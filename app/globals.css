@@ -146,33 +146,33 @@
      FIGMA COMPONENT TOKENS (flattened oklch)
      =========================================== */
 
-  /* Text - Button Primary */
-  --color-text-button-primary-default: oklch(1.00 0 0);
-  --color-text-button-primary-hover: oklch(1.00 0 0);
-  --color-text-button-primary-pressed: oklch(1.00 0 0);
-  --color-text-button-primary-focused: oklch(1.00 0 0);
-  --color-text-button-primary-disabled: oklch(0.81 0.01 250);
+  /* Text - Button Primary (hex for v0 compatibility) */
+  --color-text-button-primary-default: #ffffff;
+  --color-text-button-primary-hover: #ffffff;
+  --color-text-button-primary-pressed: #ffffff;
+  --color-text-button-primary-focused: #ffffff;
+  --color-text-button-primary-disabled: #b8bdc2;
 
-  /* Text - Button Secondary */
-  --color-text-button-secondary-default: oklch(0.52 0.01 250);
-  --color-text-button-secondary-hover: oklch(0.57 0.01 250);
-  --color-text-button-secondary-pressed: oklch(0.23 0.01 250);
-  --color-text-button-secondary-focused: oklch(0.38 0.01 250);
-  --color-text-button-secondary-disabled: oklch(0.65 0.01 250);
+  /* Text - Button Secondary (hex for v0 compatibility) */
+  --color-text-button-secondary-default: #6d757c;
+  --color-text-button-secondary-hover: #7c848b;
+  --color-text-button-secondary-pressed: #2a3036;
+  --color-text-button-secondary-focused: #4d555c;
+  --color-text-button-secondary-disabled: #909aa1;
 
-  /* Text - Button Tertiary */
-  --color-text-button-tertiary-default: oklch(0.45 0.21 264);
-  --color-text-button-tertiary-hover: oklch(0.45 0.21 264);
-  --color-text-button-tertiary-pressed: oklch(0.45 0.21 264);
-  --color-text-button-tertiary-focused: oklch(0.45 0.21 264);
-  --color-text-button-tertiary-disabled: oklch(0.38 0.01 250);
+  /* Text - Button Tertiary (hex for v0 compatibility) */
+  --color-text-button-tertiary-default: #0b49ea;
+  --color-text-button-tertiary-hover: #0b49ea;
+  --color-text-button-tertiary-pressed: #0b49ea;
+  --color-text-button-tertiary-focused: #0b49ea;
+  --color-text-button-tertiary-disabled: #4d555c;
 
-  /* Text - Button Error */
-  --color-text-button-error-default: oklch(1.00 0 0);
-  --color-text-button-error-hover: oklch(1.00 0 0);
-  --color-text-button-error-pressed: oklch(1.00 0 0);
-  --color-text-button-error-focused: oklch(1.00 0 0);
-  --color-text-button-error-disabled: oklch(0.70 0.15 20);
+  /* Text - Button Error (hex for v0 compatibility) */
+  --color-text-button-error-default: #ffffff;
+  --color-text-button-error-hover: #ffffff;
+  --color-text-button-error-pressed: #ffffff;
+  --color-text-button-error-focused: #ffffff;
+  --color-text-button-error-disabled: #e57a7a;
 
   /* Surface - Button Primary */
   --color-surface-button-primary-default: oklch(0.45 0.21 264);
@@ -266,13 +266,13 @@
   --color-alert-critical-icon: oklch(0.55 0.20 25);
 
   /* ===========================================
-     Link Component Tokens
+     Link Component Tokens (hex for v0 compatibility)
      =========================================== */
-  --color-text-link-default: oklch(0.45 0.21 264);
-  --color-text-link-hover: oklch(0.40 0.16 264);
-  --color-text-link-pressed: oklch(0.24 0.09 264);
-  --color-text-link-visited: oklch(0.35 0.13 264);
-  --color-text-link-disabled: oklch(0.65 0.01 250);
+  --color-text-link-default: #0b49ea;
+  --color-text-link-hover: #1a3db8;
+  --color-text-link-pressed: #0f2163;
+  --color-text-link-visited: #1a3399;
+  --color-text-link-disabled: #909aa1;
   --color-icon-brand: oklch(0.45 0.21 264);
 
   /* ===========================================
@@ -415,12 +415,12 @@
   --color-surface-controls-hover: oklch(0.40 0.16 264);   /* brand-600 */
   --color-surface-controls-disabled: oklch(0.74 0.01 250); /* neutral-450 */
   --color-surface-controls-locked: oklch(0.74 0.01 250);  /* neutral-450 */
-  --color-text-controls-disabled: oklch(0.63 0.01 250);   /* neutral-900 */
+  --color-text-controls-disabled: #8a939a;   /* neutral-900 - hex for v0 */
   --color-surface-focused: oklch(0.85 0.07 254);          /* ring color */
 
   /* Tooltip tokens */
   --color-surface-tooltip: oklch(0.23 0.01 250);          /* neutral-1000 / foreground-dark */
-  --color-text-tooltip: oklch(1.00 0 0);                   /* white / text-inverse */
+  --color-text-tooltip: #ffffff;                   /* white / text-inverse - hex for v0 */
 
   /* ButtonGroup / ToggleGroup tokens */
   --color-surface-button-group-background: oklch(0.93 0.01 250); /* neutral-250 / #e9ecee */
@@ -448,9 +448,9 @@
   --color-surface-hover: oklch(0.91 0.01 250);           /* neutral-200 / #e5e7e9 - hover bg */
   --color-surface-selected: oklch(0.92 0.04 254);        /* brand-150 / #dde9fa - active/selected bg */
 
-  /* Input tokens */
-  --color-text-primary: oklch(0.20 0.01 250);            /* neutral-1050 / #1c1f22 - input value text */
-  --color-text-secondary: oklch(0.48 0.01 250);          /* neutral-750 / #656c70 - label, placeholder */
+  /* Input tokens (hex for v0 compatibility) */
+  --color-text-primary: #1c1f22;            /* neutral-1050 - input value text */
+  --color-text-secondary: #656c73;          /* neutral-750 - label, placeholder */
   --color-surface-input-default: oklch(1.00 0 0);        /* neutral-50 / #ffffff - input background */
   --color-surface-input-disabled: oklch(0.91 0.01 250);  /* neutral-300 / #e0e3e6 - disabled background */
   --color-surface-input-locked: oklch(0.88 0.01 250);    /* neutral-350 / #d6dade - read-only background */
