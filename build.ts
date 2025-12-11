@@ -60,6 +60,87 @@ const REGISTRY_URL = "https://shad-brd-registery.vercel.app"
 // Prefix for component names to prevent v0 from using built-in shadcn components
 const COMPONENT_PREFIX = "brdcomp-"
 
+// Map of component file names to their registry names
+const COMPONENT_NAME_MAP: Record<string, string> = {
+  "accordion": "accordion",
+  "alert": "alert",
+  "alert-dialog": "alert-dialog",
+  "aspect-ratio": "aspect-ratio",
+  "avatar": "avatar",
+  "badge": "badge",
+  "breadcrumb": "breadcrumb",
+  "button": "button",
+  "calendar": "calendar",
+  "card": "card",
+  "carousel": "carousel",
+  "chart": "chart",
+  "checkbox": "checkbox",
+  "collapsible": "collapsible",
+  "command": "command",
+  "context-menu": "context-menu",
+  "dialog": "dialog",
+  "drawer": "drawer",
+  "dropdown-menu": "dropdown-menu",
+  "hover-card": "hover-card",
+  "icon-button": "icon-button",
+  "input": "input",
+  "input-otp": "input-otp",
+  "label": "label",
+  "link": "link",
+  "menubar": "menubar",
+  "navigation-menu": "navigation-menu",
+  "pagination": "pagination",
+  "popover": "popover",
+  "progress": "progress",
+  "radio-group": "radio-group",
+  "resizable": "resizable",
+  "scroll-area": "scroll-area",
+  "select": "select",
+  "separator": "separator",
+  "sheet": "sheet",
+  "sidebar": "sidebar",
+  "skeleton": "skeleton",
+  "slider": "slider",
+  "sonner": "sonner",
+  "switch": "switch",
+  "table": "table",
+  "tabs": "tabs",
+  "textarea": "textarea",
+  "toast": "toast",
+  "toaster": "toast",  // toaster imports from toast
+  "toggle": "toggle",
+  "toggle-group": "toggle-group",
+  "tooltip": "tooltip",
+  "use-mobile": "sidebar",  // hook used by sidebar
+  "use-toast": "toast",  // hook used by toast
+}
+
+// Extract component dependencies from file content by parsing imports
+function extractComponentDependencies(content: string): string[] {
+  const deps: Set<string> = new Set()
+
+  // Match imports from @/components/ui/xxx
+  const importRegex = /from\s+['"]@\/components\/ui\/([^'"]+)['"]/g
+  let match
+  while ((match = importRegex.exec(content)) !== null) {
+    const componentName = match[1]
+    if (COMPONENT_NAME_MAP[componentName]) {
+      deps.add(COMPONENT_NAME_MAP[componentName])
+    }
+  }
+
+  // Match imports from @/hooks/xxx (for things like use-toast)
+  const hookRegex = /from\s+['"]@\/hooks\/([^'"]+)['"]/g
+  while ((match = hookRegex.exec(content)) !== null) {
+    const hookName = match[1]
+    if (COMPONENT_NAME_MAP[hookName]) {
+      deps.add(COMPONENT_NAME_MAP[hookName])
+    }
+  }
+
+  return Array.from(deps)
+}
+
 // Extract metadata from all modules - updated to include all components
 const modules = [
   { name: "accordion", module: accordionModule },
@@ -124,6 +205,9 @@ const registryItems = modules.map(({ name, module }) => {
     files: meta?.files,
   })
 
+  // Collect all component dependencies from file contents
+  const componentDeps: Set<string> = new Set()
+
   // Read file content from filesystem if files are specified in meta
   const files = meta?.files?.map((file: any) => {
     let content = ""
@@ -143,19 +227,34 @@ const registryItems = modules.map(({ name, module }) => {
       const filePath = join(process.cwd(), basePath, file.path)
       content = readFileSync(filePath, "utf-8")
       console.log(`Successfully read content for ${file.path} (${content.length} characters)`)
+
+      // Extract component dependencies from this file
+      const deps = extractComponentDependencies(content)
+      deps.forEach(dep => {
+        // Don't add self as dependency
+        if (dep !== name) {
+          componentDeps.add(dep)
+        }
+      })
     } catch (error) {
       // Throw error if file not found
       throw new Error(`File not found: ${file.path}. Error: ${error}`)
     }
 
+    // IMPORTANT: Use "components/ui/xxx.tsx" path so v0 creates files at the correct location
+    // that matches the import paths like "@/components/ui/xxx"
+    const outputPath = file.type === "registry:hook"
+      ? file.path  // hooks stay as hooks/xxx.ts
+      : `components/${file.path}`  // ui files become components/ui/xxx.tsx
+
     return {
-      path: file.path,
+      path: outputPath,
       type: file.type || "registry:ui",
       content: content, // Add the actual file content here
     }
   }) || [
     {
-      path: `registry/new-york/${name}/${name}.tsx`,
+      path: `components/ui/${name}.tsx`,
       type: "registry:ui",
       content: `// Default placeholder content for ${name}`,
     },
@@ -164,11 +263,20 @@ const registryItems = modules.map(({ name, module }) => {
   // Add prefix to component name to prevent v0 from using built-in shadcn components
   const prefixedName = `${COMPONENT_PREFIX}${name}`
 
+  // Build registryDependencies: theme + any component dependencies found in imports
+  const registryDependencies = [
+    `${REGISTRY_URL}/r/theme.json`,
+    ...Array.from(componentDeps).map(dep => `${REGISTRY_URL}/r/${COMPONENT_PREFIX}${dep}.json`)
+  ]
+
+  if (componentDeps.size > 0) {
+    console.log(`  Component dependencies for ${name}:`, Array.from(componentDeps))
+  }
+
   return {
     name: prefixedName,
     type: "registry:ui",
-    // Add theme as registryDependency so v0 gets the CSS variables
-    registryDependencies: [`${REGISTRY_URL}/r/theme.json`],
+    registryDependencies,
     files: files,
   }
 })
