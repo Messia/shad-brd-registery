@@ -25,12 +25,24 @@ interface ComponentPageLayoutProps {
   children: React.ReactNode
 }
 
+const REGISTRY_URL = "https://shad-brd-registery.vercel.app"
+
 export function ComponentPageLayout({ meta, children }: ComponentPageLayoutProps) {
+  const v0Url = `https://v0.dev/chat/api/open?url=${encodeURIComponent(`${REGISTRY_URL}/r/${meta.name}.json`)}`
+
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-8">
       {/* Header */}
-      <div className="space-y-2">
+      <div className="flex items-center justify-between">
         <h1 className="text-4xl font-bold tracking-tight">{meta.name}</h1>
+        <a
+          href={v0Url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+        >
+          Open in v0
+        </a>
       </div>
 
       <div className="border rounded-md p-8 bg-background">{children}</div>
