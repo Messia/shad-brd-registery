@@ -174,11 +174,26 @@ function writeRegistryFiles() {
     }
 
     // Write main registry index as a plain array (matching https://ui.shadcn.com/r/index.json format)
+    // This format is used by shadcn CLI
     writeFileSync(
       join(OUTPUT_DIR, "index.json"),
       JSON.stringify(registryItems, null, 2)
     )
     console.log("Main registry written to public/r/index.json")
+
+    // Write registry.json in object format (matching Vercel registry-starter format)
+    // This format is required by v0.dev "Open in v0" button and MCP
+    const registryObject = {
+      $schema: "https://ui.shadcn.com/schema/registry.json",
+      name: "BRD Component Registry",
+      homepage: "https://shad-brd-registery.vercel.app",
+      items: registryItems,
+    }
+    writeFileSync(
+      join(OUTPUT_DIR, "registry.json"),
+      JSON.stringify(registryObject, null, 2)
+    )
+    console.log("Registry object written to public/r/registry.json (for v0.dev)")
 
     // Write individual registry items
     for (const item of registryItems) {

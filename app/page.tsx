@@ -22,8 +22,9 @@ const COMPONENTS = [
 ]
 
 // Generate the v0 URL with registry
+// Uses registry.json (object format) which v0.dev expects, not index.json (array format)
 function getV0Url() {
-  return `https://v0.dev/chat/api/open?url=${encodeURIComponent(`${REGISTRY_URL}/r/index.json`)}`
+  return `https://v0.dev/chat/api/open?url=${encodeURIComponent(`${REGISTRY_URL}/r/registry.json`)}`
 }
 
 export default function HomePage() {
