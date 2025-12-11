@@ -34,3 +34,6 @@ Thumbs.db
 
 # Vercel
 .vercel
+
+# Generated registry files (built at deploy time)
+public/r/

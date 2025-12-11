@@ -1,41 +1,25 @@
-import { list } from "@vercel/blob"
+import { readFileSync, existsSync } from "fs"
+import { join } from "path"
 import { type NextRequest, NextResponse } from "next/server"
 
-// Added dynamic export for force-dynamic rendering
-export const dynamic = "force-dynamic"
-
-export async function GET(request: NextRequest, { params }: { params: { item: string } }) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ item: string }> }
+) {
   try {
-    const { item } = params
+    const { item } = await params
 
-    // Get current commit SHA for fingerprinting
-    const commitSha = process.env.VERCEL_DEPLOYMENT_ID || "local"
+    // Read the pre-built registry item from public/r/{item}.json
+    const itemPath = join(process.cwd(), "public", "r", `${item}.json`)
 
-    // List all blobs with the registry-item prefix for this item
-    const { blobs } = await list({
-      prefix: `registry-item-${item}-`,
-    })
-
-    if (blobs.length === 0) {
-      return NextResponse.json({ error: `Registry item '${item}' not found` }, { status: 404 })
+    if (!existsSync(itemPath)) {
+      return NextResponse.json(
+        { error: `Registry item '${item}' not found` },
+        { status: 404 }
+      )
     }
 
-    // Try to find blob matching current commit SHA
-    let targetBlob = blobs.find((blob) => blob.pathname === `registry-item-${item}-${commitSha}.json`)
-
-    // If no exact match, use the most recent blob
-    if (!targetBlob) {
-      targetBlob = blobs.sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime())[0]
-    }
-
-    // Fetch the blob content
-    const response = await fetch(targetBlob.url)
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch blob: ${response.statusText}`)
-    }
-
-    const registryItem = await response.json()
+    const registryItem = JSON.parse(readFileSync(itemPath, "utf-8"))
 
     return NextResponse.json(registryItem, {
       headers: {

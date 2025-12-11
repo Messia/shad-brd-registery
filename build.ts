@@ -1,5 +1,4 @@
-import { put } from "@vercel/blob"
-import { readFileSync } from "fs"
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from "fs"
 import { join } from "path"
 
 // Manually import all app modules to extract their metadata
@@ -49,8 +48,8 @@ import * as toggleModule from "./app/toggle/page.tsx"
 import * as toggleGroupModule from "./app/toggle-group/page.tsx"
 import * as tooltipModule from "./app/tooltip/page.tsx"
 
-// Use VERCEL_DEPLOYMENT_ID as fingerprint instead of commit SHA
-const commitSha = process.env.VERCEL_DEPLOYMENT_ID || "local"
+// Output directory for generated registry files
+const OUTPUT_DIR = join(process.cwd(), "public", "r")
 
 // Extract metadata from all modules - updated to include all components
 const modules = [
@@ -168,47 +167,45 @@ const registryData = {
 
 console.log("Registry Data Summary:", {
   totalComponents: registryData.items.length,
-  commitSha,
   componentsWithMeta: registryData.items.filter((c) => c.title !== c.name.charAt(0).toUpperCase() + c.name.slice(1))
     .length,
 })
 
-// Upload main registry and individual items to blob storage
-async function uploadRegistry() {
+// Write registry files to public directory for static serving
+function writeRegistryFiles() {
   try {
-    // Upload main registry
-    const mainBlob = await put(`registry-${commitSha}.json`, JSON.stringify(registryData, null, 2), {
-      access: "public",
-      contentType: "application/json",
-    })
+    // Ensure output directory exists
+    if (!existsSync(OUTPUT_DIR)) {
+      mkdirSync(OUTPUT_DIR, { recursive: true })
+    }
 
-    console.log("Main registry uploaded successfully:", mainBlob.url)
+    // Write main registry index
+    writeFileSync(
+      join(OUTPUT_DIR, "index.json"),
+      JSON.stringify(registryData, null, 2)
+    )
+    console.log("Main registry written to public/r/index.json")
 
-    // Upload individual registry items
+    // Write individual registry items
     for (const item of registryData.items) {
       const individualItem = {
         $schema: "https://ui.shadcn.com/schema/registry-item.json",
         ...item,
       }
 
-      const itemBlob = await put(
-        `registry-item-${item.name}-${commitSha}.json`,
-        JSON.stringify(individualItem, null, 2),
-        {
-          access: "public",
-          contentType: "application/json",
-        },
+      writeFileSync(
+        join(OUTPUT_DIR, `${item.name}.json`),
+        JSON.stringify(individualItem, null, 2)
       )
-
-      console.log(`Individual item ${item.name} uploaded:`, itemBlob.url)
+      console.log(`Individual item ${item.name} written to public/r/${item.name}.json`)
     }
 
-    return mainBlob
+    console.log("Registry build complete!")
   } catch (error) {
-    console.error("Failed to upload registry:", error)
+    console.error("Failed to write registry files:", error)
     throw error
   }
 }
 
 // Execute the build
-uploadRegistry().catch(console.error)
+writeRegistryFiles()
