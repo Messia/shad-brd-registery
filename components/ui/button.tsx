@@ -7,26 +7,26 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-[var(--radius-xs)] font-semibold transition-all disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--denim-300)]",
+  "inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-[var(--radius-xs)] font-semibold transition-all disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
   {
     variants: {
       variant: {
-        // Primary (default) - solid blue button
+        // Primary (default) - solid blue button with white text
         default:
-          "bg-[var(--color-surface-button-primary-default)] text-[var(--color-text-button-primary-default)] hover:bg-[var(--color-surface-button-primary-hover)] active:bg-[var(--color-surface-button-primary-pressed)] focus-visible:bg-[var(--color-surface-button-primary-focused)] disabled:bg-[var(--color-surface-button-primary-disabled)] disabled:text-[var(--color-text-button-primary-disabled)]",
-        // Destructive/Error - solid red button
+          "bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/80 disabled:opacity-50",
+        // Destructive/Error - solid red button with white text
         destructive:
-          "bg-[var(--color-surface-button-error-default)] text-[var(--color-text-button-error-default)] hover:bg-[var(--color-surface-button-error-hover)] active:bg-[var(--color-surface-button-error-pressed)] focus-visible:bg-[var(--color-surface-button-error-focused)] disabled:bg-[var(--color-surface-button-error-disabled)] disabled:text-[var(--color-text-button-error-disabled)]",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 active:bg-destructive/80 disabled:opacity-50",
         // Outline/Secondary - bordered button
         outline:
-          "bg-[var(--color-surface-button-secondary-default)] text-[var(--color-text-button-secondary-default)] border border-[var(--color-stroke-button-secondary-default)] hover:bg-[var(--color-surface-button-secondary-hover)] hover:text-[var(--color-text-button-secondary-hover)] hover:border-[var(--color-stroke-button-secondary-hover)] active:bg-[var(--color-surface-button-secondary-pressed)] active:text-[var(--color-text-button-secondary-pressed)] active:border-[var(--color-stroke-button-secondary-pressed)] focus-visible:bg-[var(--color-surface-button-secondary-focused)] disabled:bg-[var(--color-surface-button-secondary-disabled)] disabled:text-[var(--color-text-button-secondary-disabled)] disabled:border-[var(--color-stroke-default)]",
-        // Secondary/Tertiary - light blue background
+          "border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground active:bg-accent/80 disabled:opacity-50",
+        // Secondary/Tertiary - light background
         secondary:
-          "bg-[var(--color-surface-button-tertiary-default)] text-[var(--color-text-button-tertiary-default)] hover:bg-[var(--color-surface-button-tertiary-hover)] active:bg-[var(--color-surface-button-tertiary-pressed)] focus-visible:bg-[var(--color-surface-button-tertiary-focused)] disabled:bg-[var(--color-surface-button-tertiary-disabled)] disabled:text-[var(--color-text-button-tertiary-disabled)]",
-        // Ghost - deprecated, kept for backward compatibility
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 active:bg-secondary/70 disabled:opacity-50",
+        // Ghost - transparent background
         ghost:
           "hover:bg-accent hover:text-accent-foreground",
-        // Link - deprecated, use Link component instead
+        // Link - text only
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
