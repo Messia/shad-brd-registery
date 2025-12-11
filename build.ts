@@ -49,6 +49,7 @@ import * as toastModule from "./app/toast/page.tsx"
 import * as toggleModule from "./app/toggle/page.tsx"
 import * as toggleGroupModule from "./app/toggle-group/page.tsx"
 import * as tooltipModule from "./app/tooltip/page.tsx"
+import * as widgetModule from "./app/widget/page.tsx"
 import * as themeModule from "./app/theme/page.tsx"
 
 // Output directory for generated registry files
@@ -111,6 +112,7 @@ const COMPONENT_NAME_MAP: Record<string, string> = {
   "toggle": "toggle",
   "toggle-group": "toggle-group",
   "tooltip": "tooltip",
+  "widget": "widget",
   "use-mobile": "sidebar",  // hook used by sidebar
   "use-toast": "toast",  // hook used by toast
 }
@@ -190,6 +192,7 @@ const modules = [
   { name: "toggle", module: toggleModule },
   { name: "toggle-group", module: toggleGroupModule },
   { name: "tooltip", module: tooltipModule },
+  { name: "widget", module: widgetModule },
 ]
 
 // Build main registry data matching shadcn schema (plain array format like https://ui.shadcn.com/r/index.json)
