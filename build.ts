@@ -186,6 +186,7 @@ function writeRegistryFiles() {
     const registryObject = {
       $schema: "https://ui.shadcn.com/schema/registry.json",
       name: "BRD Component Registry",
+      type: "registry:ui",
       homepage: "https://shad-brd-registery.vercel.app",
       items: registryItems,
     }
