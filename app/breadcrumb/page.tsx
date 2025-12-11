@@ -10,7 +10,7 @@ import {
   Breadcrumbs,
 } from "@/components/ui/breadcrumb"
 
-const meta = {
+export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "breadcrumb",
   type: "registry:ui",

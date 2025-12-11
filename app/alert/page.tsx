@@ -4,7 +4,7 @@ import { Alert, AlertDescription, AlertTitle, AlertActions, AlertLink } from "@/
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { ArrowRight } from "lucide-react"
 
-const meta = {
+export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "alert",
   type: "registry:block",

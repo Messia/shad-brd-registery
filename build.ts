@@ -22,9 +22,11 @@ import * as dialogModule from "./app/dialog/page.tsx"
 import * as drawerModule from "./app/drawer/page.tsx"
 import * as dropdownMenuModule from "./app/dropdown-menu/page.tsx"
 import * as hoverCardModule from "./app/hover-card/page.tsx"
+import * as iconButtonModule from "./app/icon-button/page.tsx"
 import * as inputModule from "./app/input/page.tsx"
 import * as inputOtpModule from "./app/input-otp/page.tsx"
 import * as labelModule from "./app/label/page.tsx"
+import * as linkModule from "./app/link/page.tsx"
 import * as menubarModule from "./app/menubar/page.tsx"
 import * as navigationMenuModule from "./app/navigation-menu/page.tsx"
 import * as paginationModule from "./app/pagination/page.tsx"
@@ -73,9 +75,11 @@ const modules = [
   { name: "drawer", module: drawerModule },
   { name: "dropdown-menu", module: dropdownMenuModule },
   { name: "hover-card", module: hoverCardModule },
+  { name: "icon-button", module: iconButtonModule },
   { name: "input", module: inputModule },
   { name: "input-otp", module: inputOtpModule },
   { name: "label", module: labelModule },
+  { name: "link", module: linkModule },
   { name: "menubar", module: menubarModule },
   { name: "navigation-menu", module: navigationMenuModule },
   { name: "pagination", module: paginationModule },

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { Mail, ArrowRight, Download } from "lucide-react"
 
-const meta = {
+export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "button",
   type: "registry:block",

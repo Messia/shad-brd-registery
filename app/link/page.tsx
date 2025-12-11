@@ -2,7 +2,7 @@ import { Link } from "@/components/ui/link"
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { ExternalLink, ArrowRight, Mail } from "lucide-react"
 
-const meta = {
+export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "link",
   type: "registry:block",

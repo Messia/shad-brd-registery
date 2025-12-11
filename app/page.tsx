@@ -23,7 +23,7 @@ const COMPONENTS = [
 
 // Generate the v0 URL with registry
 function getV0Url() {
-  return `https://v0.dev/chat/api/open?url=${encodeURIComponent(`${REGISTRY_URL}/registry`)}`
+  return `https://v0.dev/chat/api/open?url=${encodeURIComponent(`${REGISTRY_URL}/r/index.json`)}`
 }
 
 export default function HomePage() {
