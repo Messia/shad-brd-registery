@@ -49,6 +49,7 @@ import * as toastModule from "./app/toast/page.tsx"
 import * as toggleModule from "./app/toggle/page.tsx"
 import * as toggleGroupModule from "./app/toggle-group/page.tsx"
 import * as tooltipModule from "./app/tooltip/page.tsx"
+import * as themeModule from "./app/theme/page.tsx"
 
 // Output directory for generated registry files
 const OUTPUT_DIR = join(process.cwd(), "public", "r")
@@ -160,6 +161,8 @@ const registryItems = modules.map(({ name, module }) => {
   return {
     name,
     type: "registry:ui",
+    // Add theme as registryDependency so v0 gets the CSS variables
+    registryDependencies: [`${REGISTRY_URL}/r/theme.json`],
     files: files,
   }
 })
@@ -199,6 +202,33 @@ function writeRegistryFiles() {
     )
     console.log("Registry object written to public/r/registry.json (for v0.dev)")
 
+    // Generate theme.json with globals.css content
+    const themeMeta = themeModule.meta
+    const globalsPath = join(process.cwd(), "app", "globals.css")
+    const globalsContent = readFileSync(globalsPath, "utf-8")
+
+    const themeItem = {
+      $schema: "https://ui.shadcn.com/schema/registry-item.json",
+      name: "theme",
+      type: "registry:theme",
+      title: themeMeta?.title || "BRD Theme",
+      description: themeMeta?.description || "BRD Design System theme with Figma design tokens",
+      files: [
+        {
+          path: "app/globals.css",
+          type: "registry:style",
+          target: "app/globals.css",
+          content: globalsContent
+        }
+      ]
+    }
+
+    writeFileSync(
+      join(OUTPUT_DIR, "theme.json"),
+      JSON.stringify(themeItem, null, 2)
+    )
+    console.log("Theme written to public/r/theme.json")
+
     // Write individual registry items
     for (const item of registryItems) {
       const individualItem = {
@@ -221,7 +251,10 @@ function writeRegistryFiles() {
       type: "registry:block",
       title: "All BRD Components",
       description: "A complete collection of all BRD design system components. Open this in v0 to get access to all styled components.",
-      registryDependencies: registryItems.map(item => `${REGISTRY_URL}/r/${item.name}.json`),
+      registryDependencies: [
+        `${REGISTRY_URL}/r/theme.json`,  // Theme first so CSS variables are available
+        ...registryItems.map(item => `${REGISTRY_URL}/r/${item.name}.json`)
+      ],
       files: []
     }
 
