@@ -53,6 +53,9 @@ import * as tooltipModule from "./app/tooltip/page.tsx"
 // Output directory for generated registry files
 const OUTPUT_DIR = join(process.cwd(), "public", "r")
 
+// Registry base URL for registryDependencies
+const REGISTRY_URL = "https://shad-brd-registery.vercel.app"
+
 // Extract metadata from all modules - updated to include all components
 const modules = [
   { name: "accordion", module: accordionModule },
@@ -209,6 +212,24 @@ function writeRegistryFiles() {
       )
       console.log(`Individual item ${item.name} written to public/r/${item.name}.json`)
     }
+
+    // Create "all-components" block that references all components via registryDependencies
+    // This allows v0 to open all components at once, similar to registry-starter's "dashboard" block
+    const allComponentsBlock = {
+      $schema: "https://ui.shadcn.com/schema/registry-item.json",
+      name: "all-components",
+      type: "registry:block",
+      title: "All BRD Components",
+      description: "A complete collection of all BRD design system components. Open this in v0 to get access to all styled components.",
+      registryDependencies: registryItems.map(item => `${REGISTRY_URL}/r/${item.name}.json`),
+      files: []
+    }
+
+    writeFileSync(
+      join(OUTPUT_DIR, "all-components.json"),
+      JSON.stringify(allComponentsBlock, null, 2)
+    )
+    console.log("All-components block written to public/r/all-components.json")
 
     console.log("Registry build complete!")
   } catch (error) {
