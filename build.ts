@@ -57,6 +57,9 @@ const OUTPUT_DIR = join(process.cwd(), "public", "r")
 // Registry base URL for registryDependencies
 const REGISTRY_URL = "https://shad-brd-registery.vercel.app"
 
+// Prefix for component names to prevent v0 from using built-in shadcn components
+const COMPONENT_PREFIX = "brdcomp-"
+
 // Extract metadata from all modules - updated to include all components
 const modules = [
   { name: "accordion", module: accordionModule },
@@ -158,8 +161,11 @@ const registryItems = modules.map(({ name, module }) => {
     },
   ]
 
+  // Add prefix to component name to prevent v0 from using built-in shadcn components
+  const prefixedName = `${COMPONENT_PREFIX}${name}`
+
   return {
-    name,
+    name: prefixedName,
     type: "registry:ui",
     // Add theme as registryDependency so v0 gets the CSS variables
     registryDependencies: [`${REGISTRY_URL}/r/theme.json`],

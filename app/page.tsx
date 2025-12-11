@@ -21,10 +21,14 @@ const COMPONENTS = [
   "toggle-group", "tooltip"
 ]
 
+// Prefix for component names to prevent v0 from using built-in shadcn components
+const COMPONENT_PREFIX = "brdcomp-"
+
 // Generate the v0 URL for a specific component
 // v0's api/open expects a single registry item (component/block), not the full registry
-function getV0Url(component: string = "button") {
-  return `https://v0.dev/chat/api/open?url=${encodeURIComponent(`${REGISTRY_URL}/r/${component}.json`)}`
+function getV0Url(component: string = "button", addPrefix: boolean = true) {
+  const name = addPrefix ? `${COMPONENT_PREFIX}${component}` : component
+  return `https://v0.dev/chat/api/open?url=${encodeURIComponent(`${REGISTRY_URL}/r/${name}.json`)}`
 }
 
 export default function HomePage() {
@@ -52,7 +56,7 @@ export default function HomePage() {
             {/* Open in v0 Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Button size="lg" asChild className="gap-2">
-                <a href={getV0Url("all-components")} target="_blank" rel="noopener noreferrer">
+                <a href={getV0Url("all-components", false)} target="_blank" rel="noopener noreferrer">
                   <Zap className="w-5 h-5" />
                   Open All in v0
                   <ExternalLink className="w-4 h-4 ml-1" />
@@ -60,7 +64,7 @@ export default function HomePage() {
               </Button>
 
               <Button size="lg" variant="secondary" asChild className="gap-2">
-                <a href={getV0Url("button")} target="_blank" rel="noopener noreferrer">
+                <a href={getV0Url("button", true)} target="_blank" rel="noopener noreferrer">
                   <Zap className="w-5 h-5" />
                   Open Button in v0
                   <ExternalLink className="w-4 h-4 ml-1" />
@@ -138,14 +142,14 @@ export default function HomePage() {
             </p>
             <div className="space-y-2">
               <Button asChild className="w-full gap-2">
-                <a href={getV0Url("all-components")} target="_blank" rel="noopener noreferrer">
+                <a href={getV0Url("all-components", false)} target="_blank" rel="noopener noreferrer">
                   <Zap className="w-4 h-4" />
                   Open All Components
                   <ExternalLink className="w-4 h-4 ml-1" />
                 </a>
               </Button>
               <Button variant="secondary" asChild className="w-full gap-2">
-                <a href={getV0Url("button")} target="_blank" rel="noopener noreferrer">
+                <a href={getV0Url("button", true)} target="_blank" rel="noopener noreferrer">
                   <Zap className="w-4 h-4" />
                   Open Button Only
                   <ExternalLink className="w-4 h-4 ml-1" />

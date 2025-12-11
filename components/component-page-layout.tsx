@@ -26,9 +26,11 @@ interface ComponentPageLayoutProps {
 }
 
 const REGISTRY_URL = "https://shad-brd-registery.vercel.app"
+const COMPONENT_PREFIX = "brdcomp-"
 
 export function ComponentPageLayout({ meta, children }: ComponentPageLayoutProps) {
-  const v0Url = `https://v0.dev/chat/api/open?url=${encodeURIComponent(`${REGISTRY_URL}/r/${meta.name}.json`)}`
+  const prefixedName = `${COMPONENT_PREFIX}${meta.name}`
+  const v0Url = `https://v0.dev/chat/api/open?url=${encodeURIComponent(`${REGISTRY_URL}/r/${prefixedName}.json`)}`
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-8">
