@@ -3,8 +3,8 @@ import { join } from "path"
 
 export async function GET() {
   try {
-    // Read the pre-built registry from public/r/index.json
-    const registryPath = join(process.cwd(), "public", "r", "index.json")
+    // Read the pre-built registry from public/r/registry.json (object format for v0.dev)
+    const registryPath = join(process.cwd(), "public", "r", "registry.json")
     const registryData = JSON.parse(readFileSync(registryPath, "utf-8"))
 
     return Response.json(registryData, {
