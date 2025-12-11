@@ -104,75 +104,65 @@ const modules = [
   { name: "tooltip", module: tooltipModule },
 ]
 
-// Build main registry data matching shadcn schema
-const registryData = {
-  $schema: "https://ui.shadcn.com/schema/registry.json",
-  name: "shadcn-components",
-   type: "registry:ui",
-  homepage: "https://ui.shadcn.com",
-  items: modules.map(({ name, module }) => {
-    const meta = module.meta
+// Build main registry data matching shadcn schema (plain array format like https://ui.shadcn.com/r/index.json)
+const registryItems = modules.map(({ name, module }) => {
+  const meta = module.meta
 
-    console.log(`Processing ${name}:`, {
-      name: meta?.name,
-      title: meta?.title,
-      description: meta?.description,
-      type: meta?.type,
-      dependencies: meta?.dependencies,
-      files: meta?.files,
-    })
+  console.log(`Processing ${name}:`, {
+    name: meta?.name,
+    title: meta?.title,
+    description: meta?.description,
+    type: meta?.type,
+    dependencies: meta?.dependencies,
+    files: meta?.files,
+  })
 
-    // Read file content from filesystem if files are specified in meta
-    const files = meta?.files?.map((file: any) => {
-      let content = ""
+  // Read file content from filesystem if files are specified in meta
+  const files = meta?.files?.map((file: any) => {
+    let content = ""
 
-      try {
-        // Determine base path based on registry type
-        let basePath = ""
-        if (file.type === "registry:ui") {
-          basePath = "components"
-        } else if (file.type === "registry:hook") {
-          basePath = "hooks"
-        } else {
-          throw new Error(`Unknown registry type: ${meta?.type}`)
-        }
-
-        // Read the actual file content from the filesystem
-        const filePath = join(process.cwd(), basePath, file.path)
-        content = readFileSync(filePath, "utf-8")
-        console.log(`Successfully read content for ${file.path} (${content.length} characters)`)
-      } catch (error) {
-        // Throw error if file not found
-        throw new Error(`File not found: ${file.path}. Error: ${error}`)
+    try {
+      // Determine base path based on registry type
+      let basePath = ""
+      if (file.type === "registry:ui") {
+        basePath = "components"
+      } else if (file.type === "registry:hook") {
+        basePath = "hooks"
+      } else {
+        throw new Error(`Unknown registry type: ${meta?.type}`)
       }
 
-      return {
-        path: file.path,
-        type: file.type || "registry:ui",
-        content: content, // Add the actual file content here
-      }
-    }) || [
-      {
-        path: `registry/new-york/${name}/${name}.tsx`,
-        type: "registry:ui",
-        content: `// Default placeholder content for ${name}`,
-      },
-    ]
+      // Read the actual file content from the filesystem
+      const filePath = join(process.cwd(), basePath, file.path)
+      content = readFileSync(filePath, "utf-8")
+      console.log(`Successfully read content for ${file.path} (${content.length} characters)`)
+    } catch (error) {
+      // Throw error if file not found
+      throw new Error(`File not found: ${file.path}. Error: ${error}`)
+    }
 
     return {
-      name,
-      type: "registry:block",
-      title: meta?.title || name.charAt(0).toUpperCase() + name.slice(1),
-      description: meta?.description || `A ${name} component.`,
-      files: files,
+      path: file.path,
+      type: file.type || "registry:ui",
+      content: content, // Add the actual file content here
     }
-  }),
-}
+  }) || [
+    {
+      path: `registry/new-york/${name}/${name}.tsx`,
+      type: "registry:ui",
+      content: `// Default placeholder content for ${name}`,
+    },
+  ]
+
+  return {
+    name,
+    type: "registry:ui",
+    files: files,
+  }
+})
 
 console.log("Registry Data Summary:", {
-  totalComponents: registryData.items.length,
-  componentsWithMeta: registryData.items.filter((c) => c.title !== c.name.charAt(0).toUpperCase() + c.name.slice(1))
-    .length,
+  totalComponents: registryItems.length,
 })
 
 // Write registry files to public directory for static serving
@@ -183,15 +173,15 @@ function writeRegistryFiles() {
       mkdirSync(OUTPUT_DIR, { recursive: true })
     }
 
-    // Write main registry index
+    // Write main registry index as a plain array (matching https://ui.shadcn.com/r/index.json format)
     writeFileSync(
       join(OUTPUT_DIR, "index.json"),
-      JSON.stringify(registryData, null, 2)
+      JSON.stringify(registryItems, null, 2)
     )
     console.log("Main registry written to public/r/index.json")
 
     // Write individual registry items
-    for (const item of registryData.items) {
+    for (const item of registryItems) {
       const individualItem = {
         $schema: "https://ui.shadcn.com/schema/registry-item.json",
         ...item,
