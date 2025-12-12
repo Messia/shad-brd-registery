@@ -72,11 +72,32 @@ The Widget is a dashboard container component with header, content area, and foo
 
 ## Widget Sizes and Dimensions
 
-| Size | Max Width | Height | Use Case |
-|------|-----------|--------|----------|
-| **S** | 456px | 290px | Compact KPI view, sparklines, bullet points |
-| **M** | 912px | 580px | Default view with charts, tables, detailed content |
-| **L** | 1368px | 872px | Extended view (more rows, larger charts) |
+| Size | Max Width | Height (FIXED) | Use Case |
+|------|-----------|----------------|----------|
+| **S** | 456px | **290px** | Compact KPI view, sparklines, bullet points |
+| **M** | 912px | **580px** | Default view with charts, tables, detailed content |
+| **L** | 1368px | **872px** | Extended view (more rows, larger charts) |
+
+### ⚠️ CRITICAL: Heights are FIXED
+
+**DO NOT expand or override widget heights.** The Widget component has fixed heights that MUST NOT be changed:
+- Widget handles overflow internally with `overflow-auto` on the content area
+- Content should fit within the fixed dimensions
+- If content exceeds height, it will scroll within the widget
+
+```tsx
+// ❌ WRONG - Never override height
+<Widget size="M" className="h-[800px]">...</Widget>
+<Widget size="M" style={{ height: 'auto' }}>...</Widget>
+<div className="h-screen"><Widget size="M">...</Widget></div>  // Stretches widget
+
+// ✅ CORRECT - Let widget use its fixed height
+<Widget size="M">
+  <div className="flex flex-col gap-4">  {/* Content scrolls if needed */}
+    ...
+  </div>
+</Widget>
+```
 
 ---
 
@@ -283,6 +304,23 @@ This is handled automatically by the Widget component.
 ```tsx
 <Widget title="Revenue">    // ❌ Missing size and timestamp
   {children}
+</Widget>
+```
+
+❌ **Overriding widget height:**
+```tsx
+<Widget size="M" className="h-auto" />           // ❌ Never override height
+<Widget size="M" className="h-[800px]" />        // ❌ Never set custom height
+<Widget size="M" className="min-h-screen" />     // ❌ Never expand height
+<div className="h-full"><Widget size="M" /></div> // ❌ Parent stretching widget
+```
+
+❌ **Using h-full on content that expands widget:**
+```tsx
+<Widget size="M">
+  <div className="h-full">  // ❌ This can cause expansion issues
+    <div className="flex-1">Content</div>
+  </div>
 </Widget>
 ```
 
