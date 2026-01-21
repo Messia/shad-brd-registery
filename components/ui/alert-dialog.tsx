@@ -96,11 +96,23 @@ const AlertDialogContent = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Content>,
   AlertDialogContentProps
 >(({ className, size = 'xs', ...props }, ref) => {
+  const localRef = React.useRef<React.ElementRef<typeof AlertDialogPrimitive.Content> | null>(null)
+  const composedRef = React.useCallback(
+    (node: React.ElementRef<typeof AlertDialogPrimitive.Content> | null) => {
+      localRef.current = node
+      if (typeof ref === 'function') {
+        ref(node)
+      } else if (ref) {
+        ;(ref as React.MutableRefObject<React.ElementRef<typeof AlertDialogPrimitive.Content> | null>).current = node
+      }
+    },
+    [ref]
+  )
   return (
     <AlertDialogPortal>
       <AlertDialogOverlay />
       <AlertDialogPrimitive.Content
-        ref={ref}
+        ref={composedRef}
         data-slot="alert-dialog-content"
         data-size={size}
         className={cn(alertDialogContentVariants({ size }), className)}

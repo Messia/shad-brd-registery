@@ -145,11 +145,23 @@ const DialogContent = React.forwardRef<
     },
     ref
   ) => {
+    const localRef = React.useRef<React.ElementRef<typeof DialogPrimitive.Content> | null>(null)
+    const composedRef = React.useCallback(
+      (node: React.ElementRef<typeof DialogPrimitive.Content> | null) => {
+        localRef.current = node
+        if (typeof ref === 'function') {
+          ref(node)
+        } else if (ref) {
+          ;(ref as React.MutableRefObject<React.ElementRef<typeof DialogPrimitive.Content> | null>).current = node
+        }
+      },
+      [ref]
+    )
     return (
       <DialogPortal>
         <DialogOverlay />
         <DialogPrimitive.Content
-          ref={ref}
+          ref={composedRef}
           data-slot="dialog-content"
           data-size={size}
           className={cn(dialogContentVariants({ size }), className)}

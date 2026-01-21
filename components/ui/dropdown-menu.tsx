@@ -240,9 +240,29 @@ const DropdownMenuRadioItem = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.RadioItem>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.RadioItem>
 >(({ className, children, ...props }, ref) => {
+  const [indicatorState, setIndicatorState] = React.useState<string | null>(null)
+  const localRef = React.useRef<React.ElementRef<typeof DropdownMenuPrimitive.RadioItem> | null>(null)
+  const composedRef = React.useCallback(
+    (node: React.ElementRef<typeof DropdownMenuPrimitive.RadioItem> | null) => {
+      localRef.current = node
+      if (typeof ref === 'function') {
+        ref(node)
+      } else if (ref) {
+        ;(ref as React.MutableRefObject<React.ElementRef<typeof DropdownMenuPrimitive.RadioItem> | null>).current = node
+      }
+    },
+    [ref]
+  )
+  React.useEffect(() => {
+    const el = localRef.current
+    if (!el) return
+    const dataState = el.getAttribute('data-state')
+    setIndicatorState(dataState)
+  }, [props.value])
+
   return (
     <DropdownMenuPrimitive.RadioItem
-      ref={ref}
+      ref={composedRef}
       data-slot="dropdown-menu-radio-item"
       className={cn(
         itemBaseStyles,
@@ -263,7 +283,7 @@ const DropdownMenuRadioItem = React.forwardRef<
             'transition-colors duration-150',
             'data-[state=checked]:border-[var(--color-surface-controls-selected)]',
           )}
-          data-state={props.value ? 'checked' : 'unchecked'}
+          data-state={indicatorState ?? undefined}
         >
           <DropdownMenuPrimitive.ItemIndicator>
             <span className="w-[10px] h-[10px] rounded-full bg-[var(--color-surface-controls-selected)]" />

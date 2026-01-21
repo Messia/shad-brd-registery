@@ -53,64 +53,85 @@ export interface ButtonProps
   icon?: React.ReactNode
 }
 
-function Button({
-  className,
-  variant,
-  size,
-  asChild = false,
-  isLoading = false,
-  icon,
-  children,
-  disabled,
-  ...props
-}: ButtonProps) {
-  const Comp = asChild ? Slot : "button"
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      isLoading = false,
+      icon,
+      children,
+      disabled,
+      ...props
+    },
+    ref
+  ) => {
+    const localRef = React.useRef<HTMLButtonElement | null>(null)
+    const composedRef = React.useCallback(
+      (node: HTMLButtonElement | null) => {
+        localRef.current = node
+        if (typeof ref === "function") {
+          ref(node)
+        } else if (ref) {
+          ;(ref as React.MutableRefObject<HTMLButtonElement | null>).current = node
+        }
+      },
+      [ref]
+    )
+    const Comp = asChild ? Slot : "button"
 
-  // Loading dots component
-  const LoadingDots = () => (
-    <span className="flex items-center justify-center gap-0.5">
-      <span className="size-1 rounded-full bg-current animate-[flicker_1.4s_infinite_both]" />
-      <span className="size-1 rounded-full bg-current animate-[flicker_1.4s_0.2s_infinite_both]" />
-      <span className="size-1 rounded-full bg-current animate-[flicker_1.4s_0.4s_infinite_both]" />
-    </span>
-  )
+    // Loading dots component
+    const LoadingDots = () => (
+      <span className="flex items-center justify-center gap-0.5">
+        <span className="size-1 rounded-full bg-current animate-[flicker_1.4s_infinite_both]" />
+        <span className="size-1 rounded-full bg-current animate-[flicker_1.4s_0.2s_infinite_both]" />
+        <span className="size-1 rounded-full bg-current animate-[flicker_1.4s_0.4s_infinite_both]" />
+      </span>
+    )
 
-  if (asChild) {
+    if (asChild) {
+      return (
+        <Comp
+          ref={composedRef}
+          data-slot="button"
+          className={cn(buttonVariants({ variant, size }), className)}
+          disabled={disabled || isLoading}
+          data-loading={isLoading ? "" : undefined}
+          {...props}
+        >
+          {children}
+        </Comp>
+      )
+    }
+
     return (
       <Comp
+        ref={composedRef}
         data-slot="button"
-        className={cn(buttonVariants({ variant, size }), className)}
+        className={cn(
+          buttonVariants({ variant, size }),
+          isLoading && "cursor-wait",
+          className
+        )}
         disabled={disabled || isLoading}
         data-loading={isLoading ? "" : undefined}
         {...props}
       >
-        {children}
+        {isLoading ? (
+          <LoadingDots />
+        ) : (
+          <>
+            {icon && <span className="flex items-center justify-center">{icon}</span>}
+            {children && <span className="px-1">{children}</span>}
+          </>
+        )}
       </Comp>
     )
   }
+)
 
-  return (
-    <Comp
-      data-slot="button"
-      className={cn(
-        buttonVariants({ variant, size }),
-        isLoading && "cursor-wait",
-        className
-      )}
-      disabled={disabled || isLoading}
-      data-loading={isLoading ? "" : undefined}
-      {...props}
-    >
-      {isLoading ? (
-        <LoadingDots />
-      ) : (
-        <>
-          {icon && <span className="flex items-center justify-center">{icon}</span>}
-          {children && <span className="px-1">{children}</span>}
-        </>
-      )}
-    </Comp>
-  )
-}
+Button.displayName = "Button"
 
 export { Button, buttonVariants }
