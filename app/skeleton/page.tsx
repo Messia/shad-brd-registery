@@ -1,5 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton"
 import { ComponentPageLayout } from "@/components/component-page-layout"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -10,6 +11,7 @@ export const meta = {
   type: "registry:block",
   title: "Skeleton",
   description: "Use to show a placeholder while content is loading.",
+  ...registryMetadata["skeleton"],
   files: [
     {
       path: "ui/skeleton.tsx",

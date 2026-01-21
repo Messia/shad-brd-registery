@@ -1,6 +1,7 @@
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -9,8 +10,12 @@ const tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length
 
 // Added meta export for proper page metadata
 export const meta = {
+  $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "scroll-area",
   type: "registry:ui",
+  title: "Scroll Area",
+  description: "A scrollable container with custom scrollbars.",
+  ...registryMetadata["scroll-area"],
   dependencies: ["@radix-ui/react-scroll-area"],
   files: [
     {

@@ -1,6 +1,7 @@
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { IconButton } from "@/components/ui/icon-button"
 import { Settings, Search, Plus, Trash2, Edit, Heart, Star, Bell, X, Menu, ChevronLeft, ChevronRight } from "lucide-react"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 export const dynamic = "force-dynamic"
 
@@ -10,6 +11,7 @@ export const meta = {
   type: "registry:ui",
   title: "IconButton",
   description: "Icon-only button with built-in tooltip showing the ariaLabel.",
+  ...registryMetadata["icon-button"],
   files: [
     {
       path: "ui/icon-button.tsx",

@@ -21,7 +21,11 @@ interface ComponentSidebarProps {
   children: React.ReactNode
 }
 
-// Alphabetized the components array
+const overviewItems = [
+  { label: "Home", href: "/" },
+]
+
+// Alphabetized component pages from app/*
 const components = [
   "accordion",
   "alert",
@@ -42,11 +46,12 @@ const components = [
   "dialog",
   "drawer",
   "dropdown-menu",
-  "form",
   "hover-card",
+  "icon-button",
   "input",
   "input-otp",
   "label",
+  "link",
   "menubar",
   "navigation-menu",
   "pagination",
@@ -65,10 +70,12 @@ const components = [
   "table",
   "tabs",
   "textarea",
+  "theme",
   "toast",
   "toggle",
   "toggle-group",
   "tooltip",
+  "widget",
 ]
 
 export function ComponentSidebar({ currentComponent, children }: ComponentSidebarProps) {
@@ -76,6 +83,25 @@ export function ComponentSidebar({ currentComponent, children }: ComponentSideba
     <SidebarProvider>
       <Sidebar className="border-none bg-transparent">
         <SidebarContent className="bg-transparent">
+          <SidebarGroup>
+            <SidebarGroupLabel>Overview</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {overviewItems.map((item) => (
+                  <SidebarMenuItem key={item.href}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={currentComponent === "home"}
+                      className="hover:bg-transparent data-[active=true]:bg-transparent data-[active=true]:font-medium"
+                    >
+                      <Link href={item.href}>{item.label}</Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+
           <SidebarGroup>
             <SidebarGroupLabel>Components</SidebarGroupLabel>
             <SidebarGroupContent>
@@ -113,13 +139,6 @@ export function ComponentSidebar({ currentComponent, children }: ComponentSideba
               </h1>
             </div>
           </div>
-          {/* Replaced "Component Showcase" with attribution */}
-          <p className="text-sm text-muted-foreground">
-            Built by{" "}
-            <a href="https://x.com/jacobmparis" target="_blank" rel="noopener noreferrer" className="underline">
-              @jacobmparis
-            </a>
-          </p>
         </div>
         {children}
       </main>

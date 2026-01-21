@@ -1,5 +1,6 @@
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable"
 import { ComponentPageLayout } from "@/components/component-page-layout"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -10,6 +11,7 @@ export const meta = {
   type: "registry:ui",
   title: "Resizable",
   description: "Accessible resizable panel groups and layouts with keyboard support.",
+  ...registryMetadata["resizable"],
   files: [
     {
       path: "ui/resizable.tsx",

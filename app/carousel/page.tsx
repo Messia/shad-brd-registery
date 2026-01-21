@@ -1,6 +1,7 @@
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import { Card, CardContent } from "@/components/ui/card"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -12,6 +13,7 @@ export const meta = {
   type: "registry:block",
   title: "Carousel",
   description: "A carousel with motion and swipe built using Embla.",
+  ...registryMetadata["carousel"],
   files: [
     {
       path: "ui/carousel.tsx",

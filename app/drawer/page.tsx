@@ -13,6 +13,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 export const dynamic = "force-dynamic"
 
@@ -22,6 +23,7 @@ export const meta = {
   type: "registry:ui",
   title: "Drawer",
   description: "A panel that slides in from the edge of the screen. Opens from right by default with built-in header and footer.",
+  ...registryMetadata["drawer"],
   files: [
     {
       path: "ui/drawer.tsx",

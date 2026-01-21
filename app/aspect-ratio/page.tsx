@@ -1,5 +1,6 @@
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { AspectRatio } from "@/components/ui/aspect-ratio"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -10,6 +11,7 @@ export const meta = {
   type: "registry:block",
   title: "Aspect Ratio",
   description: "Displays content within a desired ratio.",
+  ...registryMetadata["aspect-ratio"],
   files: [
     {
       path: "ui/aspect-ratio.tsx",

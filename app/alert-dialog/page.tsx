@@ -11,6 +11,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 export const dynamic = "force-dynamic"
 
@@ -20,6 +21,7 @@ export const meta = {
   type: "registry:ui",
   title: "Alert Dialog",
   description: "A modal dialog for confirmations and alerts with sizes xs/sm/md/lg. Based on old Modal styling.",
+  ...registryMetadata["alert-dialog"],
   files: [
     {
       path: "ui/alert-dialog.tsx",

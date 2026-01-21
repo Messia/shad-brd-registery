@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Popover, PopoverContent, PopoverTrigger, PopoverClose } from "@/components/ui/popover"
 import { X } from "lucide-react"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -15,6 +16,7 @@ export const meta = {
   type: "registry:ui",
   title: "Popover",
   description: "Displays rich content in a portal, triggered by a button. Based on old Popover component.",
+  ...registryMetadata["popover"],
   files: [
     {
       path: "ui/popover.tsx",

@@ -2,6 +2,7 @@ import { Textarea, TextareaField } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { MessageSquare } from "lucide-react"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 export const dynamic = "force-dynamic"
 
@@ -11,6 +12,7 @@ export const meta = {
   type: "registry:ui",
   title: "Textarea",
   description: "A multi-line text input. Simple Textarea for basic use, TextareaField for forms with label/icons/feedback.",
+  ...registryMetadata["textarea"],
   files: [
     {
       path: "ui/textarea.tsx",

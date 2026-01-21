@@ -1,5 +1,6 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { ComponentPageLayout } from "@/components/component-page-layout"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -10,6 +11,7 @@ export const meta = {
   type: "registry:block",
   title: "Accordion",
   description: "A vertically stacked set of interactive headings that each reveal a section of content.",
+  ...registryMetadata["accordion"],
   files: [
     {
       path: "ui/accordion.tsx",

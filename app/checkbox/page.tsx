@@ -3,6 +3,7 @@
 import * as React from "react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ComponentPageLayout } from "@/components/component-page-layout"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -13,6 +14,7 @@ export const meta = {
   type: "registry:block",
   title: "Checkbox",
   description: "A control that allows the user to toggle between checked and not checked. Supports label, supporting text, sizes, and indeterminate state.",
+  ...registryMetadata["checkbox"],
   files: [
     {
       path: "ui/checkbox.tsx",

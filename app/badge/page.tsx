@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge"
 import { ComponentPageLayout } from "@/components/component-page-layout"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -10,6 +11,7 @@ export const meta = {
   type: "registry:block",
   title: "Badge",
   description: "Displays a badge or a component that looks like a badge.",
+  ...registryMetadata["badge"],
   files: [
     {
       path: "ui/badge.tsx",

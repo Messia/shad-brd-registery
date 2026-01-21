@@ -1,6 +1,7 @@
 import { Link } from "@/components/ui/link"
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { ExternalLink, ArrowRight, Mail } from "lucide-react"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
@@ -8,6 +9,7 @@ export const meta = {
   type: "registry:block",
   title: "Link",
   description: "A styled link component with icon support.",
+  ...registryMetadata["link"],
   files: [
     {
       path: "ui/link.tsx",

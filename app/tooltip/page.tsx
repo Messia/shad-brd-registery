@@ -2,14 +2,19 @@ import { ComponentPageLayout } from "@/components/component-page-layout"
 import { Button } from "@/components/ui/button"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, SimpleTooltip } from "@/components/ui/tooltip"
 import { HelpCircle, Info, Settings, Plus, Download } from "lucide-react"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
 
 // Added meta export for tooltip component
 export const meta = {
+  $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "tooltip",
   type: "registry:ui",
+  title: "Tooltip",
+  description: "A small contextual hint displayed on hover or focus.",
+  ...registryMetadata["tooltip"],
   dependencies: ["@radix-ui/react-tooltip"],
   files: [
     {

@@ -3,14 +3,19 @@
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
 
 // Updated meta export to match the provided structure
 export const meta = {
+  $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "toast",
   type: "registry:ui",
+  title: "Toast",
+  description: "Toast primitives and hooks for transient notifications.",
+  ...registryMetadata["toast"],
   dependencies: ["@radix-ui/react-toast"],
   files: [
     {
@@ -41,6 +46,7 @@ export default function ToastPage() {
               toast({
                 title: "Scheduled: Catch up",
                 description: "Friday, February 10, 2023 at 5:57 PM",
+  ...registryMetadata["toast"],
               })
             }}
           >

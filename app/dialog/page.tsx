@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 export const dynamic = "force-dynamic"
 
@@ -18,6 +19,7 @@ export const meta = {
   type: "registry:ui",
   title: "Dialog",
   description: "Modal dialog with sizes xs/sm/md/lg, built-in header/footer, and action buttons. Based on old Modal component.",
+  ...registryMetadata["dialog"],
   files: [
     {
       path: "ui/dialog.tsx",

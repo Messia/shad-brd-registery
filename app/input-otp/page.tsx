@@ -3,6 +3,7 @@
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp"
 import { useState } from "react"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -14,6 +15,7 @@ export const meta = {
   type: "registry:block",
   title: "Input OTP",
   description: "Accessible one-time password component with copy paste functionality.",
+  ...registryMetadata["input-otp"],
   files: [
     {
       path: "ui/input-otp.tsx",

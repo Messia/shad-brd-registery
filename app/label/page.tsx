@@ -1,6 +1,7 @@
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -12,6 +13,7 @@ export const meta = {
   type: "registry:block",
   title: "Label",
   description: "Renders an accessible label associated with controls.",
+  ...registryMetadata["label"],
   files: [
     {
       path: "ui/label.tsx",

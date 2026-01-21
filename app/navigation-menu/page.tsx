@@ -10,6 +10,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import React from "react"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -21,6 +22,7 @@ export const meta = {
   type: "registry:block",
   title: "Navigation Menu",
   description: "A collection of links for navigating websites.",
+  ...registryMetadata["navigation-menu"],
   files: [
     {
       path: "ui/navigation-menu.tsx",

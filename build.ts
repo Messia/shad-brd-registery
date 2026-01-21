@@ -278,7 +278,12 @@ const registryItems = modules.map(({ name, module }) => {
 
   return {
     name: prefixedName,
-    type: "registry:ui",
+    type: meta?.type || "registry:ui",
+    title: meta?.title || name,
+    description: meta?.description || "",
+    dependencies: meta?.dependencies || [],
+    categories: meta?.categories || [],
+    meta: meta?.meta || undefined,
     registryDependencies,
     files: files,
   }

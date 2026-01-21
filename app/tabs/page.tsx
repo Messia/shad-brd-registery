@@ -1,5 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ComponentPageLayout } from "@/components/component-page-layout"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -10,6 +11,7 @@ export const meta = {
   type: "registry:ui",
   title: "Tabs",
   description: "A set of layered sections of content—known as tab panels—that are displayed one at a time. Based on old Tabset component.",
+  ...registryMetadata["tabs"],
   dependencies: ["@radix-ui/react-tabs"],
   files: [
     {

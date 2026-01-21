@@ -12,7 +12,7 @@ interface LayoutWrapperProps {
 export function LayoutWrapper({ children }: LayoutWrapperProps) {
   const pathname = usePathname()
   // Extract component name from pathname (e.g., "/button" -> "button")
-  const currentComponent = pathname.slice(1) || "button"
+  const currentComponent = pathname.slice(1) || "home"
 
   // Updated to use the new shadcn sidebar - ComponentSidebar now handles all layout
   return (

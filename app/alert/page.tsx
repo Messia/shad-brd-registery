@@ -3,6 +3,7 @@
 import { Alert, AlertDescription, AlertTitle, AlertActions, AlertLink } from "@/components/ui/alert"
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { ArrowRight } from "lucide-react"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
@@ -10,6 +11,7 @@ export const meta = {
   type: "registry:block",
   title: "Alert",
   description: "Displays a callout for user attention.",
+  ...registryMetadata["alert"],
   files: [
     {
       path: "ui/alert.tsx",

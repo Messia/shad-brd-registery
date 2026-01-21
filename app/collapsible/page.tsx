@@ -5,6 +5,7 @@ import { ChevronsUpDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { useState } from "react"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -16,6 +17,7 @@ export const meta = {
   type: "registry:block",
   title: "Collapsible",
   description: "An interactive component which expands/collapses a panel.",
+  ...registryMetadata["collapsible"],
   files: [
     {
       path: "ui/collapsible.tsx",

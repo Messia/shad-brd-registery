@@ -4,6 +4,7 @@ import { Input, InputField } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { Search, Eye, Mail, Lock } from "lucide-react"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 export const dynamic = "force-dynamic"
 
@@ -13,6 +14,7 @@ export const meta = {
   type: "registry:ui",
   title: "Input",
   description: "A form input field. Simple Input for basic use, InputField for forms with label/icons/feedback.",
+  ...registryMetadata["input"],
   files: [
     {
       path: "ui/input.tsx",

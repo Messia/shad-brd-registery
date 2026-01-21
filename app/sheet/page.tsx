@@ -12,6 +12,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -23,6 +24,7 @@ export const meta = {
   type: "registry:block",
   title: "Sheet",
   description: "Extends the Dialog component to display content that complements the main content of the screen.",
+  ...registryMetadata["sheet"],
   files: [
     {
       path: "ui/sheet.tsx",

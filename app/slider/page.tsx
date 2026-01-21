@@ -1,6 +1,7 @@
 import { Slider } from "@/components/ui/slider"
 import { Label } from "@/components/ui/label"
 import { ComponentPageLayout } from "@/components/component-page-layout"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -11,6 +12,7 @@ export const meta = {
   type: "registry:block",
   title: "Slider",
   description: "An input where the user selects a value from within a given range.",
+  ...registryMetadata["slider"],
   files: [
     {
       path: "ui/slider.tsx",

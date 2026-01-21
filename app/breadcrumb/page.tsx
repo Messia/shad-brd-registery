@@ -9,6 +9,7 @@ import {
   BreadcrumbSeparator,
   Breadcrumbs,
 } from "@/components/ui/breadcrumb"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
@@ -16,6 +17,7 @@ export const meta = {
   type: "registry:ui",
   title: "Breadcrumb",
   description: "Displays the path to the current resource using a hierarchy of links.",
+  ...registryMetadata["breadcrumb"],
   dependencies: ["@radix-ui/react-slot"],
   files: [
     {

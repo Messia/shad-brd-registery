@@ -1,5 +1,6 @@
 import { Switch } from "@/components/ui/switch"
 import { ComponentPageLayout } from "@/components/component-page-layout"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -10,6 +11,7 @@ export const meta = {
   type: "registry:ui",
   title: "Switch",
   description: "A control that allows the user to toggle between checked and not checked. Based on old Switch component.",
+  ...registryMetadata["switch"],
   dependencies: ["@radix-ui/react-switch"],
   files: [
     {

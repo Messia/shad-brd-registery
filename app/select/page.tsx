@@ -1,6 +1,7 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import { ComponentPageLayout } from "@/components/component-page-layout"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -11,6 +12,7 @@ export const meta = {
   type: "registry:block",
   title: "Select",
   description: "Displays a list of options for the user to pick from—triggered by a button.",
+  ...registryMetadata["select"],
   files: [
     {
       path: "ui/select.tsx",

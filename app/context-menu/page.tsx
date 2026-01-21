@@ -14,6 +14,7 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
 } from "@/components/ui/context-menu"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -25,6 +26,7 @@ export const meta = {
   type: "registry:block",
   title: "Context Menu",
   description: "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
+  ...registryMetadata["context-menu"],
   files: [
     {
       path: "ui/context-menu.tsx",

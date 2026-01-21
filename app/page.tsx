@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Package, Palette, Code2, Zap } from "lucide-react"
+import { ExternalLink, Palette, Code2, Zap } from "lucide-react"
 
 export const dynamic = "force-dynamic"
 
@@ -17,8 +17,8 @@ const COMPONENTS = [
   "input", "input-otp", "label", "link", "menubar", "navigation-menu",
   "pagination", "popover", "progress", "radio-group", "resizable",
   "scroll-area", "select", "separator", "sheet", "skeleton", "slider",
-  "sonner", "switch", "table", "tabs", "textarea", "toast", "toggle",
-  "toggle-group", "tooltip"
+  "sonner", "switch", "table", "tabs", "textarea", "theme", "toast",
+  "toggle", "toggle-group", "tooltip", "widget"
 ]
 
 // Prefix for component names to prevent v0 from using built-in shadcn components
@@ -61,23 +61,6 @@ export default function HomePage() {
                   Open All in v0
                   <ExternalLink className="w-4 h-4 ml-1" />
                 </a>
-              </Button>
-
-              <Button size="lg" variant="secondary" asChild className="gap-2">
-                <a href={getV0Url("button", true)} target="_blank" rel="noopener noreferrer">
-                  <Zap className="w-5 h-5" />
-                  Open Button in v0
-                  <ExternalLink className="w-4 h-4 ml-1" />
-                </a>
-              </Button>
-            </div>
-
-            <div className="flex gap-4 justify-center">
-              <Button size="lg" variant="outline" asChild className="gap-2">
-                <Link href="/button">
-                  <Package className="w-5 h-5" />
-                  Browse Components
-                </Link>
               </Button>
             </div>
 
@@ -140,22 +123,9 @@ export default function HomePage() {
             <p className="text-sm text-[var(--color-text-secondary)] mb-4">
               Generate UI using our design system:
             </p>
-            <div className="space-y-2">
-              <Button asChild className="w-full gap-2">
-                <a href={getV0Url("all-components", false)} target="_blank" rel="noopener noreferrer">
-                  <Zap className="w-4 h-4" />
-                  Open All Components
-                  <ExternalLink className="w-4 h-4 ml-1" />
-                </a>
-              </Button>
-              <Button variant="secondary" asChild className="w-full gap-2">
-                <a href={getV0Url("button", true)} target="_blank" rel="noopener noreferrer">
-                  <Zap className="w-4 h-4" />
-                  Open Button Only
-                  <ExternalLink className="w-4 h-4 ml-1" />
-                </a>
-              </Button>
-            </div>
+            <p className="text-sm text-[var(--color-text-secondary)]">
+              Use the "Open All in v0" button above to open the full registry.
+            </p>
           </div>
         </div>
       </div>

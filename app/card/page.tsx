@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ComponentPageLayout } from "@/components/component-page-layout"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -11,6 +12,7 @@ export const meta = {
   type: "registry:block",
   title: "Card",
   description: "Displays a card with header, content, and footer.",
+  ...registryMetadata["card"],
   files: [
     {
       path: "ui/card.tsx",

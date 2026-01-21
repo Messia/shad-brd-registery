@@ -19,6 +19,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu"
+import { registryMetadata } from "@/lib/registry-metadata"
 import { User, Settings, CreditCard, LogOut, Mail, MessageSquare, PlusCircle, UserPlus, Cloud, LifeBuoy, Trash2 } from "lucide-react"
 
 export const dynamic = "force-dynamic"
@@ -29,6 +30,7 @@ export const meta = {
   type: "registry:ui",
   title: "Dropdown Menu",
   description: "A menu with items, checkboxes, radio groups, and submenus. Matches old DropdownMenu styling.",
+  ...registryMetadata["dropdown-menu"],
   files: [
     {
       path: "ui/dropdown-menu.tsx",

@@ -12,6 +12,7 @@ import {
   CommandSeparator,
   CommandShortcut,
 } from "@/components/ui/command"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -23,6 +24,7 @@ export const meta = {
   type: "registry:block",
   title: "Command",
   description: "Fast, composable, unstyled command menu for React.",
+  ...registryMetadata["command"],
   files: [
     {
       path: "ui/command.tsx",

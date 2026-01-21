@@ -8,6 +8,7 @@ import {
   MenubarShortcut,
   MenubarTrigger,
 } from "@/components/ui/menubar"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -20,6 +21,7 @@ export const meta = {
   title: "Menubar",
   description:
     "A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.",
+  ...registryMetadata["menubar"],
   files: [
     {
       path: "ui/menubar.tsx",

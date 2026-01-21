@@ -1,11 +1,14 @@
 "use client"
 
+import { registryMetadata } from "@/lib/registry-metadata"
 // Theme metadata for registry - this provides CSS variables to v0
 export const meta = {
+  $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "theme",
   type: "registry:theme",
   title: "BRD Theme",
   description: "BRD Design System theme with Figma design tokens and CSS variables",
+  ...registryMetadata["theme"],
   files: [
     {
       path: "globals.css",

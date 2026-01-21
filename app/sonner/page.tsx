@@ -3,14 +3,19 @@
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
 
 // Added meta export for proper page metadata
 export const meta = {
+  $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "sonner",
   type: "registry:ui",
+  title: "Sonner Toaster",
+  description: "A themed toast renderer backed by the Sonner library.",
+  ...registryMetadata["sonner"],
   dependencies: ["sonner", "next-themes"],
   files: [
     {
@@ -30,6 +35,7 @@ export default function SonnerPage() {
             onClick={() =>
               toast("Event has been created", {
                 description: "Sunday, December 03, 2023 at 9:00 AM",
+  ...registryMetadata["sonner"],
                 action: {
                   label: "Undo",
                   onClick: () => console.log("Undo"),

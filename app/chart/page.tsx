@@ -19,6 +19,7 @@ import {
   RadialBarChart,
   Legend,
 } from "recharts"
+import { registryMetadata } from "@/lib/registry-metadata"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   type ChartConfig,
@@ -40,6 +41,7 @@ export const meta = {
   type: "registry:block",
   title: "Chart",
   description: "Recharts components with 26 color swatches from Figma design tokens.",
+  ...registryMetadata["chart"],
   files: [
     {
       path: "ui/chart.tsx",

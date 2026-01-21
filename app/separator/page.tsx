@@ -1,13 +1,18 @@
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { Separator } from "@/components/ui/separator"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
 
 // Added meta export for proper page metadata
 export const meta = {
+  $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "separator",
   type: "registry:ui",
+  title: "Separator",
+  description: "A horizontal or vertical divider for separating content.",
+  ...registryMetadata["separator"],
   dependencies: ["@radix-ui/react-separator"],
   files: [
     {

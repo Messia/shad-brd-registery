@@ -3,6 +3,7 @@
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { Calendar } from "@/components/ui/calendar"
 import { useState } from "react"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -14,6 +15,7 @@ export const meta = {
   type: "registry:block",
   title: "Calendar",
   description: "A date field component that allows users to enter and edit date.",
+  ...registryMetadata["calendar"],
   files: [
     {
       path: "ui/calendar.tsx",

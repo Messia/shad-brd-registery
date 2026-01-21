@@ -1,5 +1,6 @@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { ComponentPageLayout } from "@/components/component-page-layout"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -10,6 +11,7 @@ export const meta = {
   type: "registry:ui",
   title: "Radio Group",
   description: "A set of checkable buttons—known as radio buttons—where no more than one can be checked at a time. Based on old Radio component.",
+  ...registryMetadata["radio-group"],
   dependencies: ["@radix-ui/react-radio-group"],
   files: [
     {

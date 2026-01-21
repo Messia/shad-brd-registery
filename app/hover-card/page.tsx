@@ -3,6 +3,7 @@ import { CalendarDays, Info, User, Settings } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -14,6 +15,7 @@ export const meta = {
   type: "registry:block",
   title: "Hover Card",
   description: "For sighted users to preview content available behind a link. Matches old Popover styling with M/S/XS sizes.",
+  ...registryMetadata["hover-card"],
   files: [
     {
       path: "ui/hover-card.tsx",

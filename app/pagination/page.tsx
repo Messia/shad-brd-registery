@@ -8,6 +8,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -19,6 +20,7 @@ export const meta = {
   type: "registry:block",
   title: "Pagination",
   description: "Pagination with page navigation, built using Radix UI's navigation components.",
+  ...registryMetadata["pagination"],
   files: [
     {
       path: "ui/pagination.tsx",

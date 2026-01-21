@@ -1,5 +1,6 @@
 import { Progress } from "@/components/ui/progress"
 import { ComponentPageLayout } from "@/components/component-page-layout"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 // Added dynamic export for force-dynamic rendering
 export const dynamic = "force-dynamic"
@@ -11,6 +12,7 @@ export const meta = {
   title: "Progress",
   description:
     "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+  ...registryMetadata["progress"],
   files: [
     {
       path: "ui/progress.tsx",

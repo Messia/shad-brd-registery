@@ -3,6 +3,7 @@
 import { Widget } from "@/components/ui/widget"
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { TrendingUp, TrendingDown } from "lucide-react"
+import { registryMetadata } from "@/lib/registry-metadata"
 
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
@@ -10,6 +11,7 @@ export const meta = {
   type: "registry:ui",
   title: "Widget",
   description: "A dashboard widget container with header, content area, and footer. Supports S/M/L sizes with zoom functionality.",
+  ...registryMetadata["widget"],
   files: [
     {
       path: "ui/widget.tsx",

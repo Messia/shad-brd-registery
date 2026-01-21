@@ -1,4 +1,5 @@
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { registryMetadata } from "@/lib/registry-metadata"
 // Added ComponentPageLayout import for consistent layout
 import { ComponentPageLayout } from "@/components/component-page-layout"
 
@@ -11,6 +12,7 @@ export const meta = {
   type: "registry:block",
   title: "Table",
   description: "A responsive table component.",
+  ...registryMetadata["table"],
   files: [
     {
       path: "ui/table.tsx",
