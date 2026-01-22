@@ -324,16 +324,25 @@ const registryItems = modules.map(({ name, module }) => {
 
 const allRegistryDependencies = [
   `${REGISTRY_URL}/r/theme.json`,
-  ...registryItems
-    .filter((item) => item.name !== `${COMPONENT_PREFIX}shell`)
-    .map((item) => `${REGISTRY_URL}/r/${item.name}.json`),
+  ...registryItems.map((item) => `${REGISTRY_URL}/r/${item.name}.json`),
 ]
 
 const shellItem = registryItems.find(
   (item) => item.name === `${COMPONENT_PREFIX}shell`
 )
 if (shellItem) {
-  shellItem.registryDependencies = allRegistryDependencies
+  shellItem.registryDependencies = allRegistryDependencies.filter(
+    (item) => !item.endsWith(`/${COMPONENT_PREFIX}shell.json`)
+  )
+}
+
+const widgetItem = registryItems.find(
+  (item) => item.name === `${COMPONENT_PREFIX}widget`
+)
+if (widgetItem) {
+  widgetItem.registryDependencies = allRegistryDependencies.filter(
+    (item) => !item.endsWith(`/${COMPONENT_PREFIX}widget.json`)
+  )
 }
 
 console.log("Registry Data Summary:", {

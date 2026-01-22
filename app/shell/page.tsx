@@ -1,6 +1,5 @@
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { registryMetadata } from "@/lib/registry-metadata"
-import { ShellDemo } from "./shell-demo"
 
 export const dynamic = "force-dynamic"
 
@@ -45,8 +44,6 @@ export default function ShellPage() {
       )}
       title="Shell"
       description="Combine header, navigation, and page containers into a full layout shell."
-    >
-      <ShellDemo embedded />
-    </ComponentPageLayout>
+    />
   )
 }

@@ -95,6 +95,16 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
     ref
   ) => {
     const [zoomOpen, setZoomOpen] = React.useState(false)
+    const { style, ...rest } = props
+    const safeStyle = style ? { ...style } : undefined
+    if (safeStyle) {
+      delete safeStyle.width
+      delete safeStyle.height
+      delete safeStyle.minWidth
+      delete safeStyle.maxWidth
+      delete safeStyle.minHeight
+      delete safeStyle.maxHeight
+    }
 
     const hasFooter = sourceLink || viewMoreLink
 
@@ -104,14 +114,14 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
       return (
         <div className="flex justify-between items-center w-full shrink-0">
           {sourceLink ? (
-            <Link href={sourceLink.href} size="M">
+            <Link href={sourceLink.href}>
               {sourceLink.label}
             </Link>
           ) : (
             <div />
           )}
           {viewMoreLink && (
-            <Link href={viewMoreLink.href} size="M">
+            <Link href={viewMoreLink.href}>
               {viewMoreLink.label}
             </Link>
           )}
@@ -123,9 +133,10 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
       <>
         <div
           ref={ref}
-          className={cn(widgetVariants({ size }), className)}
+          className={cn(className, widgetVariants({ size }))}
           data-size={size}
-          {...props}
+          style={safeStyle}
+          {...rest}
         >
           {/* Widget Header */}
           <div className="flex justify-between items-start w-full shrink-0">
@@ -139,7 +150,7 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
                 {onInfoClick && (
                   <IconButton
                     ariaLabel="Widget info"
-                    size="XS"
+                    size="S"
                     color="Black"
                     onClick={onInfoClick}
                   >
@@ -165,7 +176,6 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
                   ) : (
                     <Link
                       href="#"
-                      size="S"
                       icon={<RefreshCw size={14} />}
                       onClick={(e) => {
                         e.preventDefault()
