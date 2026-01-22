@@ -196,6 +196,9 @@
   --color-surface-button-tertiary-focused: oklch(0.96 0.00 264);
   --color-surface-button-tertiary-disabled: oklch(0.85 0.01 250);
 
+  /* Surface - Dashboard */
+  --color-surface-dashboard: var(--grey-150);
+
   /* Surface - Button Error */
   --color-surface-button-error-default: oklch(0.50 0.19 25);
   --color-surface-button-error-hover: oklch(0.36 0.13 25);

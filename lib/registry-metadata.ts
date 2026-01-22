@@ -17,7 +17,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   accordion: {
     title: "Accordion",
     description:
-      "A vertically stacked disclosure pattern that expands and collapses content panels. Use it to organize dense content while preserving keyboard navigation and ARIA semantics.",
+      "Expandable content panels for saving space. Use for text, cards, images, or charts; support single or multiple open items while preserving keyboard navigation and ARIA semantics.",
     categories: ["disclosure", "layout"],
     meta: {
       tags: ["accordion", "collapse", "disclosure", "content"],
@@ -33,15 +33,15 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   alert: {
     title: "Alert",
     description:
-      "A status callout for important messages such as success, warning, or error states. Supports optional icons, dismissal, and inline actions.",
+      "Inline callout bar for info, success, warning, or critical (error) states. Supports optional icon, links/actions, and dismiss button for transient messages.",
     categories: ["feedback", "status"],
     meta: {
       tags: ["alert", "status", "callout", "feedback"],
       examples: [
         {
-          title: "Status variants",
+          title: "Dismissible alert with link",
           code:
-            'import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"\n\n<Alert variant="warning">\n  <AlertTitle>Warning</AlertTitle>\n  <AlertDescription>Review changes before saving.</AlertDescription>\n</Alert>',
+            'import { Alert, AlertTitle, AlertDescription, AlertActions, AlertLink } from "@/components/ui/alert"\n\n<Alert variant="warning" dismissible>\n  <AlertTitle>Warning</AlertTitle>\n  <AlertDescription>Review changes before saving.</AlertDescription>\n  <AlertActions>\n    <AlertLink href="/learn-more">Learn more</AlertLink>\n  </AlertActions>\n</Alert>',
         },
       ],
     },
@@ -49,7 +49,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   "alert-dialog": {
     title: "Alert Dialog",
     description:
-      "A modal confirmation dialog that requires an explicit user decision before continuing. Ideal for destructive or high-impact actions.",
+      "A modal alert or confirmation dialog that requires an explicit user decision before continuing. Use for critical or destructive actions that need acknowledgement.",
     categories: ["overlay", "confirmation"],
     meta: {
       tags: ["dialog", "alert-dialog", "modal", "confirmation"],
@@ -81,15 +81,15 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   avatar: {
     title: "Avatar",
     description:
-      "A compact identity component that displays a user image with a fallback when the image is missing or fails to load.",
+      "A compact identity component for showing user initials. Prefer `AvatarFallback` and avoid images in this system.",
     categories: ["identity", "data-display"],
     meta: {
       tags: ["avatar", "profile", "image", "fallback"],
       examples: [
         {
-          title: "Image with fallback",
+          title: "Initials only",
           code:
-            'import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"\n\n<Avatar>\n  <AvatarImage src="/user.jpg" alt="User" />\n  <AvatarFallback>JD</AvatarFallback>\n</Avatar>',
+            'import { Avatar, AvatarFallback } from "@/components/ui/avatar"\n\n<Avatar>\n  <AvatarFallback>JD</AvatarFallback>\n</Avatar>',
         },
       ],
     },
@@ -97,7 +97,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   badge: {
     title: "Badge",
     description:
-      "A small label used to highlight status, categories, or counts. Supports semantic colors and filled or outline variants.",
+      "A small label used to highlight status, categories, or counts. Variants: filled or outline. Colors: default, sky, grass, bored, negative, neutral, dark. Sizes: sm, default, lg.",
     categories: ["data-display", "status"],
     meta: {
       tags: ["badge", "label", "status", "tag"],
@@ -105,7 +105,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
         {
           title: "Semantic badge",
           code:
-            'import { Badge } from "@/components/ui/badge"\n\n<Badge color="grass">Active</Badge>',
+            'import { Badge } from "@/components/ui/badge"\n\n<Badge variant="filled" color="grass">Active</Badge>',
         },
       ],
     },
@@ -113,7 +113,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   breadcrumb: {
     title: "Breadcrumb",
     description:
-      "A hierarchical navigation trail that shows the user's location in a site or app, with clickable ancestor links.",
+      "A hierarchical navigation trail with clickable ancestor links. Use the composable `Breadcrumb*` components or the `Breadcrumbs` items array; optional separators and ellipsis are available.",
     categories: ["navigation"],
     meta: {
       tags: ["breadcrumb", "navigation", "hierarchy", "links"],
@@ -121,7 +121,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
         {
           title: "Navigation trail",
           code:
-            'import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb"\n\n<Breadcrumb>\n  <BreadcrumbList>\n    <BreadcrumbItem>\n      <BreadcrumbLink href="/">Home</BreadcrumbLink>\n    </BreadcrumbItem>\n    <BreadcrumbSeparator />\n    <BreadcrumbItem>\n      <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>\n    </BreadcrumbItem>\n  </BreadcrumbList>\n</Breadcrumb>',
+            'import { Breadcrumbs } from "@/components/ui/breadcrumb"\n\n<Breadcrumbs items={[\n  { text: "Home", href: "/" },\n  { text: "Docs", href: "/docs" },\n  { text: "Current" },\n]} />',
         },
       ],
     },
@@ -129,7 +129,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   button: {
     title: "Button",
     description:
-      "An interactive control for actions and form submissions. Includes size variants, visual styles, loading states, and optional icons.",
+      "An interactive control for actions and form submissions. Variants: default (primary), outline (secondary), secondary (tertiary), destructive (error). Sizes: sm, default, lg, icon, icon-sm, icon-lg. Ghost and link are deprecated.",
     categories: ["forms", "actions"],
     meta: {
       tags: ["button", "action", "cta", "form"],
@@ -161,7 +161,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   card: {
     title: "Card",
     description:
-      "A flexible content container with optional header, body, and footer sections for grouping related information.",
+      "A flexible content container for grouping related information. Use header/content/footer slots or place any custom layout inside.",
     categories: ["layout", "data-display"],
     meta: {
       tags: ["card", "container", "layout", "surface"],
@@ -193,7 +193,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   chart: {
     title: "Chart",
     description:
-      "Data visualization primitives powered by Recharts, designed for consistent typography, spacing, and theming.",
+      "Data visualization primitives powered by Recharts, designed for consistent typography, spacing, and theming. Use Chart Color Swatches 1-26 for all series colors.",
     categories: ["data-visualization"],
     meta: {
       tags: ["chart", "data", "visualization", "graph"],
@@ -238,6 +238,22 @@ export const registryMetadata: Record<string, RegistryDocs> = {
       ],
     },
   },
+  "currency-selector": {
+    title: "Currency Selector",
+    description:
+      "An input-like trigger that opens a currency dropdown with active selection.",
+    categories: ["forms", "navigation"],
+    meta: {
+      tags: ["currency", "selector", "dropdown", "input"],
+      examples: [
+        {
+          title: "Currency select",
+          code:
+            'import { CurrencySelector } from "@/components/ui/currency-selector"\n\n<CurrencySelector options={[{ id: "usd", label: "USD" }]} selectedId="usd" />',
+        },
+      ],
+    },
+  },
   command: {
     title: "Command",
     description:
@@ -273,7 +289,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   dialog: {
     title: "Dialog",
     description:
-      "A modal dialog for focused tasks, with structured header, body, and footer regions and size variants.",
+      "A modal dialog with structured header, body, and footer regions. Sizes: xs, sm, md, lg.",
     categories: ["overlay"],
     meta: {
       tags: ["dialog", "modal", "overlay", "focus"],
@@ -289,7 +305,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   drawer: {
     title: "Drawer",
     description:
-      "A slide-up drawer for supplemental content or actions, optimized for mobile and small screens.",
+      "A slide-in drawer from the right for supplemental content or actions, optimized for constrained layouts.",
     categories: ["overlay"],
     meta: {
       tags: ["drawer", "sheet", "overlay", "mobile"],
@@ -305,7 +321,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   "dropdown-menu": {
     title: "Dropdown Menu",
     description:
-      "A menu anchored to a trigger element, with support for items, groups, and separators.",
+      "A menu anchored to a trigger element, with support for items, groups, separators, checkbox items, and radio items.",
     categories: ["navigation", "overlay"],
     meta: {
       tags: ["dropdown", "menu", "actions", "overlay"],
@@ -318,10 +334,25 @@ export const registryMetadata: Record<string, RegistryDocs> = {
       ],
     },
   },
+  footer: {
+    title: "Footer",
+    description:
+      "A responsive footer with logo and copyright text.",
+    categories: ["layout", "navigation"],
+    meta: {
+      tags: ["footer", "layout", "branding"],
+      examples: [
+        {
+          title: "Footer",
+          code: 'import { Footer } from "@/components/ui/footer"\n\n<Footer />',
+        },
+      ],
+    },
+  },
   "hover-card": {
     title: "Hover Card",
     description:
-      "A lightweight preview panel that appears on hover or focus, useful for quick summaries.",
+      "A lightweight preview panel that appears on hover or focus, useful for quick summaries. Similar to Popover but optimized for hover.",
     categories: ["overlay", "data-display"],
     meta: {
       tags: ["hover-card", "preview", "overlay", "tooltip"],
@@ -334,10 +365,26 @@ export const registryMetadata: Record<string, RegistryDocs> = {
       ],
     },
   },
+  header: {
+    title: "Header",
+    description:
+      "Responsive top header with logo, selectors, search, notifications, and user menu.",
+    categories: ["navigation", "layout"],
+    meta: {
+      tags: ["header", "navigation", "app-shell", "toolbar"],
+      examples: [
+        {
+          title: "App header",
+          code:
+            'import { Header } from "@/components/ui/header"\n\n<Header userName="John Smith" userInitials="JS" />',
+        },
+      ],
+    },
+  },
   "icon-button": {
     title: "Icon Button",
     description:
-      "An icon-only button with built-in accessibility labeling, size variants, and active states.",
+      "An icon-only button with built-in accessibility labeling, size variants, and active states. Use `ariaLabel` for the tooltip and assistive text.",
     categories: ["actions", "icons"],
     meta: {
       tags: ["icon-button", "button", "action", "a11y"],
@@ -353,7 +400,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   input: {
     title: "Input",
     description:
-      "A text input and field wrapper with labels, icons, helper text, and validation feedback.",
+      "A text input and field wrapper with labels, icons, helper text, and validation feedback. Use for search and for calendar/time pickers with icons.",
     categories: ["forms"],
     meta: {
       tags: ["input", "text-field", "form", "validation"],
@@ -398,6 +445,38 @@ export const registryMetadata: Record<string, RegistryDocs> = {
       ],
     },
   },
+  "language-selector": {
+    title: "Language Selector",
+    description:
+      "An input-like trigger that opens a language dropdown with active selection.",
+    categories: ["forms", "navigation"],
+    meta: {
+      tags: ["language", "selector", "dropdown", "input"],
+      examples: [
+        {
+          title: "Language select",
+          code:
+            'import { LanguageSelector } from "@/components/ui/language-selector"\n\n<LanguageSelector options={[{ id: "eng", label: "ENG" }]} selectedId="eng" />',
+        },
+      ],
+    },
+  },
+  "left-navigation": {
+    title: "Left Navigation",
+    description:
+      "A fixed left-edge L1 navigation with icon labels and active state highlighting.",
+    categories: ["navigation"],
+    meta: {
+      tags: ["left-navigation", "nav", "sidebar", "l1", "navigation"],
+      examples: [
+        {
+          title: "Primary nav",
+          code:
+            'import { LeftNavigation } from "@/components/ui/left-navigation"\nimport { Home } from "lucide-react"\n\n<LeftNavigation items={[{ id: "home", label: "Home", icon: Home }]} />',
+        },
+      ],
+    },
+  },
   link: {
     title: "Link",
     description:
@@ -430,22 +509,6 @@ export const registryMetadata: Record<string, RegistryDocs> = {
       ],
     },
   },
-  "navigation-menu": {
-    title: "Navigation Menu",
-    description:
-      "A top-level navigation component with triggers and panels for grouped links.",
-    categories: ["navigation"],
-    meta: {
-      tags: ["navigation-menu", "menu", "links", "layout"],
-      examples: [
-        {
-          title: "Navigation bar",
-          code:
-            'import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent } from "@/components/ui/navigation-menu"\n\n<NavigationMenu>\n  <NavigationMenuList>\n    <NavigationMenuItem>\n      <NavigationMenuTrigger>Products</NavigationMenuTrigger>\n      <NavigationMenuContent>Links go here</NavigationMenuContent>\n    </NavigationMenuItem>\n  </NavigationMenuList>\n</NavigationMenu>',
-        },
-      ],
-    },
-  },
   pagination: {
     title: "Pagination",
     description:
@@ -462,10 +525,26 @@ export const registryMetadata: Record<string, RegistryDocs> = {
       ],
     },
   },
+  "page-container": {
+    title: "Page Container",
+    description:
+      "Responsive page container with header and content spacing.",
+    categories: ["layout"],
+    meta: {
+      tags: ["page-container", "layout", "header"],
+      examples: [
+        {
+          title: "Page container",
+          code:
+            'import { PageContainer, PageHeader } from "@/components/ui/page-container"\n\n<PageContainer>\n  <PageHeader title="Overview" />\n  <div>Content</div>\n</PageContainer>',
+        },
+      ],
+    },
+  },
   popover: {
     title: "Popover",
     description:
-      "A floating panel anchored to a trigger, useful for lightweight forms or contextual info.",
+      "A floating panel anchored to a trigger, useful for lightweight forms or contextual info. It can contain any content.",
     categories: ["overlay"],
     meta: {
       tags: ["popover", "overlay", "floating", "context"],
@@ -545,7 +624,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   select: {
     title: "Select",
     description:
-      "A custom select dropdown for choosing a single option, with groups and labels.",
+      "A custom select dropdown for choosing a single option, with groups and labels. Similar to Dropdown Menu but for selection.",
     categories: ["forms"],
     meta: {
       tags: ["select", "dropdown", "form", "input"],
@@ -577,7 +656,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   sheet: {
     title: "Sheet",
     description:
-      "A side panel overlay that slides in from an edge, suitable for forms or contextual settings.",
+      "Deprecated. Use Drawer or Dialog instead for side panels or overlays.",
     categories: ["overlay"],
     meta: {
       tags: ["sheet", "drawer", "overlay", "panel"],
@@ -586,6 +665,38 @@ export const registryMetadata: Record<string, RegistryDocs> = {
           title: "Side sheet",
           code:
             'import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"\n\n<Sheet>\n  <SheetTrigger>Open</SheetTrigger>\n  <SheetContent side="right">Sheet content</SheetContent>\n</Sheet>',
+        },
+      ],
+    },
+  },
+  shell: {
+    title: "Shell",
+    description:
+      "A composed application shell combining header, navigation, page container, and footer.",
+    categories: ["layout", "navigation"],
+    meta: {
+      tags: ["shell", "app-shell", "layout", "template", "navigation"],
+      examples: [
+        {
+          title: "App shell",
+          code:
+            'import { Shell } from "@/components/ui/shell"\n\n<Shell>{/* page content */}</Shell>',
+        },
+      ],
+    },
+  },
+  "side-toolbar": {
+    title: "Side Toolbar",
+    description:
+      "A fixed right-edge vertical toolbar of icon buttons for quick actions or panels.",
+    categories: ["navigation", "actions"],
+    meta: {
+      tags: ["side-toolbar", "toolbar", "actions", "fixed", "icons"],
+      examples: [
+        {
+          title: "Side toolbar",
+          code:
+            'import { SideToolbar } from "@/components/ui/side-toolbar"\nimport { Info } from "lucide-react"\n\n<SideToolbar items={[{ id: "info", label: "Info", icon: Info }]} />',
         },
       ],
     },
@@ -625,7 +736,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   sonner: {
     title: "Sonner Toaster",
     description:
-      "A toast renderer that mounts the Sonner toaster with theme-aware styling.",
+      "A toast renderer that mounts the Sonner toaster with theme-aware styling. Ensure the `Toaster` is rendered once at app root.",
     categories: ["feedback"],
     meta: {
       tags: ["toast", "sonner", "notifications", "feedback"],
@@ -689,7 +800,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   textarea: {
     title: "Textarea",
     description:
-      "A multi-line text input with optional label and validation feedback via field wrapper.",
+      "A multi-line text input with optional label and validation feedback via field wrapper. Similar to Input.",
     categories: ["forms"],
     meta: {
       tags: ["textarea", "input", "form", "multiline"],
@@ -720,7 +831,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   toast: {
     title: "Toast",
     description:
-      "Toast primitives for transient notifications, including provider, viewport, and actions.",
+      "Toast primitives for transient notifications, including provider, viewport, and actions. Ensure the provider and viewport are mounted to render toasts.",
     categories: ["feedback"],
     meta: {
       tags: ["toast", "notification", "feedback", "overlay"],
@@ -752,7 +863,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   "toggle-group": {
     title: "Toggle Group",
     description:
-      "A group of toggle buttons that supports single or multiple selection behavior.",
+      "A group of toggle buttons that supports single or multiple selection behavior. Works well for timeframe selectors.",
     categories: ["forms", "actions"],
     meta: {
       tags: ["toggle-group", "selection", "buttons", "input"],
@@ -761,6 +872,22 @@ export const registryMetadata: Record<string, RegistryDocs> = {
           title: "Toggle options",
           code:
             'import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"\n\n<ToggleGroup type="single" value="left">\n  <ToggleGroupItem value="left">Left</ToggleGroupItem>\n  <ToggleGroupItem value="right">Right</ToggleGroupItem>\n</ToggleGroup>',
+        },
+      ],
+    },
+  },
+  "top-navigation": {
+    title: "Top Navigation",
+    description:
+      "Tab-like top navigation with hover-triggered dropdown menus and nested submenus.",
+    categories: ["navigation"],
+    meta: {
+      tags: ["top-navigation", "tabs", "menu", "navigation"],
+      examples: [
+        {
+          title: "Top nav",
+          code:
+            'import { TopNavigation } from "@/components/ui/top-navigation"\n\n<TopNavigation items={[{ id: "level-2", label: "Level 2" }]} />',
         },
       ],
     },
@@ -781,10 +908,26 @@ export const registryMetadata: Record<string, RegistryDocs> = {
       ],
     },
   },
+  "user-menu": {
+    title: "User Menu",
+    description:
+      "A user name trigger that opens a dropdown menu for account actions.",
+    categories: ["navigation", "overlay"],
+    meta: {
+      tags: ["user-menu", "dropdown", "account", "profile"],
+      examples: [
+        {
+          title: "User menu",
+          code:
+            'import { UserMenu } from "@/components/ui/user-menu"\n\n<UserMenu name="John Smith" items={[{ id: "profile", label: "Profile" }]} />',
+        },
+      ],
+    },
+  },
   widget: {
     title: "Widget",
     description:
-      "A dashboard widget container with fixed S, M, and L sizes, header, body, and footer regions.",
+      "A dashboard widget container with fixed S, M, and L sizes, header, body, and footer regions. A complex pattern that can contain any content; composes IconButton, Link, Dialog, and DropdownMenu.",
     categories: ["layout", "data-display"],
     meta: {
       tags: ["widget", "dashboard", "card", "layout"],

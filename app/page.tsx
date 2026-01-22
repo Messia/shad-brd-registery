@@ -13,12 +13,13 @@ const COMPONENTS = [
   "accordion", "alert", "alert-dialog", "aspect-ratio", "avatar",
   "badge", "breadcrumb", "button", "calendar", "card", "carousel",
   "chart", "checkbox", "collapsible", "command", "context-menu",
-  "dialog", "drawer", "dropdown-menu", "hover-card", "icon-button",
-  "input", "input-otp", "label", "link", "menubar", "navigation-menu",
+  "currency-selector", "dialog", "drawer", "dropdown-menu", "footer",
+  "header", "hover-card", "icon-button", "input", "input-otp", "label",
+  "language-selector", "left-navigation", "link", "menubar", "page-container",
   "pagination", "popover", "progress", "radio-group", "resizable",
-  "scroll-area", "select", "separator", "sheet", "skeleton", "slider",
-  "sonner", "switch", "table", "tabs", "textarea", "theme", "toast",
-  "toggle", "toggle-group", "tooltip", "widget"
+  "scroll-area", "select", "separator", "sheet", "shell", "side-toolbar", "skeleton",
+  "slider", "sonner", "switch", "table", "tabs", "textarea", "theme",
+  "toast", "toggle", "toggle-group", "top-navigation", "tooltip", "user-menu", "widget"
 ]
 
 // Prefix for component names to prevent v0 from using built-in shadcn components
