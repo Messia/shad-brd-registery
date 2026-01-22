@@ -100,10 +100,6 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
     if (safeStyle) {
       delete safeStyle.width
       delete safeStyle.height
-      delete safeStyle.minWidth
-      delete safeStyle.maxWidth
-      delete safeStyle.minHeight
-      delete safeStyle.maxHeight
     }
 
     const hasFooter = sourceLink || viewMoreLink

@@ -59,7 +59,7 @@ const LeftNavigation = React.forwardRef<HTMLDivElement, LeftNavigationProps>(
                 disabled={item.disabled}
               >
                 <Icon className="size-6 mx-auto" aria-hidden="true" />
-                <span className="w-full text-[11px] font-semibold text-center leading-[10px] whitespace-normal break-words">
+                <span className="w-full text-[11px] font-semibold text-center leading-[10px] whitespace-nowrap truncate">
                   {item.label}
                 </span>
               </Button>

@@ -2,6 +2,8 @@
 
 import * as React from "react"
 
+import { Bookmark, Calendar, Info, MessageSquare, Settings } from "lucide-react"
+
 import { Header, type HeaderProps } from "@/components/ui/header"
 import { TopNavigation, type TopNavigationProps } from "@/components/ui/top-navigation"
 import { SideToolbar, type SideToolbarProps } from "@/components/ui/side-toolbar"
@@ -21,6 +23,14 @@ export interface ShellProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode
 }
 
+const defaultSideToolbarItems: SideToolbarProps["items"] = [
+  { id: "info", label: "Info", icon: Info },
+  { id: "bookmarks", label: "Bookmarks", icon: Bookmark },
+  { id: "messages", label: "Messages", icon: MessageSquare },
+  { id: "calendar", label: "Calendar", icon: Calendar },
+  { id: "settings", label: "Settings", icon: Settings },
+]
+
 function Shell({
   headerProps,
   topNavigationProps,
@@ -34,7 +44,10 @@ function Shell({
   ...props
 }: ShellProps) {
   const hasLeftNav = Boolean(leftNavigationProps?.items?.length)
-  const hasSideToolbar = Boolean(sideToolbarProps?.items?.length)
+  const sideToolbarItems = sideToolbarProps?.items ?? defaultSideToolbarItems
+  const hasSideToolbar = sideToolbarProps
+    ? sideToolbarProps.items.length > 0
+    : defaultSideToolbarItems.length > 0
   const hasTopNav = Boolean(topNavigationProps?.items?.length)
   const headerHeight = "56px"
   const topNavHeight = hasTopNav ? "40px" : "0px"
@@ -75,7 +88,8 @@ function Shell({
         {hasSideToolbar && (
           <SideToolbar
             {...sideToolbarProps}
-            position="fixed"
+            items={sideToolbarItems}
+            position={sideToolbarProps?.position ?? "fixed"}
             className={sideToolbarProps?.className}
           />
         )}

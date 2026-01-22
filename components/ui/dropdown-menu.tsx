@@ -161,14 +161,14 @@ const DropdownMenuItem = React.forwardRef<
         ref={ref}
         data-slot="dropdown-menu-item"
         data-inset={inset}
-        data-active={isActive ? '' : undefined}
+        data-active={isActive ? 'true' : undefined}
         data-variant={variant}
         className={cn(
           itemBaseStyles,
           // Inset padding for alignment
           inset && 'pl-[calc(theme(spacing.4)+18px+theme(spacing.3))]',
           // Active/selected state
-          'data-[active]:bg-[var(--color-surface-selected)] data-[active]:text-[var(--color-text-selected)] data-[active]:font-semibold',
+          'data-[active=true]:bg-[var(--color-surface-selected)] data-[active=true]:text-[var(--color-text-selected)] data-[active=true]:font-semibold',
           // Destructive variant
           'data-[variant=destructive]:text-[var(--color-state-error)]',
           'data-[variant=destructive]:data-[highlighted]:bg-[var(--color-state-error)]/10',
