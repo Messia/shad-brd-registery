@@ -147,10 +147,11 @@ const TopNavigation = React.forwardRef<HTMLDivElement, TopNavigationProps>(
       <nav
         ref={ref}
         className={cn(
-          "flex items-center gap-1",
+          "sticky z-30 flex items-center gap-1",
           "bg-[var(--grey-150)] px-4",
           className
         )}
+        style={{ top: "var(--shell-header-height, 56px)", ...(props.style ?? {}) }}
         {...props}
       >
         <div
@@ -192,9 +193,8 @@ const TopNavigation = React.forwardRef<HTMLDivElement, TopNavigationProps>(
                     "whitespace-nowrap",
                     "text-[var(--color-text-primary)]",
                     "border-b-2 border-transparent",
-                    "hover:bg-[var(--color-surface-hover)]",
-                    isActive &&
-                      "border-[var(--color-text-brand)] text-[var(--color-text-brand)]"
+                    "hover:border-[var(--color-stroke-default)] hover:bg-[var(--color-surface-hover)]",
+                    isActive && "border-[var(--color-stroke-brand)]"
                   )}
                   onMouseEnter={() => hasChildren && setOpenId(item.id)}
                   onMouseLeave={() => hasChildren && setOpenId(null)}
@@ -237,7 +237,7 @@ const TopNavigation = React.forwardRef<HTMLDivElement, TopNavigationProps>(
                     "whitespace-nowrap",
                     "text-[var(--color-text-primary)]",
                     "border-b-2 border-transparent",
-                    "hover:bg-[var(--color-surface-hover)]"
+                    "hover:border-[var(--color-stroke-default)] hover:bg-[var(--color-surface-hover)]"
                   )}
                   onMouseEnter={() => setOpenId("more")}
                   onMouseLeave={() => setOpenId(null)}

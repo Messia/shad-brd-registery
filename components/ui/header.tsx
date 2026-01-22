@@ -72,7 +72,7 @@ function Header({
   return (
     <header
       className={cn(
-        "w-full bg-[var(--grey-150)]",
+        "sticky top-0 z-40 w-full bg-[var(--grey-150)]",
         className
       )}
       {...props}

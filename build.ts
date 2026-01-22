@@ -322,6 +322,20 @@ const registryItems = modules.map(({ name, module }) => {
   }
 })
 
+const allRegistryDependencies = [
+  `${REGISTRY_URL}/r/theme.json`,
+  ...registryItems
+    .filter((item) => item.name !== `${COMPONENT_PREFIX}shell`)
+    .map((item) => `${REGISTRY_URL}/r/${item.name}.json`),
+]
+
+const shellItem = registryItems.find(
+  (item) => item.name === `${COMPONENT_PREFIX}shell`
+)
+if (shellItem) {
+  shellItem.registryDependencies = allRegistryDependencies
+}
+
 console.log("Registry Data Summary:", {
   totalComponents: registryItems.length,
 })
