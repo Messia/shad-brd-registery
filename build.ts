@@ -18,16 +18,22 @@ import * as checkboxModule from "./app/checkbox/page.tsx"
 import * as collapsibleModule from "./app/collapsible/page.tsx"
 import * as commandModule from "./app/command/page.tsx"
 import * as contextMenuModule from "./app/context-menu/page.tsx"
+import * as currencySelectorModule from "./app/currency-selector/page.tsx"
 import * as dialogModule from "./app/dialog/page.tsx"
 import * as drawerModule from "./app/drawer/page.tsx"
 import * as dropdownMenuModule from "./app/dropdown-menu/page.tsx"
+import * as footerModule from "./app/footer/page.tsx"
+import * as headerModule from "./app/header/page.tsx"
 import * as hoverCardModule from "./app/hover-card/page.tsx"
 import * as iconButtonModule from "./app/icon-button/page.tsx"
 import * as inputModule from "./app/input/page.tsx"
 import * as inputOtpModule from "./app/input-otp/page.tsx"
 import * as labelModule from "./app/label/page.tsx"
+import * as languageSelectorModule from "./app/language-selector/page.tsx"
+import * as leftNavigationModule from "./app/left-navigation/page.tsx"
 import * as linkModule from "./app/link/page.tsx"
 import * as menubarModule from "./app/menubar/page.tsx"
+import * as pageContainerModule from "./app/page-container/page.tsx"
 import * as paginationModule from "./app/pagination/page.tsx"
 import * as popoverModule from "./app/popover/page.tsx"
 import * as progressModule from "./app/progress/page.tsx"
@@ -36,7 +42,9 @@ import * as resizableModule from "./app/resizable/page.tsx"
 import * as scrollAreaModule from "./app/scroll-area/page.tsx"
 import * as selectModule from "./app/select/page.tsx"
 import * as separatorModule from "./app/separator/page.tsx"
+import * as shellModule from "./app/shell/page.tsx"
 import * as sheetModule from "./app/sheet/page.tsx"
+import * as sideToolbarModule from "./app/side-toolbar/page.tsx"
 import * as skeletonModule from "./app/skeleton/page.tsx"
 import * as sliderModule from "./app/slider/page.tsx"
 import * as sonnerModule from "./app/sonner/page.tsx"
@@ -44,12 +52,14 @@ import * as switchModule from "./app/switch/page.tsx"
 import * as tableModule from "./app/table/page.tsx"
 import * as tabsModule from "./app/tabs/page.tsx"
 import * as textareaModule from "./app/textarea/page.tsx"
+import * as themeModule from "./app/theme/page.tsx"
 import * as toastModule from "./app/toast/page.tsx"
 import * as toggleModule from "./app/toggle/page.tsx"
 import * as toggleGroupModule from "./app/toggle-group/page.tsx"
 import * as tooltipModule from "./app/tooltip/page.tsx"
+import * as topNavigationModule from "./app/top-navigation/page.tsx"
+import * as userMenuModule from "./app/user-menu/page.tsx"
 import * as widgetModule from "./app/widget/page.tsx"
-import * as themeModule from "./app/theme/page.tsx"
 
 // Output directory for generated registry files
 const OUTPUT_DIR = join(process.cwd(), "public", "r")
@@ -78,16 +88,22 @@ const COMPONENT_NAME_MAP: Record<string, string> = {
   "collapsible": "collapsible",
   "command": "command",
   "context-menu": "context-menu",
+  "currency-selector": "currency-selector",
   "dialog": "dialog",
   "drawer": "drawer",
   "dropdown-menu": "dropdown-menu",
+  "footer": "footer",
+  "header": "header",
   "hover-card": "hover-card",
   "icon-button": "icon-button",
   "input": "input",
   "input-otp": "input-otp",
   "label": "label",
+  "language-selector": "language-selector",
+  "left-navigation": "left-navigation",
   "link": "link",
   "menubar": "menubar",
+  "page-container": "page-container",
   "pagination": "pagination",
   "popover": "popover",
   "progress": "progress",
@@ -96,8 +112,10 @@ const COMPONENT_NAME_MAP: Record<string, string> = {
   "scroll-area": "scroll-area",
   "select": "select",
   "separator": "separator",
+  "shell": "shell",
   "sheet": "sheet",
   "sidebar": "sidebar",
+  "side-toolbar": "side-toolbar",
   "skeleton": "skeleton",
   "slider": "slider",
   "sonner": "sonner",
@@ -105,11 +123,14 @@ const COMPONENT_NAME_MAP: Record<string, string> = {
   "table": "table",
   "tabs": "tabs",
   "textarea": "textarea",
+  "theme": "theme",
   "toast": "toast",
   "toaster": "toast",  // toaster imports from toast
   "toggle": "toggle",
   "toggle-group": "toggle-group",
   "tooltip": "tooltip",
+  "top-navigation": "top-navigation",
+  "user-menu": "user-menu",
   "widget": "widget",
   "use-mobile": "sidebar",  // hook used by sidebar
   "use-toast": "toast",  // hook used by toast
@@ -159,16 +180,22 @@ const modules = [
   { name: "collapsible", module: collapsibleModule },
   { name: "command", module: commandModule },
   { name: "context-menu", module: contextMenuModule },
+  { name: "currency-selector", module: currencySelectorModule },
   { name: "dialog", module: dialogModule },
   { name: "drawer", module: drawerModule },
   { name: "dropdown-menu", module: dropdownMenuModule },
+  { name: "footer", module: footerModule },
+  { name: "header", module: headerModule },
   { name: "hover-card", module: hoverCardModule },
   { name: "icon-button", module: iconButtonModule },
   { name: "input", module: inputModule },
   { name: "input-otp", module: inputOtpModule },
   { name: "label", module: labelModule },
+  { name: "language-selector", module: languageSelectorModule },
+  { name: "left-navigation", module: leftNavigationModule },
   { name: "link", module: linkModule },
   { name: "menubar", module: menubarModule },
+  { name: "page-container", module: pageContainerModule },
   { name: "pagination", module: paginationModule },
   { name: "popover", module: popoverModule },
   { name: "progress", module: progressModule },
@@ -177,7 +204,9 @@ const modules = [
   { name: "scroll-area", module: scrollAreaModule },
   { name: "select", module: selectModule },
   { name: "separator", module: separatorModule },
+  { name: "shell", module: shellModule },
   { name: "sheet", module: sheetModule },
+  { name: "side-toolbar", module: sideToolbarModule },
   { name: "skeleton", module: skeletonModule },
   { name: "slider", module: sliderModule },
   { name: "sonner", module: sonnerModule },
@@ -185,10 +214,13 @@ const modules = [
   { name: "table", module: tableModule },
   { name: "tabs", module: tabsModule },
   { name: "textarea", module: textareaModule },
+  { name: "theme", module: themeModule },
   { name: "toast", module: toastModule },
   { name: "toggle", module: toggleModule },
   { name: "toggle-group", module: toggleGroupModule },
   { name: "tooltip", module: tooltipModule },
+  { name: "top-navigation", module: topNavigationModule },
+  { name: "user-menu", module: userMenuModule },
   { name: "widget", module: widgetModule },
 ]
 
@@ -215,10 +247,12 @@ const registryItems = modules.map(({ name, module }) => {
     try {
       // Determine base path based on registry type
       let basePath = ""
-      if (file.type === "registry:ui") {
+      if (file.type === "registry:ui" || file.type === "registry:block") {
         basePath = "components"
       } else if (file.type === "registry:hook") {
         basePath = "hooks"
+      } else if (file.type === "registry:style") {
+        basePath = "app"
       } else {
         throw new Error(`Unknown registry type: ${meta?.type}`)
       }
@@ -245,7 +279,9 @@ const registryItems = modules.map(({ name, module }) => {
     // that matches the import paths like "@/components/ui/xxx"
     const outputPath = file.type === "registry:hook"
       ? file.path  // hooks stay as hooks/xxx.ts
-      : `components/${file.path}`  // ui files become components/ui/xxx.tsx
+      : file.type === "registry:style"
+        ? (file.target ?? `app/${file.path}`)
+        : `components/${file.path}`  // ui/block files become components/ui/xxx.tsx
 
     return {
       path: outputPath,
