@@ -17,10 +17,11 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "pagination",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Pagination",
   description: "Pagination with page navigation, built using Radix UI's navigation components.",
   ...registryMetadata["pagination"],
+  dependencies: ["lucide-react"],
   files: [
     {
       path: "ui/pagination.tsx",

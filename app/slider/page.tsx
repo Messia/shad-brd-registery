@@ -9,10 +9,11 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "slider",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Slider",
   description: "An input where the user selects a value from within a given range.",
   ...registryMetadata["slider"],
+  dependencies: ["@radix-ui/react-slider"],
   files: [
     {
       path: "ui/slider.tsx",

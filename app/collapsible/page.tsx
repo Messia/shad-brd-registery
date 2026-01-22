@@ -14,7 +14,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "collapsible",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Collapsible",
   description: "An interactive component which expands/collapses a panel.",
   ...registryMetadata["collapsible"],

@@ -18,7 +18,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: [],
+  dependencies: [
+    "class-variance-authority",
+    "lucide-react",
+  ],
 }
 
 // Sample KPI data for demonstrations

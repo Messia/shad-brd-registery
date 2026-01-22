@@ -18,7 +18,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["@radix-ui/react-slot", "@radix-ui/react-tooltip"],
+  dependencies: [
+    "@radix-ui/react-slot",
+    "class-variance-authority",
+  ],
 }
 
 export default function IconButtonPage() {

@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "avatar",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Avatar",
   description: "An image element with a fallback for representing the user.",
   ...registryMetadata["avatar"],

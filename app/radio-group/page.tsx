@@ -12,7 +12,10 @@ export const meta = {
   title: "Radio Group",
   description: "A set of checkable buttons—known as radio buttons—where no more than one can be checked at a time. Based on old Radio component.",
   ...registryMetadata["radio-group"],
-  dependencies: ["@radix-ui/react-radio-group"],
+  dependencies: [
+    "@radix-ui/react-radio-group",
+    "class-variance-authority",
+  ],
   files: [
     {
       path: "ui/radio-group.tsx",

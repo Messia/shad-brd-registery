@@ -18,7 +18,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["react-resizable-panels"],
+  dependencies: [
+    "lucide-react",
+    "react-resizable-panels",
+  ],
 }
 
 function ResizableExample() {

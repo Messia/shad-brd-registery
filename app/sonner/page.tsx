@@ -16,7 +16,10 @@ export const meta = {
   title: "Sonner Toaster",
   description: "A themed toast renderer backed by the Sonner library.",
   ...registryMetadata["sonner"],
-  dependencies: ["sonner", "next-themes"],
+  dependencies: [
+    "next-themes",
+    "sonner",
+  ],
   files: [
     {
       path: "ui/sonner.tsx",

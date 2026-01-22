@@ -30,7 +30,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["vaul"],
+  dependencies: [
+    "lucide-react",
+    "vaul",
+  ],
   registryDependencies: ["icon-button"],
 }
 

@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "carousel",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Carousel",
   description: "A carousel with motion and swipe built using Embla.",
   ...registryMetadata["carousel"],
@@ -20,7 +20,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["embla-carousel-react"],
+  dependencies: [
+    "embla-carousel-react",
+    "lucide-react",
+  ],
   registryDependencies: ["button"],
 }
 

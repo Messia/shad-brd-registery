@@ -18,7 +18,10 @@ export const meta = {
   title: "Breadcrumb",
   description: "Displays the path to the current resource using a hierarchy of links.",
   ...registryMetadata["breadcrumb"],
-  dependencies: ["@radix-ui/react-slot"],
+  dependencies: [
+    "@radix-ui/react-slot",
+    "lucide-react",
+  ],
   files: [
     {
       path: "ui/breadcrumb.tsx",

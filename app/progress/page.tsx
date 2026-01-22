@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "progress",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Progress",
   description:
     "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",

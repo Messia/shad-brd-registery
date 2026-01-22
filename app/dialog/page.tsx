@@ -26,7 +26,11 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["@radix-ui/react-dialog"],
+  dependencies: [
+    "@radix-ui/react-dialog",
+    "class-variance-authority",
+    "lucide-react",
+  ],
 }
 
 export default function DialogPage() {

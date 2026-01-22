@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "menubar",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Menubar",
   description:
     "A visually persistent menu common in desktop applications that provides quick access to a consistent set of commands.",
@@ -28,7 +28,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["@radix-ui/react-menubar"],
+  dependencies: [
+    "@radix-ui/react-menubar",
+    "lucide-react",
+  ],
 }
 
 function MenubarExample() {

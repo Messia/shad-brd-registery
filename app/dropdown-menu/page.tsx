@@ -37,7 +37,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["@radix-ui/react-dropdown-menu"],
+  dependencies: [
+    "@radix-ui/react-dropdown-menu",
+    "lucide-react",
+  ],
   registryDependencies: ["checkbox"],
 }
 

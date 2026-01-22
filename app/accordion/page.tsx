@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "accordion",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Accordion",
   description: "A vertically stacked set of interactive headings that each reveal a section of content.",
   ...registryMetadata["accordion"],
@@ -18,7 +18,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["@radix-ui/react-accordion"],
+  dependencies: [
+    "@radix-ui/react-accordion",
+    "lucide-react",
+  ],
 }
 
 function AccordionExample() {

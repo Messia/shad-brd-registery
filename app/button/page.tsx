@@ -8,7 +8,7 @@ import { registryMetadata } from "@/lib/registry-metadata"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "button",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Button",
   description: "Displays a button or a component that looks like a button.",
   ...registryMetadata["button"],
@@ -18,7 +18,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["@radix-ui/react-slot"],
+  dependencies: [
+    "@radix-ui/react-slot",
+    "class-variance-authority",
+  ],
 }
 
 function ButtonExample() {

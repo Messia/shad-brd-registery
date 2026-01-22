@@ -12,7 +12,10 @@ export const meta = {
   title: "Switch",
   description: "A control that allows the user to toggle between checked and not checked. Based on old Switch component.",
   ...registryMetadata["switch"],
-  dependencies: ["@radix-ui/react-switch"],
+  dependencies: [
+    "@radix-ui/react-switch",
+    "class-variance-authority",
+  ],
   files: [
     {
       path: "ui/switch.tsx",

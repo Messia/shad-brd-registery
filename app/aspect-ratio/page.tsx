@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "aspect-ratio",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Aspect Ratio",
   description: "Displays content within a desired ratio.",
   ...registryMetadata["aspect-ratio"],

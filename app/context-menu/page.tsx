@@ -23,7 +23,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "context-menu",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Context Menu",
   description: "Displays a menu to the user — such as a set of actions or functions — triggered by a button.",
   ...registryMetadata["context-menu"],
@@ -33,7 +33,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["@radix-ui/react-context-menu"],
+  dependencies: [
+    "@radix-ui/react-context-menu",
+    "lucide-react",
+  ],
 }
 
 function ContextMenuExample() {

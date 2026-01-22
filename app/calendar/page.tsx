@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "calendar",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Calendar",
   description: "A date field component that allows users to enter and edit date.",
   ...registryMetadata["calendar"],
@@ -22,7 +22,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["react-day-picker@latest", "date-fns"],
+  dependencies: [
+    "lucide-react",
+    "react-day-picker@latest",
+  ],
   registryDependencies: ["button"],
 }
 

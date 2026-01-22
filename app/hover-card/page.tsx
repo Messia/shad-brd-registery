@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "hover-card",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Hover Card",
   description: "For sighted users to preview content available behind a link. Matches old Popover styling with M/S/XS sizes.",
   ...registryMetadata["hover-card"],
@@ -22,7 +22,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["@radix-ui/react-hover-card"],
+  dependencies: [
+    "@radix-ui/react-hover-card",
+    "class-variance-authority",
+  ],
 }
 
 export default function HoverCardPage() {

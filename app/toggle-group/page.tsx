@@ -30,7 +30,10 @@ export const meta = {
   title: "Toggle Group",
   description: "A group of toggle buttons that supports single or multiple selection.",
   ...registryMetadata["toggle-group"],
-  dependencies: ["@radix-ui/react-toggle-group"],
+  dependencies: [
+    "@radix-ui/react-toggle-group",
+    "class-variance-authority",
+  ],
   files: [
     {
       path: "ui/toggle-group.tsx",

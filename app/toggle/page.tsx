@@ -14,7 +14,10 @@ export const meta = {
   title: "Toggle",
   description: "A two-state toggle button.",
   ...registryMetadata["toggle"],
-  dependencies: ["@radix-ui/react-toggle"],
+  dependencies: [
+    "@radix-ui/react-toggle",
+    "class-variance-authority",
+  ],
   files: [
     {
       path: "ui/toggle.tsx",

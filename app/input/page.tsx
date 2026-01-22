@@ -15,6 +15,10 @@ export const meta = {
   title: "Input",
   description: "A form input field. Simple Input for basic use, InputField for forms with label/icons/feedback.",
   ...registryMetadata["input"],
+  dependencies: [
+    "class-variance-authority",
+    "lucide-react",
+  ],
   files: [
     {
       path: "ui/input.tsx",

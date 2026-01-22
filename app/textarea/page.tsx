@@ -13,6 +13,7 @@ export const meta = {
   title: "Textarea",
   description: "A multi-line text input. Simple Textarea for basic use, TextareaField for forms with label/icons/feedback.",
   ...registryMetadata["textarea"],
+  dependencies: ["lucide-react"],
   files: [
     {
       path: "ui/textarea.tsx",

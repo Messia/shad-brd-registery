@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "skeleton",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Skeleton",
   description: "Use to show a placeholder while content is loading.",
   ...registryMetadata["skeleton"],

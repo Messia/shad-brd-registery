@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "input-otp",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Input OTP",
   description: "Accessible one-time password component with copy paste functionality.",
   ...registryMetadata["input-otp"],
@@ -22,7 +22,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["input-otp"],
+  dependencies: [
+    "input-otp",
+    "lucide-react",
+  ],
 }
 
 function InputOTPExample() {

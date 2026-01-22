@@ -8,10 +8,14 @@ import { registryMetadata } from "@/lib/registry-metadata"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "alert",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Alert",
   description: "Displays a callout for user attention.",
   ...registryMetadata["alert"],
+  dependencies: [
+    "class-variance-authority",
+    "lucide-react",
+  ],
   files: [
     {
       path: "ui/alert.tsx",

@@ -9,10 +9,14 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "select",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Select",
   description: "Displays a list of options for the user to pick from—triggered by a button.",
   ...registryMetadata["select"],
+  dependencies: [
+    "@radix-ui/react-select",
+    "lucide-react",
+  ],
   files: [
     {
       path: "ui/select.tsx",

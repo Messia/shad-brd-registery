@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "label",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Label",
   description: "Renders an accessible label associated with controls.",
   ...registryMetadata["label"],

@@ -23,7 +23,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["@radix-ui/react-popover"],
+  dependencies: [
+    "@radix-ui/react-popover",
+    "class-variance-authority",
+  ],
 }
 
 export default function PopoverPage() {

@@ -28,7 +28,6 @@ import * as inputOtpModule from "./app/input-otp/page.tsx"
 import * as labelModule from "./app/label/page.tsx"
 import * as linkModule from "./app/link/page.tsx"
 import * as menubarModule from "./app/menubar/page.tsx"
-import * as navigationMenuModule from "./app/navigation-menu/page.tsx"
 import * as paginationModule from "./app/pagination/page.tsx"
 import * as popoverModule from "./app/popover/page.tsx"
 import * as progressModule from "./app/progress/page.tsx"
@@ -89,7 +88,6 @@ const COMPONENT_NAME_MAP: Record<string, string> = {
   "label": "label",
   "link": "link",
   "menubar": "menubar",
-  "navigation-menu": "navigation-menu",
   "pagination": "pagination",
   "popover": "popover",
   "progress": "progress",
@@ -171,7 +169,6 @@ const modules = [
   { name: "label", module: labelModule },
   { name: "link", module: linkModule },
   { name: "menubar", module: menubarModule },
-  { name: "navigation-menu", module: navigationMenuModule },
   { name: "pagination", module: paginationModule },
   { name: "popover", module: popoverModule },
   { name: "progress", module: progressModule },

@@ -28,7 +28,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["@radix-ui/react-alert-dialog"],
+  dependencies: [
+    "@radix-ui/react-alert-dialog",
+    "class-variance-authority",
+  ],
   registryDependencies: ["button"],
 }
 

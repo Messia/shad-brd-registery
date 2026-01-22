@@ -21,7 +21,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "sheet",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Sheet",
   description: "Extends the Dialog component to display content that complements the main content of the screen.",
   ...registryMetadata["sheet"],
@@ -31,7 +31,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["@radix-ui/react-dialog", "@radix-ui/react-portal"],
+  dependencies: [
+    "@radix-ui/react-dialog",
+    "lucide-react",
+  ],
 }
 
 // Extracted the sheet example into a separate component

@@ -38,7 +38,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "chart",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Chart",
   description: "Recharts components with 26 color swatches from Figma design tokens.",
   ...registryMetadata["chart"],
@@ -48,7 +48,7 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["recharts@2.15.4", "lucide-react"],
+  dependencies: ["recharts@2.15.4"],
   registryDependencies: ["card"],
 }
 

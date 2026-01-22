@@ -12,7 +12,10 @@ export const meta = {
   title: "Tabs",
   description: "A set of layered sections of content—known as tab panels—that are displayed one at a time. Based on old Tabset component.",
   ...registryMetadata["tabs"],
-  dependencies: ["@radix-ui/react-tabs"],
+  dependencies: [
+    "@radix-ui/react-tabs",
+    "class-variance-authority",
+  ],
   files: [
     {
       path: "ui/tabs.tsx",

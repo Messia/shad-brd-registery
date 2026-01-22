@@ -16,7 +16,11 @@ export const meta = {
   title: "Toast",
   description: "Toast primitives and hooks for transient notifications.",
   ...registryMetadata["toast"],
-  dependencies: ["@radix-ui/react-toast"],
+  dependencies: [
+    "@radix-ui/react-toast",
+    "class-variance-authority",
+    "lucide-react",
+  ],
   files: [
     {
       path: "ui/toast.tsx",

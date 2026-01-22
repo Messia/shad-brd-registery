@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "badge",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Badge",
   description: "Displays a badge or a component that looks like a badge.",
   ...registryMetadata["badge"],
@@ -18,7 +18,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["@radix-ui/react-slot"],
+  dependencies: [
+    "@radix-ui/react-slot",
+    "class-variance-authority",
+  ],
 }
 
 const colors = ["default", "sky", "grass", "bored", "negative", "neutral", "dark"] as const

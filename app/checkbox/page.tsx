@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "checkbox",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Checkbox",
   description: "A control that allows the user to toggle between checked and not checked. Supports label, supporting text, sizes, and indeterminate state.",
   ...registryMetadata["checkbox"],
@@ -21,7 +21,11 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["@radix-ui/react-checkbox", "class-variance-authority", "lucide-react"],
+  dependencies: [
+    "@radix-ui/react-checkbox",
+    "class-variance-authority",
+    "lucide-react",
+  ],
 }
 
 function CheckboxExample() {

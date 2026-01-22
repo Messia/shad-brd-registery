@@ -21,7 +21,7 @@ export const dynamic = "force-dynamic"
 export const meta = {
   $schema: "https://ui.shadcn.com/schema/registry-item.json",
   name: "command",
-  type: "registry:block",
+  type: "registry:ui",
   title: "Command",
   description: "Fast, composable, unstyled command menu for React.",
   ...registryMetadata["command"],
@@ -31,7 +31,10 @@ export const meta = {
       type: "registry:ui",
     },
   ],
-  dependencies: ["cmdk"],
+  dependencies: [
+    "cmdk",
+    "lucide-react",
+  ],
   registryDependencies: ["dialog"],
 }
 
