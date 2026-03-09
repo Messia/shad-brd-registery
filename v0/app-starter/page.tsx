@@ -2,11 +2,16 @@
 
 /**
  * v0 starter contract:
+ * - Keep button icons and labels on one horizontal row inside `<Button>`.
+ * - Do not use `flex-col`, `h-auto`, or stacked icon/text button layouts.
  * - Use `var(--font-family-brand)` and BRD typography tokens for all custom text styles.
+ * - Prefer composed BRD font tokens for full text styles and use granular tokens only when an API needs separate values.
+ * - Do not use generic `text-*` / `leading-*` Tailwind typography utilities when a BRD font token exists.
  * - Use BRD `var(--spacing-sp-X)` tokens for layout spacing.
  * - Do not add shadows unless a BRD component already includes them or the user explicitly asks for them.
  * - Use Highcharts for data visualization via `@/lib/brd-highcharts-theme`.
  * - Use AG Grid for application tables via `@/lib/brd-ag-grid-theme`.
+ * - Wrap AG Grid in a borderless BRD surface container with `var(--spacing-sp-8)` padding and no extra outer border.
  * - Keep chart series colors in BRD chart swatch order 1 through 24.
  */
 
@@ -116,7 +121,7 @@ export function AppStarterPage() {
               </div>
               <div className="grid gap-4 md:grid-cols-4">
                 <div className="rounded-[var(--radius-xs)] border border-[var(--color-stroke-default)] bg-[var(--color-surface-background)] p-4 text-sm text-[var(--color-text-secondary)]">
-                  Typography: use <span className="font-semibold text-[var(--color-text-primary)]">var(--font-family-brand)</span> and BRD typography tokens.
+                  Typography: use <span className="font-semibold text-[var(--color-text-primary)]">var(--font-family-brand)</span> and composed BRD typography tokens.
                 </div>
                 <div className="rounded-[var(--radius-xs)] border border-[var(--color-stroke-default)] bg-[var(--color-surface-background)] p-4 text-sm text-[var(--color-text-secondary)]">
                   Spacing: use <span className="font-semibold text-[var(--color-text-primary)]">var(--spacing-sp-X)</span> tokens for gap, padding, and margin.
@@ -125,7 +130,7 @@ export function AppStarterPage() {
                   Charts: use <span className="font-semibold text-[var(--color-text-primary)]">Highcharts</span> with the BRD theme helper and swatches 1-24 in sequence.
                 </div>
                 <div className="rounded-[var(--radius-xs)] border border-[var(--color-stroke-default)] bg-[var(--color-surface-background)] p-4 text-sm text-[var(--color-text-secondary)]">
-                  Tables: use <span className="font-semibold text-[var(--color-text-primary)]">AG Grid</span> with the BRD AG Grid theme helper.
+                  Tables: use <span className="font-semibold text-[var(--color-text-primary)]">AG Grid</span> in a borderless wrapper with <span className="font-semibold text-[var(--color-text-primary)]">sp-8</span> padding.
                 </div>
               </div>
               <div className="grid flex-1 gap-4 md:grid-cols-2">

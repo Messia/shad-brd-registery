@@ -73,6 +73,7 @@ import { Link } from "@/components/ui/link"
 - For buttons with visible text, place the icon directly inside `<Button>` next to the label.
 - Use `IconButton` for icon-only actions.
 - Do not invent custom stacked icon/text button layouts.
+- Do not add `flex-col`, `h-auto`, or wrapper markup that stacks the icon above or below the label.
 
 **Examples:**
 ```tsx
@@ -643,6 +644,10 @@ The design system uses CSS custom properties. Key patterns:
 
 When v0 generates custom CSS or inline style objects, it must use BRD typography tokens instead of ad hoc font families, sizes, line heights, or font weights.
 
+- Prefer composed BRD tokens like `--font-body-medium`, `--font-body-medium-semibold`, `--font-body-large`, `--font-headline-h1`, `--font-headline-h2`, `--font-headline-h3`, `--font-headline-h4`, `--font-headline-h5`, and `--font-utility-link` when applying a complete text style.
+- Use granular `size` / `line-height` / `weight` tokens only when an API requires separate values.
+- Do not use generic Tailwind typography utilities like `text-lg`, `text-sm`, `leading-6`, or `leading-5` for BRD text when an equivalent BRD typography token exists.
+
 ```tsx
 className="font-[var(--font-family-brand)] text-[length:var(--font-body-medium-size)] leading-[var(--font-body-medium-line-height)] font-[var(--font-body-medium-regular-weight)]"
 ```
@@ -716,6 +721,8 @@ applyBrdHighchartsTheme(Highcharts)
 - Apply the shared BRD theme from `@/lib/brd-ag-grid-theme`.
 - Do not generate primary application tables with plain HTML `<table>` markup or the lightweight BRD `Table` component.
 - The BRD `Table` component is only for very small, static supporting tables.
+- Wrap AG Grid in a borderless BRD surface container with padding `var(--spacing-sp-8)`.
+- Do not add an extra outer border around the AG Grid wrapper unless the user explicitly asks for it.
 
 **Preferred pattern:**
 ```tsx

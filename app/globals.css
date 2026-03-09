@@ -513,9 +513,19 @@
   --radix-toast-swipe-move-x: 0px;
 
   --font-body-small: var(--font-body-small-regular-weight) var(--font-body-small-size)/var(--font-body-small-line-height) var(--font-family-brand);
+  --font-body-small-semibold: var(--font-body-small-semibold-weight) var(--font-body-small-size)/var(--font-body-small-line-height) var(--font-family-brand);
   --font-body-medium: var(--font-body-medium-regular-weight) var(--font-body-medium-size)/var(--font-body-medium-line-height) var(--font-family-brand);
   --font-body-medium-semibold: var(--font-body-medium-semibold-weight) var(--font-body-medium-size)/var(--font-body-medium-line-height) var(--font-family-brand);
+  --font-body-medium-bold: var(--font-body-medium-bold-weight) var(--font-body-medium-size)/var(--font-body-medium-line-height) var(--font-family-brand);
+  --font-body-large: var(--font-body-large-regular-weight) var(--font-body-large-size)/var(--font-body-large-line-height) var(--font-family-brand);
+  --font-body-large-semibold: var(--font-body-large-semibold-weight) var(--font-body-large-size)/var(--font-body-large-line-height) var(--font-family-brand);
+  --font-body-large-bold: var(--font-body-large-bold-weight) var(--font-body-large-size)/var(--font-body-large-line-height) var(--font-family-brand);
+  --font-headline-h1: var(--font-headline-h1-weight) var(--font-headline-h1-size)/var(--font-headline-h1-line-height) var(--font-family-brand);
+  --font-headline-h2: var(--font-headline-h2-weight) var(--font-headline-h2-size)/var(--font-headline-h2-line-height) var(--font-family-brand);
+  --font-headline-h3: var(--font-headline-h3-weight) var(--font-headline-h3-size)/var(--font-headline-h3-line-height) var(--font-family-brand);
   --font-headline-h4: var(--font-headline-h4-weight) var(--font-headline-h4-size)/var(--font-headline-h4-line-height) var(--font-family-brand);
+  --font-headline-h5: var(--font-headline-h5-weight) var(--font-headline-h5-size)/var(--font-headline-h5-line-height) var(--font-family-brand);
+  --font-utility-link: var(--font-utility-link-weight) var(--font-utility-link-size)/var(--font-utility-link-line-height) var(--font-family-brand);
   --typography-body-medium-regular: var(--font-body-medium);
 
   --brand-150: var(--blue-150);
