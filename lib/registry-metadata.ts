@@ -693,15 +693,15 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   "app-starter": {
     title: "App Starter",
     description:
-      "A root application starter built on BRD Shell with access to all BRD tokens and components, including Widget and WidgetBoard, plus starter helpers for BRD typography, Highcharts, and AG Grid. Use this as the default entrypoint for generating new views in v0.",
+      "A root application starter built on BRD Shell with access to all BRD tokens and components, including Widget, plus starter helpers for BRD typography, Highcharts, and AG Grid. Use this as the default entrypoint for generating new views in v0.",
     categories: ["starter", "layout"],
     meta: {
-      tags: ["starter", "app-starter", "prototype", "shell", "layout", "root-app", "v0", "widget", "widget-board", "highcharts", "ag-grid", "typography"],
+      tags: ["starter", "app-starter", "prototype", "shell", "layout", "root-app", "v0", "widget", "highcharts", "ag-grid", "typography"],
       examples: [
         {
           title: "Root app scaffold",
           code:
-            'import { Shell } from "@/components/ui/shell"\n\n// app/page.tsx starter scaffold that composes Shell, WidgetBoard, and other BRD components.',
+            'import { Shell } from "@/components/ui/shell"\n\n// app/page.tsx starter scaffold that composes Shell, Widget, and other BRD components.',
         },
       ],
     },
@@ -948,7 +948,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   widget: {
     title: "Widget",
     description:
-      "A dashboard widget surface with semantic S, M, and L sizes, header, body, and footer regions. Use WidgetBoard for responsive dashboard layout, breakpoint transforms, and drag-and-resize behavior.",
+      "A dashboard widget container with fixed S, M, and L sizes, header, body, and footer regions. A complex pattern that can contain any content; composes IconButton, Link, Dialog, and DropdownMenu.",
     categories: ["layout", "data-display"],
     meta: {
       tags: ["widget", "dashboard", "card", "layout"],
@@ -957,22 +957,6 @@ export const registryMetadata: Record<string, RegistryDocs> = {
           title: "Widget sizes",
           code:
             'import { Widget } from "@/components/ui/widget"\n\n<Widget size="M" title="Sales" timestamp="Updated now">\n  Widget content\n</Widget>',
-        },
-      ],
-    },
-  },
-  "widget-board": {
-    title: "Widget Board",
-    description:
-      "A responsive BRD dashboard grid for Widget surfaces with semantic S/M/L sizing, breakpoint-aware spans, and drag-and-resize snapping.",
-    categories: ["layout", "data-display"],
-    meta: {
-      tags: ["widget-board", "dashboard", "grid", "drag-drop", "responsive", "layout"],
-      examples: [
-        {
-          title: "Responsive dashboard",
-          code:
-            'import { WidgetBoard } from "@/components/ui/widget-board"\n\n<WidgetBoard items={[{ id: "kpi", size: "S", title: "KPI", timestamp: "Updated now", content: <div /> }]} />',
         },
       ],
     },

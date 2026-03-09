@@ -60,7 +60,6 @@ import * as tooltipModule from "./app/tooltip/page.tsx"
 import * as topNavigationModule from "./app/top-navigation/page.tsx"
 import * as userMenuModule from "./app/user-menu/page.tsx"
 import * as widgetModule from "./app/widget/page.tsx"
-import * as widgetBoardModule from "./app/widget-board/page.tsx"
 import * as appStarterModule from "./app/app-starter/page.tsx"
 
 // Output directory for generated registry files
@@ -134,7 +133,6 @@ const COMPONENT_NAME_MAP: Record<string, string> = {
   "top-navigation": "top-navigation",
   "user-menu": "user-menu",
   "widget": "widget",
-  "widget-board": "widget-board",
   "use-mobile": "sidebar",  // hook used by sidebar
   "use-toast": "toast",  // hook used by toast
   "app-starter": "app-starter",
@@ -226,7 +224,6 @@ const modules = [
   { name: "top-navigation", module: topNavigationModule },
   { name: "user-menu", module: userMenuModule },
   { name: "widget", module: widgetModule },
-  { name: "widget-board", module: widgetBoardModule },
   { name: "app-starter", module: appStarterModule },
 ]
 
@@ -385,6 +382,22 @@ const registryItems = modules.map(({ name, module }) => {
     files: files,
   }
 })
+
+const allRegistryDependencies = [
+  `${REGISTRY_URL}/r/theme.json`,
+  ...registryItems.map((item) => `${REGISTRY_URL}/r/${item.name}.json`),
+]
+
+const widgetItem = registryItems.find(
+  (item) => item.name === `${COMPONENT_PREFIX}widget`
+)
+if (widgetItem) {
+  widgetItem.registryDependencies = allRegistryDependencies.filter(
+    (item) =>
+      !item.endsWith(`/${COMPONENT_PREFIX}widget.json`) &&
+      !item.endsWith(`/${COMPONENT_PREFIX}app-starter.json`)
+  )
+}
 
 const appStarterItem = registryItems.find(
   (item) => item.name === `${COMPONENT_PREFIX}app-starter`

@@ -89,7 +89,6 @@ const components = [
   "tooltip",
   "user-menu",
   "widget",
-  "widget-board",
 ]
 
 export function ComponentSidebar({ currentComponent, children }: ComponentSidebarProps) {
