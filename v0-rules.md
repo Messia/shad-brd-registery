@@ -73,6 +73,8 @@ import { Link } from "@/components/ui/link"
 - For buttons with visible text, place the icon directly inside `<Button>` next to the label.
 - Use `IconButton` for icon-only actions.
 - Do not invent custom stacked icon/text button layouts.
+- Do not add `flex-col`, `h-auto`, or wrapper markup that places the icon above or below the label.
+- Prefer `<DownloadIcon className="size-5" />` for labeled button icons.
 
 **Examples:**
 ```tsx
@@ -635,6 +637,7 @@ The design system uses CSS custom properties. Key patterns:
 
 ### Typography Tokens:
 - `--font-family-brand` - The only approved font family for BRD interfaces
+- Composed tokens: `--font-body-small`, `--font-body-small-semibold`, `--font-body-small-bold`, `--font-body-medium`, `--font-body-medium-semibold`, `--font-body-medium-bold`, `--font-body-large`, `--font-body-large-semibold`, `--font-body-large-bold`, `--font-headline-h1`, `--font-headline-h2`, `--font-headline-h3`, `--font-headline-h4`, `--font-headline-h5`, `--font-utility-link`
 - `--font-body-small-*` - Small body text tokens
 - `--font-body-medium-*` - Default body text tokens
 - `--font-body-large-*` - Large body text tokens
@@ -642,8 +645,13 @@ The design system uses CSS custom properties. Key patterns:
 - `--font-utility-link-*` - Link typography tokens
 
 When v0 generates custom CSS or inline style objects, it must use BRD typography tokens instead of ad hoc font families, sizes, line heights, or font weights.
+- Prefer composed BRD font tokens when applying a complete text style.
+- Use granular size / line-height / weight tokens only when an API requires separate values.
+- Do not use generic Tailwind typography utilities like `text-lg`, `text-sm`, `leading-6`, or `leading-5` for BRD text when a BRD token exists.
 
 ```tsx
+style={{ font: "var(--font-body-medium)" }}
+
 className="font-[var(--font-family-brand)] text-[length:var(--font-body-medium-size)] leading-[var(--font-body-medium-line-height)] font-[var(--font-body-medium-regular-weight)]"
 ```
 
@@ -674,6 +682,33 @@ className="gap-[var(--spacing-sp-16)] px-[var(--spacing-sp-24)] py-[var(--spacin
 - Do not add `shadow-*`, `box-shadow`, or custom elevation styles by default.
 - Only use shadows when they are already built into an existing BRD component.
 - Only add new shadows when the user explicitly asks for them.
+
+---
+
+## Widget Dashboards
+
+- Use `WidgetBoard` for dashboard pages and any layout that arranges multiple widgets.
+- Keep widget sizes semantic as `S`, `M`, or `L`.
+- Let `WidgetBoard` handle breakpoint transforms and drag/resize snapping.
+- Use `Widget` as the surface component inside the board, not as a hand-positioned replacement for a dashboard grid.
+- Do not build one-off CSS grids for widget collections when `WidgetBoard` is available.
+
+**Preferred pattern:**
+```tsx
+import { WidgetBoard } from "@/components/ui/widget-board"
+
+<WidgetBoard
+  items={[
+    {
+      id: "kpi",
+      size: "S",
+      title: "KPI",
+      timestamp: "Updated now",
+      content: <div />,
+    },
+  ]}
+/>
+```
 
 ---
 
@@ -716,6 +751,8 @@ applyBrdHighchartsTheme(Highcharts)
 - Apply the shared BRD theme from `@/lib/brd-ag-grid-theme`.
 - Do not generate primary application tables with plain HTML `<table>` markup or the lightweight BRD `Table` component.
 - The BRD `Table` component is only for very small, static supporting tables.
+- Wrap AG Grid in a borderless surface container with `padding: var(--spacing-sp-8)`.
+- Do not add an extra outer border around the grid wrapper unless the user explicitly asks for it.
 
 **Preferred pattern:**
 ```tsx
@@ -723,11 +760,13 @@ import { AgGridReact } from "ag-grid-react"
 
 import { brdAgGridTheme } from "@/lib/brd-ag-grid-theme"
 
-<AgGridReact
-  theme={brdAgGridTheme}
-  rowData={rows}
-  columnDefs={columnDefs}
-/>
+<div className="bg-[var(--color-surface-foreground)] p-[var(--spacing-sp-8)]">
+  <AgGridReact
+    theme={brdAgGridTheme}
+    rowData={rows}
+    columnDefs={columnDefs}
+  />
+</div>
 ```
 
 ---

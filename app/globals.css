@@ -513,9 +513,20 @@
   --radix-toast-swipe-move-x: 0px;
 
   --font-body-small: var(--font-body-small-regular-weight) var(--font-body-small-size)/var(--font-body-small-line-height) var(--font-family-brand);
+  --font-body-small-semibold: var(--font-body-small-semibold-weight) var(--font-body-small-size)/var(--font-body-small-line-height) var(--font-family-brand);
+  --font-body-small-bold: var(--font-body-small-bold-weight) var(--font-body-small-size)/var(--font-body-small-line-height) var(--font-family-brand);
   --font-body-medium: var(--font-body-medium-regular-weight) var(--font-body-medium-size)/var(--font-body-medium-line-height) var(--font-family-brand);
   --font-body-medium-semibold: var(--font-body-medium-semibold-weight) var(--font-body-medium-size)/var(--font-body-medium-line-height) var(--font-family-brand);
+  --font-body-medium-bold: var(--font-body-medium-bold-weight) var(--font-body-medium-size)/var(--font-body-medium-line-height) var(--font-family-brand);
+  --font-body-large: var(--font-body-large-regular-weight) var(--font-body-large-size)/var(--font-body-large-line-height) var(--font-family-brand);
+  --font-body-large-semibold: var(--font-body-large-semibold-weight) var(--font-body-large-size)/var(--font-body-large-line-height) var(--font-family-brand);
+  --font-body-large-bold: var(--font-body-large-bold-weight) var(--font-body-large-size)/var(--font-body-large-line-height) var(--font-family-brand);
+  --font-headline-h1: var(--font-headline-h1-weight) var(--font-headline-h1-size)/var(--font-headline-h1-line-height) var(--font-family-brand);
+  --font-headline-h2: var(--font-headline-h2-weight) var(--font-headline-h2-size)/var(--font-headline-h2-line-height) var(--font-family-brand);
+  --font-headline-h3: var(--font-headline-h3-weight) var(--font-headline-h3-size)/var(--font-headline-h3-line-height) var(--font-family-brand);
   --font-headline-h4: var(--font-headline-h4-weight) var(--font-headline-h4-size)/var(--font-headline-h4-line-height) var(--font-family-brand);
+  --font-headline-h5: var(--font-headline-h5-weight) var(--font-headline-h5-size)/var(--font-headline-h5-line-height) var(--font-family-brand);
+  --font-utility-link: var(--font-utility-link-weight) var(--font-utility-link-size)/var(--font-utility-link-line-height) var(--font-family-brand);
   --typography-body-medium-regular: var(--font-body-medium);
 
   --brand-150: var(--blue-150);
@@ -840,4 +851,46 @@
   40% {
     opacity: 1;
   }
+}
+
+.widget-board-layout {
+  position: relative;
+  transition: height 160ms ease;
+}
+
+.widget-board-layout .react-grid-item {
+  transition: transform 160ms ease, width 160ms ease, height 160ms ease;
+}
+
+.widget-board-layout .react-grid-item.react-grid-placeholder {
+  background: color-mix(in srgb, var(--color-icon-brand) 12%, transparent);
+  border: 1px dashed var(--color-stroke-brand);
+  border-radius: var(--radius-s);
+  opacity: 1;
+}
+
+.widget-board-layout .react-grid-item > .react-resizable-handle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: 0;
+  bottom: 0;
+}
+
+.widget-board-layout .react-grid-item > .react-resizable-handle::after {
+  content: "";
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--color-stroke-brand);
+  border-bottom: 2px solid var(--color-stroke-brand);
+  opacity: 0.7;
+}
+
+.widget-board-item,
+.widget-board-surface {
+  height: 100%;
+  min-height: 0;
 }

@@ -3,6 +3,7 @@ import { themeQuartz } from "ag-grid-community"
 /**
  * Use this theme for all primary data tables and grids in BRD application views.
  * Prefer AG Grid with this theme over lightweight semantic tables in generated screens.
+ * Wrap the grid in a borderless BRD surface container with padding `var(--spacing-sp-8)`.
  */
 export const brdAgGridTheme = themeQuartz.withParams({
   accentColor: "var(--brand-500)",

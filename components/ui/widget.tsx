@@ -75,6 +75,8 @@ export interface WidgetProps
   viewMoreLink?: WidgetLink
   /** Widget content */
   children?: React.ReactNode
+  /** Render as a standalone fixed-size widget or a grid-managed surface */
+  layoutMode?: 'standalone' | 'board'
 }
 
 const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
@@ -90,19 +92,27 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
       viewMoreLink,
       children,
       className,
+      layoutMode = 'standalone',
       ...props
     },
     ref
   ) => {
     const [zoomOpen, setZoomOpen] = React.useState(false)
-    const { style, ...rest } = props
-    const safeStyle = style ? { ...style } : undefined
-    if (safeStyle) {
-      delete safeStyle.width
-      delete safeStyle.height
-    }
-
     const hasFooter = sourceLink || viewMoreLink
+    const resolvedClassName =
+      layoutMode === 'board'
+        ? cn(
+            'flex flex-col',
+            'bg-[var(--color-surface-widget)]',
+            'rounded-[var(--radius-s)]',
+            'overflow-hidden',
+            'box-border',
+            'shadow-md',
+            'h-full min-h-0 w-full',
+            size === 'S' ? 'p-4 gap-1.5' : 'p-6 gap-2',
+            className
+          )
+        : cn(className, widgetVariants({ size }))
 
     // Render footer content (reused in widget and dialog)
     const renderFooter = () => {
@@ -129,10 +139,9 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
       <>
         <div
           ref={ref}
-          className={cn(className, widgetVariants({ size }))}
+          className={resolvedClassName}
           data-size={size}
-          style={safeStyle}
-          {...rest}
+          {...props}
         >
           {/* Widget Header */}
           <div className="flex justify-between items-start w-full shrink-0">
@@ -140,7 +149,10 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
             <div className="flex flex-col gap-1">
               {/* Title row */}
               <div className="flex items-center gap-1">
-                <h4 className="m-0 text-[var(--color-text-primary)] font-semibold text-lg leading-6">
+                <h4
+                  className="m-0 text-[var(--color-text-primary)]"
+                  style={{ font: 'var(--font-body-large-semibold)' }}
+                >
                   {title}
                 </h4>
                 {onInfoClick && (
@@ -156,7 +168,10 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
               </div>
               {/* Timestamp row */}
               <div className="flex items-center gap-2">
-                <span className="text-sm text-[var(--color-text-secondary)]">
+                <span
+                  className="text-[var(--color-text-secondary)]"
+                  style={{ font: 'var(--font-body-small)' }}
+                >
                   {timestamp}
                 </span>
                 {onRefresh && (

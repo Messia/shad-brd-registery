@@ -19,7 +19,7 @@ const COMPONENTS = [
   "pagination", "popover", "progress", "radio-group", "resizable",
   "scroll-area", "select", "separator", "sheet", "shell", "side-toolbar", "skeleton",
   "slider", "sonner", "switch", "table", "tabs", "textarea", "theme",
-  "toast", "toggle", "toggle-group", "top-navigation", "tooltip", "user-menu", "widget"
+  "toast", "toggle", "toggle-group", "top-navigation", "tooltip", "user-menu", "widget", "widget-board"
 ]
 
 // Prefix for component names to prevent v0 from using built-in shadcn components

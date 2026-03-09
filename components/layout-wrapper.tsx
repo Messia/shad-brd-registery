@@ -11,7 +11,10 @@ interface LayoutWrapperProps {
 
 export function LayoutWrapper({ children }: LayoutWrapperProps) {
   const pathname = usePathname()
-  const isFullShellDemo = pathname === "/shell/demo" || pathname === "/app-starter/demo"
+  const isFullShellDemo =
+    pathname === "/shell/demo" ||
+    pathname === "/app-starter/demo" ||
+    pathname === "/widget-board/demo"
   // Extract component name from pathname (e.g., "/button" -> "button")
   const currentComponent = pathname.slice(1) || "home"
 

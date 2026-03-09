@@ -1,6 +1,7 @@
 'use client'
 
 import { Widget } from "@/components/ui/widget"
+import { WidgetBoardShowcase } from "@/components/widget-board-showcase"
 import { ComponentPageLayout } from "@/components/component-page-layout"
 import { TrendingUp, TrendingDown } from "lucide-react"
 import { registryMetadata } from "@/lib/registry-metadata"
@@ -10,7 +11,7 @@ export const meta = {
   name: "widget",
   type: "registry:ui",
   title: "Widget",
-  description: "A dashboard widget container with header, content area, and footer. Supports S/M/L sizes with zoom functionality.",
+  description: "A dashboard widget surface with header, content area, footer, and zoom. Use WidgetBoard for responsive multi-widget dashboards and drag-and-resize layouts.",
   ...registryMetadata["widget"],
   files: [
     {
@@ -153,6 +154,13 @@ export default function WidgetPage() {
   return (
     <ComponentPageLayout meta={meta}>
       <div className="flex flex-col gap-8">
+        <div className="rounded-md border border-[var(--color-stroke-default)] bg-[var(--color-surface-foreground)] p-4 text-sm text-[var(--color-text-secondary)]">
+          <span className="font-medium text-[var(--color-text-primary)]">Widget</span>
+          {" "}is the surface component. For responsive dashboard layout, breakpoint size transforms, and drag-and-resize behavior, use{" "}
+          <a href="/widget-board" className="font-medium text-[var(--color-icon-brand)] hover:underline">
+            Widget Board
+          </a>.
+        </div>
         <div>
           <h3 className="text-lg font-semibold mb-4">Size S - Compact KPI View</h3>
           <WidgetSizeS />
@@ -165,8 +173,11 @@ export default function WidgetPage() {
           <h3 className="text-lg font-semibold mb-4">Size L - Extended View</h3>
           <WidgetSizeL />
         </div>
+        <div>
+          <h3 className="text-lg font-semibold mb-4">Widget Board Composition</h3>
+          <WidgetBoardShowcase />
+        </div>
       </div>
     </ComponentPageLayout>
   )
 }
-
