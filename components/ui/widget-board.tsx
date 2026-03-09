@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import * as ReactGridLayoutModule from "react-grid-layout"
 import type { Layout, Layouts } from "react-grid-layout"
 
 import { cn } from "@/lib/utils"
@@ -25,6 +26,19 @@ import {
   type WidgetLink,
   type WidgetMenuItem,
 } from "@/components/ui/widget"
+
+const Responsive =
+  ReactGridLayoutModule.Responsive ??
+  ReactGridLayoutModule.default?.Responsive
+const WidthProvider =
+  ReactGridLayoutModule.WidthProvider ??
+  ReactGridLayoutModule.default?.WidthProvider
+
+if (!Responsive || !WidthProvider) {
+  throw new Error("react-grid-layout Responsive/WidthProvider exports are unavailable")
+}
+
+const ResponsiveGridLayout = WidthProvider(Responsive)
 
 export interface WidgetBoardItem extends WidgetBoardSeedItem {
   title?: string
@@ -100,8 +114,6 @@ export function WidgetBoard({
   onItemsChange,
   className,
 }: WidgetBoardProps) {
-  const [ResponsiveGridLayout, setResponsiveGridLayout] =
-    React.useState<React.ComponentType<any> | null>(null)
   const [boardItems, setBoardItems] = React.useState(items)
   const [currentBreakpoint, setCurrentBreakpoint] =
     React.useState<WidgetBoardBreakpoint>("xl")
@@ -130,25 +142,6 @@ export function WidgetBoard({
   React.useEffect(() => {
     liveLayoutsRef.current = layouts
   }, [layouts])
-
-  React.useEffect(() => {
-    let isActive = true
-
-    void import("react-grid-layout").then((module) => {
-      const responsive = module.Responsive ?? module.default?.Responsive
-      const widthProvider = module.WidthProvider ?? module.default?.WidthProvider
-
-      if (!isActive || !responsive || !widthProvider) {
-        return
-      }
-
-      setResponsiveGridLayout(() => widthProvider(responsive))
-    })
-
-    return () => {
-      isActive = false
-    }
-  }, [])
 
   const emitLayouts = React.useCallback(
     (nextLayouts: WidgetBoardLayouts) => {
@@ -223,37 +216,6 @@ export function WidgetBoard({
     () => (editable && !isCompactWidgetBoardBreakpoint(currentBreakpoint) ? ["se"] as const : []),
     [currentBreakpoint, editable]
   )
-
-  if (!ResponsiveGridLayout) {
-    return (
-      <div className={cn("grid w-full gap-[var(--spacing-sp-24)] px-[var(--spacing-sp-24)] md:grid-cols-2 xl:grid-cols-12", className)}>
-        {boardItems.map((item) => (
-          <div
-            key={item.id}
-            className={cn(
-              item.size === "L" ? "xl:col-span-9" : item.size === "M" ? "xl:col-span-6" : "xl:col-span-3",
-              item.size === "L" ? "md:col-span-2" : "md:col-span-1"
-            )}
-          >
-            <Widget
-              size={item.size}
-              layoutMode="board"
-              title={item.title ?? "Widget"}
-              timestamp={item.timestamp ?? "Updated now"}
-              sourceLink={item.sourceLink}
-              viewMoreLink={item.viewMoreLink}
-              menuItems={item.menuItems}
-              onRefresh={item.onRefresh}
-              onInfoClick={item.onInfoClick}
-              className="widget-board-surface min-h-[280px]"
-            >
-              <div className="h-full min-h-0">{item.content}</div>
-            </Widget>
-          </div>
-        ))}
-      </div>
-    )
-  }
 
   return (
     <div className={cn("w-full px-[var(--spacing-sp-24)]", className)}>
