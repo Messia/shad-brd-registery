@@ -38,4 +38,5 @@ export const brdAgGridTheme = themeQuartz.withParams({
   invalidColor: "var(--color-state-error)",
   valueChangeDeltaDownColor: "var(--color-state-error)",
   valueChangeDeltaUpColor: "var(--color-state-success)",
+  wrapperBorder: false,
 })
