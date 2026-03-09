@@ -1,8 +1,12 @@
 "use client"
 
 import * as React from "react"
-import ReactGridLayout from "react-grid-layout"
-import type { Layout, Layouts } from "react-grid-layout"
+import {
+  Responsive,
+  WidthProvider,
+  type Layout,
+  type Layouts,
+} from "react-grid-layout"
 
 import { cn } from "@/lib/utils"
 import {
@@ -27,8 +31,6 @@ import {
   type WidgetMenuItem,
 } from "@/components/ui/widget"
 
-const { Responsive, WidthProvider } =
-  ReactGridLayout as typeof import("react-grid-layout")
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
 export interface WidgetBoardItem extends WidgetBoardSeedItem {
