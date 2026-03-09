@@ -739,6 +739,90 @@ import { brdAgGridTheme } from "@/lib/brd-ag-grid-theme"
 
 ---
 
+## Chip
+
+- Use `Chip` for compact selected filters, tags, and dismissible pills when the BRD registry pattern fits.
+- Do not recreate chip-like controls with ad hoc rounded `div`s or custom borders if `Chip` covers the use case.
+- Use `selected` for the active state.
+- Use `icon` for the leading icon.
+- Use `onRemove` for removable chips.
+- Keep chip label typography on BRD body tokens.
+- Do not generate fake props like `state="hover"` or `state="selected"` for `Chip`.
+
+**Preferred pattern:**
+```tsx
+import { Star } from "lucide-react"
+
+import { Chip } from "@/components/ui/chip"
+
+<Chip
+  icon={<Star className="size-4" />}
+  selected
+  onClick={() => {}}
+  onRemove={() => {}}
+>
+  Chip Label
+</Chip>
+```
+
+---
+
+## Data Point Card
+
+- Use `DataPointCard` for compact KPI, stat, and metric surfaces instead of hand-rolling ad hoc cards.
+- Prefer `DataPointCard` over generic `Card` when the UI is primarily `label + value` with small accessories.
+- Use `label` and `value` as the core content.
+- Use `trend`, `badge`, and `valueAccessory` for metric-side accessories.
+- Use `action` for top-right icon actions.
+- Use `cta` for bottom metric-card links.
+- Keep color variants limited to `blue`, `gray`, `light`, and `superLight`.
+- Do not invent fake props like `state`, `variant="metric"`, or `emphasis="kpi"` when `DataPointCard` already fits.
+
+**Preferred pattern:**
+```tsx
+import { ArrowUpRight, LayoutGrid, MoreHorizontal } from "lucide-react"
+
+import { Badge } from "@/components/ui/badge"
+import { DataPointCard } from "@/components/ui/data-point-card"
+
+<DataPointCard
+  size="md"
+  color="blue"
+  label="Available Cash"
+  value="$50,000.00"
+  topLeftIcon={<LayoutGrid className="size-4" />}
+  action={{ ariaLabel: "More options", icon: <MoreHorizontal className="size-4" />, onClick: () => {} }}
+  trend={{ icon: <ArrowUpRight className="size-4" />, label: "+8.2%", tone: "success" }}
+  badge={<Badge variant="outline" color="neutral" size="sm">YTD</Badge>}
+/>
+```
+
+---
+
+## Stepper
+
+- Use `Stepper` for onboarding and multi-step workflow progress instead of hand-rolling circles, lines, and status text.
+- Prefer passing `steps` and `currentStepIndex` over inventing per-step state props.
+- Keep `Stepper` display-only in generated code unless a separate navigation component is explicitly required.
+- Use `title` and optional `description` for each step.
+- Do not invent fake props like `variant="wizard"`, `orientation`, or `state="completed"` for v1.
+
+**Preferred pattern:**
+```tsx
+import { Stepper } from "@/components/ui/stepper"
+
+<Stepper
+  currentStepIndex={1}
+  steps={[
+    { title: "Company details", description: "Website and location" },
+    { title: "Your details", description: "Name and email" },
+    { title: "Verification", description: "Confirm your account" },
+  ]}
+/>
+```
+
+---
+
 ## ❌ DO NOT USE (Invalid in BRD)
 
 These standard shadcn/ui patterns do NOT exist in BRD:

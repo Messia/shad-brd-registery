@@ -28,7 +28,7 @@ export const meta = {
 function SelectExample() {
   return (
     <div className="space-y-4 max-w-sm">
-      <div>
+      <div className="space-y-[var(--spacing-sp-4)]">
         <Label>Select a fruit</Label>
         <Select>
           <SelectTrigger>

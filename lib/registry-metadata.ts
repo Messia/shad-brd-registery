@@ -211,6 +211,22 @@ export const registryMetadata: Record<string, RegistryDocs> = {
       ],
     },
   },
+  chip: {
+    title: "Chip",
+    description:
+      "An interactive chip for compact selected filters, tags, and removable pills. Supports optional leading icon, selected state, and dismiss action.",
+    categories: ["forms", "data-display", "selection"],
+    meta: {
+      tags: ["chip", "tag", "pill", "filter", "selection", "removable"],
+      examples: [
+        {
+          title: "Selected removable chip",
+          code:
+            'import { Star } from "lucide-react"\nimport { Chip } from "@/components/ui/chip"\n\n<Chip\n  icon={<Star className="size-4" />}\n  selected\n  onClick={() => {}}\n  onRemove={() => {}}\n>\n  Chip Label\n</Chip>',
+        },
+      ],
+    },
+  },
   checkbox: {
     title: "Checkbox",
     description:
@@ -255,6 +271,22 @@ export const registryMetadata: Record<string, RegistryDocs> = {
           title: "Currency select",
           code:
             'import { CurrencySelector } from "@/components/ui/currency-selector"\n\n<CurrencySelector options={[{ id: "usd", label: "USD" }]} selectedId="usd" />',
+        },
+      ],
+    },
+  },
+  "data-point-card": {
+    title: "Data Point Card",
+    description:
+      "A compact metric card for key user-facing values with optional icon, action, trend, badge, and CTA.",
+    categories: ["data-display", "dashboard", "cards"],
+    meta: {
+      tags: ["metric", "kpi", "card", "stat", "dashboard", "data-point"],
+      examples: [
+        {
+          title: "Metric card with trend and badge",
+          code:
+            'import { ArrowUpRight, LayoutGrid } from "lucide-react"\nimport { Badge } from "@/components/ui/badge"\nimport { DataPointCard } from "@/components/ui/data-point-card"\n\n<DataPointCard\n  size="md"\n  color="blue"\n  label="Available Cash"\n  value="$50,000.00"\n  topLeftIcon={<LayoutGrid className="size-4" />}\n  trend={{ icon: <ArrowUpRight className="size-4" />, label: "+8.2%", tone: "success" }}\n  badge={<Badge variant="outline" color="neutral" size="sm">YTD</Badge>}\n/>',
         },
       ],
     },
@@ -766,6 +798,22 @@ export const registryMetadata: Record<string, RegistryDocs> = {
           title: "Toaster mount",
           code:
             'import { Toaster } from "@/components/ui/sonner"\n\n<Toaster />',
+        },
+      ],
+    },
+  },
+  stepper: {
+    title: "Stepper",
+    description:
+      "An onboarding and workflow progress indicator for multi-step flows with inferred completed, current, and upcoming states.",
+    categories: ["navigation", "onboarding", "data-display"],
+    meta: {
+      tags: ["stepper", "wizard", "onboarding", "progress", "steps"],
+      examples: [
+        {
+          title: "Onboarding progress",
+          code:
+            'import { Stepper } from "@/components/ui/stepper"\n\n<Stepper\n  currentStepIndex={1}\n  steps={[\n    { title: "Company details", description: "Website and location" },\n    { title: "Your details", description: "Name and email" },\n    { title: "Verification", description: "Confirm your account" },\n  ]}\n/>',
         },
       ],
     },

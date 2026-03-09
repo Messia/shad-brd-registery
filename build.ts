@@ -14,11 +14,13 @@ import * as calendarModule from "./app/calendar/page.tsx"
 import * as cardModule from "./app/card/page.tsx"
 import * as carouselModule from "./app/carousel/page.tsx"
 import * as chartModule from "./app/chart/page.tsx"
+import * as chipModule from "./app/chip/page.tsx"
 import * as checkboxModule from "./app/checkbox/page.tsx"
 import * as collapsibleModule from "./app/collapsible/page.tsx"
 import * as commandModule from "./app/command/page.tsx"
 import * as contextMenuModule from "./app/context-menu/page.tsx"
 import * as currencySelectorModule from "./app/currency-selector/page.tsx"
+import * as dataPointCardModule from "./app/data-point-card/page.tsx"
 import * as dialogModule from "./app/dialog/page.tsx"
 import * as drawerModule from "./app/drawer/page.tsx"
 import * as dropdownMenuModule from "./app/dropdown-menu/page.tsx"
@@ -48,6 +50,7 @@ import * as sideToolbarModule from "./app/side-toolbar/page.tsx"
 import * as skeletonModule from "./app/skeleton/page.tsx"
 import * as sliderModule from "./app/slider/page.tsx"
 import * as sonnerModule from "./app/sonner/page.tsx"
+import * as stepperModule from "./app/stepper/page.tsx"
 import * as switchModule from "./app/switch/page.tsx"
 import * as tableModule from "./app/table/page.tsx"
 import * as tabsModule from "./app/tabs/page.tsx"
@@ -85,11 +88,13 @@ const COMPONENT_NAME_MAP: Record<string, string> = {
   "card": "card",
   "carousel": "carousel",
   "chart": "chart",
+  "chip": "chip",
   "checkbox": "checkbox",
   "collapsible": "collapsible",
   "command": "command",
   "context-menu": "context-menu",
   "currency-selector": "currency-selector",
+  "data-point-card": "data-point-card",
   "dialog": "dialog",
   "drawer": "drawer",
   "dropdown-menu": "dropdown-menu",
@@ -120,6 +125,7 @@ const COMPONENT_NAME_MAP: Record<string, string> = {
   "skeleton": "skeleton",
   "slider": "slider",
   "sonner": "sonner",
+  "stepper": "stepper",
   "switch": "switch",
   "table": "table",
   "tabs": "tabs",
@@ -178,11 +184,13 @@ const modules = [
   { name: "card", module: cardModule },
   { name: "carousel", module: carouselModule },
   { name: "chart", module: chartModule },
+  { name: "chip", module: chipModule },
   { name: "checkbox", module: checkboxModule },
   { name: "collapsible", module: collapsibleModule },
   { name: "command", module: commandModule },
   { name: "context-menu", module: contextMenuModule },
   { name: "currency-selector", module: currencySelectorModule },
+  { name: "data-point-card", module: dataPointCardModule },
   { name: "dialog", module: dialogModule },
   { name: "drawer", module: drawerModule },
   { name: "dropdown-menu", module: dropdownMenuModule },
@@ -212,6 +220,7 @@ const modules = [
   { name: "skeleton", module: skeletonModule },
   { name: "slider", module: sliderModule },
   { name: "sonner", module: sonnerModule },
+  { name: "stepper", module: stepperModule },
   { name: "switch", module: switchModule },
   { name: "table", module: tableModule },
   { name: "tabs", module: tabsModule },

@@ -12,13 +12,13 @@ const REGISTRY_URL = "https://shad-brd-registery.vercel.app"
 const COMPONENTS = [
   "accordion", "alert", "alert-dialog", "aspect-ratio", "avatar",
   "badge", "breadcrumb", "button", "calendar", "card", "carousel",
-  "chart", "checkbox", "collapsible", "command", "context-menu",
-  "currency-selector", "dialog", "drawer", "dropdown-menu", "footer",
+  "chart", "chip", "checkbox", "collapsible", "command", "context-menu",
+  "currency-selector", "data-point-card", "dialog", "drawer", "dropdown-menu", "footer",
   "header", "hover-card", "icon-button", "input", "input-otp", "label",
   "language-selector", "left-navigation", "link", "menubar", "page-container",
   "pagination", "popover", "progress", "radio-group", "resizable",
   "scroll-area", "select", "separator", "sheet", "shell", "side-toolbar", "skeleton",
-  "slider", "sonner", "switch", "table", "tabs", "textarea", "theme",
+  "slider", "sonner", "stepper", "switch", "table", "tabs", "textarea", "theme",
   "toast", "toggle", "toggle-group", "top-navigation", "tooltip", "user-menu", "widget"
 ]
 
