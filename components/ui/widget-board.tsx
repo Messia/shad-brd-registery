@@ -1,8 +1,9 @@
 "use client"
 
 import * as React from "react"
-import * as ReactGridLayoutModule from "react-grid-layout"
 import type { Layout, Layouts } from "react-grid-layout"
+import Responsive from "react-grid-layout/build/ResponsiveReactGridLayout"
+import WidthProvider from "react-grid-layout/build/components/WidthProvider"
 
 import { cn } from "@/lib/utils"
 import {
@@ -26,17 +27,6 @@ import {
   type WidgetLink,
   type WidgetMenuItem,
 } from "@/components/ui/widget"
-
-const Responsive =
-  ReactGridLayoutModule.Responsive ??
-  ReactGridLayoutModule.default?.Responsive
-const WidthProvider =
-  ReactGridLayoutModule.WidthProvider ??
-  ReactGridLayoutModule.default?.WidthProvider
-
-if (!Responsive || !WidthProvider) {
-  throw new Error("react-grid-layout Responsive/WidthProvider exports are unavailable")
-}
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
