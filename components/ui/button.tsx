@@ -50,6 +50,7 @@ export interface ButtonProps
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
   isLoading?: boolean
+  /** @deprecated Prefer placing the icon directly inside the button before the label. Use IconButton for icon-only actions. */
   icon?: React.ReactNode
 }
 

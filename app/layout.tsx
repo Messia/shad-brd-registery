@@ -4,7 +4,10 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { LayoutWrapper } from "@/components/layout-wrapper"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-family-brand",
+})
 
 export const metadata: Metadata = {
   title: "shadcn/ui Components",
@@ -19,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.variable} font-[var(--font-family-brand)]`}>
         <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>

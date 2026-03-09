@@ -129,7 +129,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   button: {
     title: "Button",
     description:
-      "An interactive control for actions and form submissions. Variants: default (primary), outline (secondary), secondary (tertiary), destructive (error). Sizes: sm, default, lg, icon, icon-sm, icon-lg. Ghost and link are deprecated.",
+      "An interactive control for actions and form submissions. Variants: default (primary), outline (secondary), secondary (tertiary), destructive (error). Sizes: sm, default, lg, icon, icon-sm, icon-lg. For labeled buttons with icons, compose the icon and text as children. Use IconButton for icon-only actions. Ghost and link are deprecated.",
     categories: ["forms", "actions"],
     meta: {
       tags: ["button", "action", "cta", "form"],
@@ -138,6 +138,11 @@ export const registryMetadata: Record<string, RegistryDocs> = {
           title: "Primary action",
           code:
             'import { Button } from "@/components/ui/button"\n\n<Button>Save changes</Button>',
+        },
+        {
+          title: "Button with leading icon",
+          code:
+            'import { Download } from "lucide-react"\nimport { Button } from "@/components/ui/button"\n\n<Button variant="outline">\n  <Download className="size-4" />\n  Export\n</Button>',
         },
       ],
     },
@@ -193,7 +198,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   chart: {
     title: "Chart",
     description:
-      "Data visualization primitives powered by Recharts, designed for consistent typography, spacing, and theming. Use Chart Color Swatches 1-26 for all series colors.",
+      "Legacy Recharts primitives for lightweight internal chart composition. For v0-generated application views, prefer Highcharts with the BRD Highcharts theme helper and chart swatches 1-24 in sequence.",
     categories: ["data-visualization"],
     meta: {
       tags: ["chart", "data", "visualization", "graph"],
@@ -688,10 +693,10 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   "app-starter": {
     title: "App Starter",
     description:
-      "A root application starter built on BRD Shell with access to all BRD tokens and components, including Widget. Use this as the default entrypoint for generating new views in v0.",
+      "A root application starter built on BRD Shell with access to all BRD tokens and components, including Widget, plus starter helpers for BRD typography, Highcharts, and AG Grid. Use this as the default entrypoint for generating new views in v0.",
     categories: ["starter", "layout"],
     meta: {
-      tags: ["starter", "app-starter", "prototype", "shell", "layout", "root-app", "v0", "widget"],
+      tags: ["starter", "app-starter", "prototype", "shell", "layout", "root-app", "v0", "widget", "highcharts", "ag-grid", "typography"],
       examples: [
         {
           title: "Root app scaffold",
@@ -784,7 +789,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   table: {
     title: "Table",
     description:
-      "A structured data table with header, body, rows, and cells for tabular content.",
+      "A lightweight semantic table for simple static tabular content. For primary application data tables in v0-generated views, prefer AG Grid with the BRD AG Grid theme helper.",
     categories: ["data-display"],
     meta: {
       tags: ["table", "data", "rows", "columns"],

@@ -40,7 +40,7 @@ export const meta = {
   name: "chart",
   type: "registry:ui",
   title: "Chart",
-  description: "Recharts components with 26 color swatches from Figma design tokens.",
+  description: "Legacy Recharts utilities for lightweight chart composition. For v0-generated application views, prefer Highcharts with the BRD Highcharts theme helper.",
   ...registryMetadata["chart"],
   files: [
     {

@@ -1,5 +1,15 @@
 "use client"
 
+/**
+ * v0 starter contract:
+ * - Use `var(--font-family-brand)` and BRD typography tokens for all custom text styles.
+ * - Use BRD `var(--spacing-sp-X)` tokens for layout spacing.
+ * - Do not add shadows unless a BRD component already includes them or the user explicitly asks for them.
+ * - Use Highcharts for data visualization via `@/lib/brd-highcharts-theme`.
+ * - Use AG Grid for application tables via `@/lib/brd-ag-grid-theme`.
+ * - Keep chart series colors in BRD chart swatch order 1 through 24.
+ */
+
 import {
   BarChart3,
   BriefcaseBusiness,
@@ -93,7 +103,7 @@ export function AppStarterPage() {
           <Widget
             size="M"
             title="Primary workspace area"
-            timestamp="Place your main chart, table, form, or process here"
+            timestamp="Place your main Highcharts chart, AG Grid table, form, or process here"
             sourceLink={{ label: "Use existing BRD components", href: "#" }}
             viewMoreLink={{ label: "Expand the view", href: "#" }}
           >
@@ -101,8 +111,22 @@ export function AppStarterPage() {
               <div className="rounded-[var(--radius-xs)] border border-[var(--color-stroke-default)] bg-[var(--color-surface-foreground)] p-4">
                 <h3 className="text-base font-semibold text-[var(--color-text-primary)]">Start inside the shell content area</h3>
                 <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
-                  When you prompt v0 to create a new view, extend this area with BRD tables, cards, charts, forms, widgets, and navigation patterns instead of rebuilding the registry interface.
+                  When you prompt v0 to create a new view, extend this area with BRD cards, widgets, forms, Highcharts visualizations, and AG Grid data tables instead of rebuilding the registry interface.
                 </p>
+              </div>
+              <div className="grid gap-4 md:grid-cols-4">
+                <div className="rounded-[var(--radius-xs)] border border-[var(--color-stroke-default)] bg-[var(--color-surface-background)] p-4 text-sm text-[var(--color-text-secondary)]">
+                  Typography: use <span className="font-semibold text-[var(--color-text-primary)]">var(--font-family-brand)</span> and BRD typography tokens.
+                </div>
+                <div className="rounded-[var(--radius-xs)] border border-[var(--color-stroke-default)] bg-[var(--color-surface-background)] p-4 text-sm text-[var(--color-text-secondary)]">
+                  Spacing: use <span className="font-semibold text-[var(--color-text-primary)]">var(--spacing-sp-X)</span> tokens for gap, padding, and margin.
+                </div>
+                <div className="rounded-[var(--radius-xs)] border border-[var(--color-stroke-default)] bg-[var(--color-surface-background)] p-4 text-sm text-[var(--color-text-secondary)]">
+                  Charts: use <span className="font-semibold text-[var(--color-text-primary)]">Highcharts</span> with the BRD theme helper and swatches 1-24 in sequence.
+                </div>
+                <div className="rounded-[var(--radius-xs)] border border-[var(--color-stroke-default)] bg-[var(--color-surface-background)] p-4 text-sm text-[var(--color-text-secondary)]">
+                  Tables: use <span className="font-semibold text-[var(--color-text-primary)]">AG Grid</span> with the BRD AG Grid theme helper.
+                </div>
               </div>
               <div className="grid flex-1 gap-4 md:grid-cols-2">
                 <div className="rounded-[var(--radius-xs)] border border-dashed border-[var(--color-stroke-default)] bg-[var(--color-surface-background)] p-4 text-sm text-[var(--color-text-secondary)]">

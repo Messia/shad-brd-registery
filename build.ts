@@ -232,6 +232,10 @@ function getFileBasePath(fileType: string) {
     return "components"
   }
 
+  if (fileType === "registry:lib") {
+    return "lib"
+  }
+
   if (fileType === "registry:hook") {
     return "hooks"
   }
@@ -248,6 +252,10 @@ function getFileBasePath(fileType: string) {
 }
 
 function getOutputPath(file: { path: string; type: string; target?: string }) {
+  if (file.type === "registry:lib") {
+    return file.target ?? `lib/${file.path}`
+  }
+
   if (file.type === "registry:hook") {
     return file.path
   }

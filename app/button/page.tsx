@@ -52,9 +52,18 @@ function ButtonExample() {
       <div className="space-y-4">
         <h3 className="text-lg font-semibold">With Icons</h3>
         <div className="flex flex-wrap items-center gap-4">
-          <Button icon={<Mail />}>Send Email</Button>
-          <Button variant="outline" icon={<Download />}>Download</Button>
-          <Button variant="secondary" icon={<ArrowRight />}>Continue</Button>
+          <Button>
+            <Mail />
+            Send Email
+          </Button>
+          <Button variant="outline">
+            <Download />
+            Download
+          </Button>
+          <Button variant="secondary">
+            Continue
+            <ArrowRight />
+          </Button>
         </div>
       </div>
 

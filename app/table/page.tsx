@@ -11,7 +11,7 @@ export const meta = {
   name: "table",
   type: "registry:ui",
   title: "Table",
-  description: "A responsive table component.",
+  description: "A lightweight semantic table component for simple static content. For v0-generated application views, prefer AG Grid with the BRD AG Grid theme helper.",
   ...registryMetadata["table"],
   files: [
     {

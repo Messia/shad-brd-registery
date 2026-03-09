@@ -60,7 +60,7 @@ import { Link } from "@/components/ui/link"
 | `variant` | `"default"` \| `"destructive"` \| `"outline"` \| `"secondary"` | `"default"` | Visual style |
 | `size` | `"sm"` \| `"default"` \| `"lg"` \| `"icon"` \| `"icon-sm"` \| `"icon-lg"` | `"default"` | Size |
 | `isLoading` | `boolean` | `false` | Shows animated loading dots |
-| `icon` | `ReactNode` | - | Icon element to display |
+| `icon` | `ReactNode` | - | Legacy convenience prop. Prefer placing the icon directly inside the button before the label. |
 | `disabled` | `boolean` | `false` | Disabled state |
 
 **Variant Meanings:**
@@ -69,6 +69,11 @@ import { Link } from "@/components/ui/link"
 - `outline` - Bordered button (white with border)
 - `destructive` - Dangerous action (solid red)
 
+**Composition Rules:**
+- For buttons with visible text, place the icon directly inside `<Button>` next to the label.
+- Use `IconButton` for icon-only actions.
+- Do not invent custom stacked icon/text button layouts.
+
 **Examples:**
 ```tsx
 <Button>Save Changes</Button>
@@ -76,7 +81,14 @@ import { Link } from "@/components/ui/link"
 <Button variant="outline">Edit</Button>
 <Button variant="destructive">Delete</Button>
 <Button isLoading>Saving...</Button>
-<Button icon={<PlusIcon className="size-4" />}>Add Item</Button>
+<Button>
+  <PlusIcon className="size-4" />
+  Add Item
+</Button>
+<Button variant="outline">
+  <DownloadIcon className="size-4" />
+  Export
+</Button>
 <Button size="sm">Small</Button>
 <Button size="lg">Large</Button>
 ```
@@ -621,6 +633,103 @@ The design system uses CSS custom properties. Key patterns:
 --color-state-warning           /* Warning orange */
 ```
 
+### Typography Tokens:
+- `--font-family-brand` - The only approved font family for BRD interfaces
+- `--font-body-small-*` - Small body text tokens
+- `--font-body-medium-*` - Default body text tokens
+- `--font-body-large-*` - Large body text tokens
+- `--font-headline-h1-*` through `--font-headline-h5-*` - Headline tokens
+- `--font-utility-link-*` - Link typography tokens
+
+When v0 generates custom CSS or inline style objects, it must use BRD typography tokens instead of ad hoc font families, sizes, line heights, or font weights.
+
+```tsx
+className="font-[var(--font-family-brand)] text-[length:var(--font-body-medium-size)] leading-[var(--font-body-medium-line-height)] font-[var(--font-body-medium-regular-weight)]"
+```
+
+### Spacing Tokens:
+- `--spacing-sp-1`
+- `--spacing-sp-2`
+- `--spacing-sp-4`
+- `--spacing-sp-6`
+- `--spacing-sp-8`
+- `--spacing-sp-12`
+- `--spacing-sp-16`
+- `--spacing-sp-24`
+- `--spacing-sp-32`
+- `--spacing-sp-36`
+- `--spacing-sp-40`
+- `--spacing-sp-48`
+- `--spacing-sp-64`
+- `--spacing-sp-80`
+- `--spacing-sp-96`
+
+When v0 generates layout spacing, it must prefer BRD spacing tokens for `gap`, `padding`, `margin`, and sectional spacing instead of arbitrary pixel values.
+
+```tsx
+className="gap-[var(--spacing-sp-16)] px-[var(--spacing-sp-24)] py-[var(--spacing-sp-16)]"
+```
+
+### Shadows:
+- Do not add `shadow-*`, `box-shadow`, or custom elevation styles by default.
+- Only use shadows when they are already built into an existing BRD component.
+- Only add new shadows when the user explicitly asks for them.
+
+---
+
+## Charts & Data Grids
+
+### Charts
+
+- Use `Highcharts` for application charts in generated BRD views.
+- Apply the shared BRD theme from `@/lib/brd-highcharts-theme`.
+- Assign series colors in BRD chart swatch order `1` through `24`.
+- Do not generate primary application charts with `Recharts`.
+
+**Preferred pattern:**
+```tsx
+import Highcharts from "highcharts"
+import { Chart } from "@highcharts/react"
+
+import {
+  applyBrdHighchartsTheme,
+  brdChartSwatches,
+} from "@/lib/brd-highcharts-theme"
+
+applyBrdHighchartsTheme(Highcharts)
+
+<Chart
+  highcharts={Highcharts}
+  options={{
+    chart: { type: "column" },
+    series: [
+      { type: "column", data: [12, 18, 14], color: brdChartSwatches[0] },
+      { type: "column", data: [9, 13, 11], color: brdChartSwatches[1] },
+    ],
+  }}
+/>
+```
+
+### Tables & Grids
+
+- Use `AG Grid` for all primary application tables and data grids.
+- Apply the shared BRD theme from `@/lib/brd-ag-grid-theme`.
+- Do not generate primary application tables with plain HTML `<table>` markup or the lightweight BRD `Table` component.
+- The BRD `Table` component is only for very small, static supporting tables.
+
+**Preferred pattern:**
+```tsx
+import { AgGridReact } from "ag-grid-react"
+
+import { brdAgGridTheme } from "@/lib/brd-ag-grid-theme"
+
+<AgGridReact
+  theme={brdAgGridTheme}
+  rowData={rows}
+  columnDefs={columnDefs}
+/>
+```
+
 ---
 
 ## ❌ DO NOT USE (Invalid in BRD)
@@ -671,4 +780,3 @@ import {
 <PlusIcon className="size-5" />  // 20px - for buttons
 <PlusIcon className="size-6" />  // 24px - for larger elements
 ```
-
