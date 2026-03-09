@@ -13,6 +13,8 @@ build/
 # Environment
 .env
 .env.local
+.npmrc
+
 .env.development.local
 .env.test.local
 .env.production.local
@@ -37,3 +39,6 @@ Thumbs.db
 
 # Generated registry files (built at deploy time)
 public/r/
+
+# Local sandbox work
+sandbox/
