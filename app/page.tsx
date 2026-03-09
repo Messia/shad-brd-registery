@@ -57,8 +57,15 @@ export default function HomePage() {
             {/* Open in v0 Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Button size="lg" asChild className="gap-2">
-                <a href={getV0Url("all-components", false)} target="_blank" rel="noopener noreferrer">
+                <a href={getV0Url("app-starter")} target="_blank" rel="noopener noreferrer">
                   <Zap className="w-5 h-5" />
+                  Open App Starter in v0
+                  <ExternalLink className="w-4 h-4 ml-1" />
+                </a>
+              </Button>
+              <Button size="lg" asChild className="gap-2">
+                <a href={getV0Url("all-components", false)} target="_blank" rel="noopener noreferrer">
+                  <Code2 className="w-5 h-5" />
                   Open All in v0
                   <ExternalLink className="w-4 h-4 ml-1" />
                 </a>
@@ -124,9 +131,10 @@ export default function HomePage() {
             <p className="text-sm text-[var(--color-text-secondary)] mb-4">
               Generate UI using our design system:
             </p>
-            <p className="text-sm text-[var(--color-text-secondary)]">
-              Use the "Open All in v0" button above to open the full registry.
-            </p>
+            <div className="space-y-2 text-sm text-[var(--color-text-secondary)]">
+              <p>Use "Open App Starter in v0" to begin from the BRD shell scaffold.</p>
+              <p>Use "Open All in v0" only when you want the full component inventory as extra context.</p>
+            </div>
           </div>
         </div>
       </div>

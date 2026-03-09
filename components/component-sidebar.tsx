@@ -25,6 +25,10 @@ const overviewItems = [
   { label: "Home", href: "/" },
 ]
 
+const starterItems = [
+  { label: "App Starter", href: "/app-starter" },
+]
+
 // Alphabetized component pages from app/*
 const components = [
   "accordion",
@@ -101,6 +105,25 @@ export function ComponentSidebar({ currentComponent, children }: ComponentSideba
                     <SidebarMenuButton
                       asChild
                       isActive={currentComponent === "home"}
+                      className="hover:bg-transparent data-[active=true]:bg-transparent data-[active=true]:font-medium"
+                    >
+                      <Link href={item.href}>{item.label}</Link>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+
+          <SidebarGroup>
+            <SidebarGroupLabel>Starters</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {starterItems.map((item) => (
+                  <SidebarMenuItem key={item.href}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={currentComponent === "app-starter"}
                       className="hover:bg-transparent data-[active=true]:bg-transparent data-[active=true]:font-medium"
                     >
                       <Link href={item.href}>{item.label}</Link>

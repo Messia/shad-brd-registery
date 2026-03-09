@@ -685,6 +685,22 @@ export const registryMetadata: Record<string, RegistryDocs> = {
       ],
     },
   },
+  "app-starter": {
+    title: "App Starter",
+    description:
+      "A root application starter built on BRD Shell with access to all BRD tokens and components, including Widget. Use this as the default entrypoint for generating new views in v0.",
+    categories: ["starter", "layout"],
+    meta: {
+      tags: ["starter", "app-starter", "prototype", "shell", "layout", "root-app", "v0", "widget"],
+      examples: [
+        {
+          title: "Root app scaffold",
+          code:
+            'import { Shell } from "@/components/ui/shell"\n\n// app/page.tsx starter scaffold that composes Shell, Widget, and other BRD components.',
+        },
+      ],
+    },
+  },
   "side-toolbar": {
     title: "Side Toolbar",
     description:

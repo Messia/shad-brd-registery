@@ -44,6 +44,10 @@ export default function ShellPage() {
       )}
       title="Shell"
       description="Combine header, navigation, and page containers into a full layout shell."
-    />
+    >
+      <div className="rounded-md border border-[var(--color-stroke-default)] bg-[var(--color-surface-foreground)] p-4 text-sm text-[var(--color-text-secondary)]">
+        For generating a new view in v0, start from <a href="/app-starter" className="font-medium text-[var(--color-icon-brand)] hover:underline">App Starter</a>. Use Shell directly when you need the layout primitive on its own.
+      </div>
+    </ComponentPageLayout>
   )
 }

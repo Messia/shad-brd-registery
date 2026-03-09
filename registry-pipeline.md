@@ -55,10 +55,37 @@ and open in v0 with the correct dependencies.
 4. **Build registry artifacts**
    - Run `npm run build` and verify `/r/brdcomp-your-template.json`.
 
+## Add a New App Starter
+
+Use an app starter when you want v0 to begin from a full application scaffold instead of a single reusable component.
+
+1. **Create the exported starter source**
+   - Add the starter source under `v0/` (example: `v0/app-starter/page.tsx`).
+   - Keep the file free of registry-site chrome. It should render only the starter app experience.
+   - Prefer existing BRD components and tokens, including `Shell` and `Widget`.
+
+2. **Create the starter docs page**
+   - Add a docs route under `app/` (example: `app/app-starter/page.tsx`).
+   - Use `type: "registry:block"` in `meta`.
+   - In `files`, add a `registry:page` entry that points at the `v0/` source and targets `app/page.tsx`.
+
+3. **Add preview/demo route**
+   - Add `app/your-starter/demo/page.tsx`.
+   - Update `components/layout-wrapper.tsx` if the demo should render without registry chrome.
+
+4. **Add metadata entry**
+   - Add a corresponding entry in `lib/registry-metadata.ts`.
+   - Include tags that describe this as a starter/root-app entrypoint.
+
+5. **Build registry artifacts**
+   - Run `npm run build` and verify `/r/brdcomp-your-starter.json`.
+   - Confirm the generated JSON preserves `type: "registry:page"` and `target: "app/page.tsx"`.
+
 ## Checklist Before Commit
 
 - Page renders without errors.
 - `meta` includes `$schema`, `name`, `type`, `title`, `description`, `files`.
+- For starters, exported files live under `v0/` and use `registry:page` with a `target`.
 - Registry dependencies point to `https://shad-brd-registery.vercel.app/r/...`.
 - v0 open link works (use the "Open in v0" button).
 - `public/r/` regenerated and includes the new item.

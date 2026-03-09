@@ -60,6 +60,7 @@ import * as tooltipModule from "./app/tooltip/page.tsx"
 import * as topNavigationModule from "./app/top-navigation/page.tsx"
 import * as userMenuModule from "./app/user-menu/page.tsx"
 import * as widgetModule from "./app/widget/page.tsx"
+import * as appStarterModule from "./app/app-starter/page.tsx"
 
 // Output directory for generated registry files
 const OUTPUT_DIR = join(process.cwd(), "public", "r")
@@ -134,6 +135,7 @@ const COMPONENT_NAME_MAP: Record<string, string> = {
   "widget": "widget",
   "use-mobile": "sidebar",  // hook used by sidebar
   "use-toast": "toast",  // hook used by toast
+  "app-starter": "app-starter",
 }
 
 // Extract component dependencies from file content by parsing imports
@@ -222,7 +224,76 @@ const modules = [
   { name: "top-navigation", module: topNavigationModule },
   { name: "user-menu", module: userMenuModule },
   { name: "widget", module: widgetModule },
+  { name: "app-starter", module: appStarterModule },
 ]
+
+function getFileBasePath(fileType: string) {
+  if (fileType === "registry:ui" || fileType === "registry:block") {
+    return "components"
+  }
+
+  if (fileType === "registry:hook") {
+    return "hooks"
+  }
+
+  if (fileType === "registry:style") {
+    return "app"
+  }
+
+  if (fileType === "registry:page") {
+    return "v0"
+  }
+
+  throw new Error(`Unknown file type: ${fileType}`)
+}
+
+function getOutputPath(file: { path: string; type: string; target?: string }) {
+  if (file.type === "registry:hook") {
+    return file.path
+  }
+
+  if (file.type === "registry:style") {
+    return file.target ?? `app/${file.path}`
+  }
+
+  if (file.type === "registry:page") {
+    return file.target ?? `app/${file.path}`
+  }
+
+  return `components/${file.path}`
+}
+
+function buildDefaultRegistryDependencies(name: string, componentDeps: Set<string>) {
+  return [
+    `${REGISTRY_URL}/r/theme.json`,
+    ...Array.from(componentDeps).map((dep) => `${REGISTRY_URL}/r/${COMPONENT_PREFIX}${dep}.json`),
+  ]
+}
+
+function buildAppStarterDependencies(registryItems: Array<{ name: string; type: string }>) {
+  const dependencySet = new Set<string>([
+    `${REGISTRY_URL}/r/theme.json`,
+    `${REGISTRY_URL}/r/${COMPONENT_PREFIX}shell.json`,
+  ])
+
+  for (const item of registryItems) {
+    if (item.name === `${COMPONENT_PREFIX}app-starter`) {
+      continue
+    }
+
+    if (item.name === "all-components") {
+      continue
+    }
+
+    if (item.type === "registry:ui" || item.type === "registry:hook") {
+      dependencySet.add(`${REGISTRY_URL}/r/${item.name}.json`)
+    }
+  }
+
+  dependencySet.add(`${REGISTRY_URL}/r/${COMPONENT_PREFIX}widget.json`)
+
+  return Array.from(dependencySet)
+}
 
 // Build main registry data matching shadcn schema (plain array format like https://ui.shadcn.com/r/index.json)
 const registryItems = modules.map(({ name, module }) => {
@@ -245,17 +316,7 @@ const registryItems = modules.map(({ name, module }) => {
     let content = ""
 
     try {
-      // Determine base path based on registry type
-      let basePath = ""
-      if (file.type === "registry:ui" || file.type === "registry:block") {
-        basePath = "components"
-      } else if (file.type === "registry:hook") {
-        basePath = "hooks"
-      } else if (file.type === "registry:style") {
-        basePath = "app"
-      } else {
-        throw new Error(`Unknown registry type: ${meta?.type}`)
-      }
+      const basePath = getFileBasePath(file.type || meta?.type)
 
       // Read the actual file content from the filesystem
       const filePath = join(process.cwd(), basePath, file.path)
@@ -275,17 +336,12 @@ const registryItems = modules.map(({ name, module }) => {
       throw new Error(`File not found: ${file.path}. Error: ${error}`)
     }
 
-    // IMPORTANT: Use "components/ui/xxx.tsx" path so v0 creates files at the correct location
-    // that matches the import paths like "@/components/ui/xxx"
-    const outputPath = file.type === "registry:hook"
-      ? file.path  // hooks stay as hooks/xxx.ts
-      : file.type === "registry:style"
-        ? (file.target ?? `app/${file.path}`)
-        : `components/${file.path}`  // ui/block files become components/ui/xxx.tsx
+    const outputPath = getOutputPath(file)
 
     return {
       path: outputPath,
       type: file.type || "registry:ui",
+      target: file.target,
       content: content, // Add the actual file content here
     }
   }) || [
@@ -300,10 +356,7 @@ const registryItems = modules.map(({ name, module }) => {
   const prefixedName = `${COMPONENT_PREFIX}${name}`
 
   // Build registryDependencies: theme + any component dependencies found in imports
-  const registryDependencies = [
-    `${REGISTRY_URL}/r/theme.json`,
-    ...Array.from(componentDeps).map(dep => `${REGISTRY_URL}/r/${COMPONENT_PREFIX}${dep}.json`)
-  ]
+  const registryDependencies = buildDefaultRegistryDependencies(name, componentDeps)
 
   if (componentDeps.size > 0) {
     console.log(`  Component dependencies for ${name}:`, Array.from(componentDeps))
@@ -327,22 +380,22 @@ const allRegistryDependencies = [
   ...registryItems.map((item) => `${REGISTRY_URL}/r/${item.name}.json`),
 ]
 
-const shellItem = registryItems.find(
-  (item) => item.name === `${COMPONENT_PREFIX}shell`
-)
-if (shellItem) {
-  shellItem.registryDependencies = allRegistryDependencies.filter(
-    (item) => !item.endsWith(`/${COMPONENT_PREFIX}shell.json`)
-  )
-}
-
 const widgetItem = registryItems.find(
   (item) => item.name === `${COMPONENT_PREFIX}widget`
 )
 if (widgetItem) {
   widgetItem.registryDependencies = allRegistryDependencies.filter(
-    (item) => !item.endsWith(`/${COMPONENT_PREFIX}widget.json`)
+    (item) =>
+      !item.endsWith(`/${COMPONENT_PREFIX}widget.json`) &&
+      !item.endsWith(`/${COMPONENT_PREFIX}app-starter.json`)
   )
+}
+
+const appStarterItem = registryItems.find(
+  (item) => item.name === `${COMPONENT_PREFIX}app-starter`
+)
+if (appStarterItem) {
+  appStarterItem.registryDependencies = buildAppStarterDependencies(registryItems)
 }
 
 console.log("Registry Data Summary:", {
@@ -431,7 +484,9 @@ function writeRegistryFiles() {
       description: "A complete collection of all BRD design system components. Open this in v0 to get access to all styled components.",
       registryDependencies: [
         `${REGISTRY_URL}/r/theme.json`,  // Theme first so CSS variables are available
-        ...registryItems.map(item => `${REGISTRY_URL}/r/${item.name}.json`)
+        ...registryItems
+          .filter((item) => item.name !== `${COMPONENT_PREFIX}app-starter`)
+          .map(item => `${REGISTRY_URL}/r/${item.name}.json`)
       ],
       files: []
     }

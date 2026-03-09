@@ -3,6 +3,7 @@ import type React from "react"
 interface ComponentFile {
   path: string
   type: string
+  target?: string
 }
 
 interface ComponentMeta {
@@ -124,9 +125,14 @@ export function ComponentPageLayout({ meta, children, headerActions }: Component
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">FILES</h2>
         <div className="bg-muted/50 p-4 rounded-md">
           {meta.files.map((file, index) => (
-            <div key={index} className="flex items-center gap-2">
+            <div key={index} className="flex flex-wrap items-center gap-2">
               <span className="font-mono text-sm text-foreground">{file.path}</span>
               <span className="text-sm text-foreground">{file.type.replace("registry:", "")}</span>
+              {file.target ? (
+                <span className="text-xs text-muted-foreground">
+                  → {file.target}
+                </span>
+              ) : null}
             </div>
           ))}
         </div>
