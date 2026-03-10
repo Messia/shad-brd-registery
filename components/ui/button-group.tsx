@@ -1,83 +1,164 @@
-import { Slot } from '@radix-ui/react-slot'
+'use client'
+
+import * as React from 'react'
+import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
-import { Separator } from '@/components/ui/separator'
+
+export type ButtonGroupSize = 'sm' | 'default' | 'lg'
 
 const buttonGroupVariants = cva(
-  "flex w-fit items-stretch [&>*]:focus-visible:z-10 [&>*]:focus-visible:relative [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1 has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-md has-[>[data-slot=button-group]]:gap-2",
+  [
+    'inline-flex items-center box-border',
+    'rounded-[var(--radius-s)] p-1',
+    'bg-[var(--color-surface-button-group-background)]',
+  ],
   {
     variants: {
-      orientation: {
-        horizontal:
-          '[&>*:not(:first-child)]:rounded-l-none [&>*:not(:first-child)]:border-l-0 [&>*:not(:last-child)]:rounded-r-none',
-        vertical:
-          'flex-col [&>*:not(:first-child)]:rounded-t-none [&>*:not(:first-child)]:border-t-0 [&>*:not(:last-child)]:rounded-b-none',
+      size: {
+        sm: 'gap-1',
+        default: 'gap-2',
+        lg: 'gap-2',
       },
     },
     defaultVariants: {
-      orientation: 'horizontal',
+      size: 'lg',
     },
-  },
+  }
 )
+
+const buttonGroupItemVariants = cva(
+  [
+    'inline-flex items-center justify-center cursor-pointer whitespace-nowrap',
+    'rounded-[var(--radius-xs)] border border-transparent',
+    'text-[var(--color-text-primary)] bg-transparent',
+    'font-[var(--font-family-brand)]',
+    'transition-[background-color,color,border-color] duration-150 ease-in-out',
+    'hover:not-[data-state=on]:not-disabled:bg-[var(--color-surface-button-group-hover)]',
+    'data-[state=on]:bg-[var(--color-surface-button-group-active)]',
+    'data-[state=on]:text-[var(--color-text-link-default)]',
+    'focus-visible:outline-none focus-visible:border-[var(--color-stroke-brand)]',
+    'focus-visible:ring-2 focus-visible:ring-[var(--color-surface-focused)]',
+    'disabled:text-[var(--color-text-disabled)] disabled:bg-transparent',
+    'disabled:border-transparent disabled:cursor-not-allowed',
+    '[&_svg]:pointer-events-none [&_svg]:shrink-0',
+  ],
+  {
+    variants: {
+      size: {
+        sm: [
+          'h-7 px-1.5',
+          'text-xs font-semibold leading-4',
+          '[&_svg]:size-3.5',
+        ],
+        default: [
+          'h-8 px-1',
+          'text-sm font-semibold leading-5',
+          '[&_svg]:size-4',
+        ],
+        lg: [
+          'h-12 px-2',
+          'text-base font-semibold leading-6',
+          '[&_svg]:size-5',
+        ],
+      },
+      iconOnly: {
+        true: '',
+        false: '',
+      },
+    },
+    compoundVariants: [
+      { size: 'sm', iconOnly: true, class: 'w-7 px-0' },
+      { size: 'default', iconOnly: true, class: 'w-8 px-0' },
+      { size: 'lg', iconOnly: true, class: 'w-12 px-0' },
+    ],
+    defaultVariants: {
+      size: 'lg',
+      iconOnly: false,
+    },
+  }
+)
+
+interface ButtonGroupContextValue {
+  size: ButtonGroupSize
+}
+
+const ButtonGroupContext = React.createContext<ButtonGroupContextValue>({
+  size: 'lg',
+})
+
+export interface ButtonGroupProps
+  extends React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root>,
+    VariantProps<typeof buttonGroupVariants> {}
 
 function ButtonGroup({
   className,
-  orientation,
+  size = 'lg',
+  children,
   ...props
-}: React.ComponentProps<'div'> & VariantProps<typeof buttonGroupVariants>) {
+}: ButtonGroupProps) {
   return (
-    <div
-      role="group"
+    <ToggleGroupPrimitive.Root
       data-slot="button-group"
-      data-orientation={orientation}
-      className={cn(buttonGroupVariants({ orientation }), className)}
+      data-size={size}
+      className={cn(buttonGroupVariants({ size }), className)}
       {...props}
-    />
+    >
+      <ButtonGroupContext.Provider value={{ size: size || 'lg' }}>
+        {children}
+      </ButtonGroupContext.Provider>
+    </ToggleGroupPrimitive.Root>
   )
 }
 
-function ButtonGroupText({
-  className,
-  asChild = false,
-  ...props
-}: React.ComponentProps<'div'> & {
-  asChild?: boolean
-}) {
-  const Comp = asChild ? Slot : 'div'
-
-  return (
-    <Comp
-      className={cn(
-        "bg-muted flex items-center gap-2 rounded-md border px-4 text-sm font-medium shadow-xs [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
-        className,
-      )}
-      {...props}
-    />
-  )
+export interface ButtonGroupItemProps
+  extends React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> {
+  icon?: React.ReactNode
+  iconOnly?: boolean
 }
 
-function ButtonGroupSeparator({
+function ButtonGroupItem({
   className,
-  orientation = 'vertical',
+  children,
+  icon,
+  iconOnly = false,
   ...props
-}: React.ComponentProps<typeof Separator>) {
+}: ButtonGroupItemProps) {
+  const { size } = React.useContext(ButtonGroupContext)
+  const effectiveIconOnly = iconOnly || (!!icon && !children)
+
+  let content: React.ReactNode = children
+  if (effectiveIconOnly && icon) {
+    content = <span className="inline-flex items-center justify-center">{icon}</span>
+  } else if (icon && children) {
+    content = (
+      <>
+        <span className="inline-flex items-center justify-center">{icon}</span>
+        <span className={cn(size === 'sm' ? 'ml-0.5' : 'ml-1')}>{children}</span>
+      </>
+    )
+  } else if (icon) {
+    content = <span className="inline-flex items-center justify-center">{icon}</span>
+  }
+
   return (
-    <Separator
-      data-slot="button-group-separator"
-      orientation={orientation}
+    <ToggleGroupPrimitive.Item
+      data-slot="button-group-item"
       className={cn(
-        'bg-input relative !m-0 self-stretch data-[orientation=vertical]:h-auto',
+        buttonGroupItemVariants({ size, iconOnly: effectiveIconOnly }),
         className,
       )}
       {...props}
-    />
+    >
+      {content}
+    </ToggleGroupPrimitive.Item>
   )
 }
 
 export {
   ButtonGroup,
-  ButtonGroupSeparator,
-  ButtonGroupText,
+  ButtonGroupItem,
   buttonGroupVariants,
+  buttonGroupItemVariants,
 }

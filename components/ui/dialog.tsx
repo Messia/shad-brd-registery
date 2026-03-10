@@ -10,7 +10,7 @@ import { IconButton } from '@/components/ui/icon-button'
 import { Button, type ButtonProps } from '@/components/ui/button'
 
 // Size type matching old Modal component
-export type DialogSize = 'xs' | 'sm' | 'md' | 'lg'
+export type DialogSize = 'xs' | 'sm' | 'md' | 'lg' | 'fluid'
 
 const dialogContentVariants = cva(
   [
@@ -37,6 +37,7 @@ const dialogContentVariants = cva(
         sm: 'w-[594px] min-w-[594px] max-w-[800px] min-h-[260px] max-h-[800px]',
         md: 'w-[882px] min-w-[882px] max-w-[1050px] min-h-[260px] max-h-[800px]',
         lg: 'w-[1172px] min-w-[1172px] min-h-[400px] max-h-[800px]',
+        fluid: '',
       },
     },
     defaultVariants: {

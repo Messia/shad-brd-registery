@@ -823,6 +823,37 @@ import { Stepper } from "@/components/ui/stepper"
 
 ---
 
+## Widget
+
+- Use `Widget` as the sanctioned BRD shell for complex dashboard content such as charts, AG Grid tables, forms, lists, summaries, and mixed layouts.
+- Do not treat `Widget` as a fixed-width KPI card. `S`, `M`, and `L` are range-sized variants with their own min and max widths.
+- Design every widget concept in all three sizes:
+  - `S` for compact and mobile-fit usage
+  - `M` as the default implementation
+  - `L` as the larger desktop implementation
+- Keep widget shell spacing on BRD tokens. Root widget padding should be `sp-24`.
+- Use BRD composed typography tokens for widget chrome instead of generic `text-*` utilities.
+- Do not add shadows to widget shells unless the user explicitly asks for elevation.
+- Do not hardcode widget widths in generated app views.
+- `S` and `M` support zoom. Zoom is an enlarged responsive widget shell, not a separate arbitrary modal design.
+
+**Preferred pattern:**
+```tsx
+import { Widget } from "@/components/ui/widget"
+
+<Widget
+  size="M"
+  title="Revenue overview"
+  timestamp="Updated now"
+  sourceLink={{ label: "View source", href: "#" }}
+  viewMoreLink={{ label: "View details", href: "#" }}
+>
+  Widget content
+</Widget>
+```
+
+---
+
 ## ❌ DO NOT USE (Invalid in BRD)
 
 These standard shadcn/ui patterns do NOT exist in BRD:

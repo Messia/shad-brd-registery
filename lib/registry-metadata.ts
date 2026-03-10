@@ -326,7 +326,7 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   dialog: {
     title: "Dialog",
     description:
-      "A modal dialog with structured header, body, and footer regions. Sizes: xs, sm, md, lg.",
+      "A modal dialog with structured header, body, and footer regions. Sizes: xs, sm, md, lg, and fluid.",
     categories: ["overlay"],
     meta: {
       tags: ["dialog", "modal", "overlay", "focus"],
@@ -929,16 +929,32 @@ export const registryMetadata: Record<string, RegistryDocs> = {
       ],
     },
   },
-  "toggle-group": {
-    title: "Toggle Group",
+  "button-group": {
+    title: "Button Group",
     description:
       "A group of toggle buttons that supports single or multiple selection behavior. Works well for timeframe selectors.",
     categories: ["forms", "actions"],
     meta: {
-      tags: ["toggle-group", "selection", "buttons", "input"],
+      tags: ["button-group", "toggle-group", "selection", "buttons", "input"],
       examples: [
         {
-          title: "Toggle options",
+          title: "Button group options",
+          code:
+            'import { ButtonGroup, ButtonGroupItem } from "@/components/ui/button-group"\n\n<ButtonGroup type="single" value="left">\n  <ButtonGroupItem value="left">Left</ButtonGroupItem>\n  <ButtonGroupItem value="right">Right</ButtonGroupItem>\n</ButtonGroup>',
+        },
+      ],
+    },
+  },
+  "toggle-group": {
+    title: "Toggle Group",
+    description:
+      "Legacy alias for Button Group. Use Button Group for new BRD implementations.",
+    categories: ["forms", "actions"],
+    meta: {
+      tags: ["toggle-group", "button-group", "selection", "buttons", "input", "legacy"],
+      examples: [
+        {
+          title: "Legacy toggle group alias",
           code:
             'import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"\n\n<ToggleGroup type="single" value="left">\n  <ToggleGroupItem value="left">Left</ToggleGroupItem>\n  <ToggleGroupItem value="right">Right</ToggleGroupItem>\n</ToggleGroup>',
         },
@@ -996,13 +1012,13 @@ export const registryMetadata: Record<string, RegistryDocs> = {
   widget: {
     title: "Widget",
     description:
-      "A dashboard widget container with fixed S, M, and L sizes, header, body, and footer regions. A complex pattern that can contain any content; composes IconButton, Link, Dialog, and DropdownMenu.",
+      "A dashboard widget shell for complex content with S/M/L width ranges, fixed per-size heights, unified token spacing, and responsive zoom for S and M. Composes IconButton, Link, Dialog, and DropdownMenu.",
     categories: ["layout", "data-display"],
     meta: {
       tags: ["widget", "dashboard", "card", "layout"],
       examples: [
         {
-          title: "Widget sizes",
+          title: "Range-sized widget shell",
           code:
             'import { Widget } from "@/components/ui/widget"\n\n<Widget size="M" title="Sales" timestamp="Updated now">\n  Widget content\n</Widget>',
         },

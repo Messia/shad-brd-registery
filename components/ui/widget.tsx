@@ -31,6 +31,12 @@ export interface WidgetLink {
   href: string
 }
 
+const WIDGET_SIZE_CONSTRAINTS = {
+  S: { minWidth: 290, maxWidth: 456, height: 315 },
+  M: { minWidth: 580, maxWidth: 912, height: 654 },
+  L: { minWidth: 872, maxWidth: 1368, height: 654 },
+} as const
+
 const widgetVariants = cva(
   [
     'flex flex-col',
@@ -38,14 +44,15 @@ const widgetVariants = cva(
     'rounded-[var(--radius-s)]',
     'overflow-hidden',
     'box-border',
-    'shadow-md',
+    'gap-[var(--spacing-sp-24)]',
+    'p-[var(--spacing-sp-24)]',
   ],
   {
     variants: {
       size: {
-        S: 'max-w-[456px] h-[290px] p-4 gap-1.5',
-        M: 'max-w-[912px] h-[580px] p-6 gap-2',
-        L: 'max-w-[1368px] h-[872px] p-6 gap-2',
+        S: '',
+        M: '',
+        L: '',
       },
     },
     defaultVariants: {
@@ -100,6 +107,20 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
     if (safeStyle) {
       delete safeStyle.width
       delete safeStyle.height
+      delete safeStyle.minWidth
+      delete safeStyle.maxWidth
+      delete safeStyle.minHeight
+      delete safeStyle.maxHeight
+    }
+    const constraints = WIDGET_SIZE_CONSTRAINTS[size]
+    const widgetStyle: React.CSSProperties = {
+      inlineSize: `min(100%, ${constraints.maxWidth}px)`,
+      minInlineSize: `min(100%, ${constraints.minWidth}px)`,
+      maxInlineSize: `${constraints.maxWidth}px`,
+      blockSize: `${constraints.height}px`,
+      minBlockSize: `${constraints.height}px`,
+      maxBlockSize: `${constraints.height}px`,
+      ...safeStyle,
     }
 
     const hasFooter = sourceLink || viewMoreLink
@@ -108,13 +129,16 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
     const renderFooter = () => {
       if (!hasFooter) return null
       return (
-        <div className="flex justify-between items-center w-full shrink-0">
+        <div
+          data-slot="widget-footer"
+          className="flex w-full items-center justify-between gap-[var(--spacing-sp-24)] shrink-0"
+        >
           {sourceLink ? (
             <Link href={sourceLink.href}>
               {sourceLink.label}
             </Link>
           ) : (
-            <div />
+            <div aria-hidden="true" />
           )}
           {viewMoreLink && (
             <Link href={viewMoreLink.href}>
@@ -131,16 +155,26 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
           ref={ref}
           className={cn(className, widgetVariants({ size }))}
           data-size={size}
-          style={safeStyle}
+          data-slot="widget"
+          style={widgetStyle}
           {...rest}
         >
-          {/* Widget Header */}
-          <div className="flex justify-between items-start w-full shrink-0">
-            {/* Left side: title and timestamp */}
-            <div className="flex flex-col gap-1">
-              {/* Title row */}
-              <div className="flex items-center gap-1">
-                <h4 className="m-0 text-[var(--color-text-primary)] font-semibold text-lg leading-6">
+          <div
+            data-slot="widget-header"
+            className="flex w-full items-start justify-between gap-[var(--spacing-sp-24)] shrink-0"
+          >
+            <div
+              data-slot="widget-header-meta"
+              className="flex min-w-0 flex-1 flex-col gap-[var(--spacing-sp-8)]"
+            >
+              <div
+                data-slot="widget-title-row"
+                className="flex min-w-0 items-center gap-[var(--spacing-sp-4)]"
+              >
+                <h4
+                  data-slot="widget-title"
+                  className="m-0 min-w-0 truncate text-[var(--color-text-primary)] [font:var(--font-headline-h4)]"
+                >
                   {title}
                 </h4>
                 {onInfoClick && (
@@ -154,9 +188,14 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
                   </IconButton>
                 )}
               </div>
-              {/* Timestamp row */}
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-[var(--color-text-secondary)]">
+              <div
+                data-slot="widget-timestamp-row"
+                className="flex min-w-0 flex-wrap items-center gap-[var(--spacing-sp-8)]"
+              >
+                <span
+                  data-slot="widget-timestamp"
+                  className="text-[var(--color-text-secondary)] [font:var(--font-body-medium)]"
+                >
                   {timestamp}
                 </span>
                 {onRefresh && (
@@ -185,9 +224,10 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
               </div>
             </div>
 
-            {/* Right side: Header actions */}
-            <div className="flex items-center gap-1 shrink-0">
-              {/* ZoomIn button - only for S and M sizes */}
+            <div
+              data-slot="widget-actions"
+              className="flex shrink-0 items-center gap-[var(--spacing-sp-4)]"
+            >
               {size !== 'L' && (
                 <IconButton
                   ariaLabel="Expand widget"
@@ -199,7 +239,6 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
                 </IconButton>
               )}
 
-              {/* Menu button - optional */}
               {menuItems && menuItems.length > 0 && (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -223,25 +262,28 @@ const Widget = React.forwardRef<HTMLDivElement, WidgetProps>(
             </div>
           </div>
 
-          {/* Content Area */}
-          <div className="flex-1 w-full overflow-auto min-h-0">
+          <div
+            data-slot="widget-content"
+            className="min-h-0 w-full flex-1 overflow-auto"
+          >
             {children}
           </div>
 
-          {/* Footer */}
           {renderFooter()}
         </div>
 
-        {/* Zoom Dialog - Opens L size widget */}
         <Dialog open={zoomOpen} onOpenChange={setZoomOpen}>
           <DialogContent
-            size="lg"
+            size="fluid"
             titleText={title}
             hideFooter={!hasFooter}
             footerContent={hasFooter ? renderFooter() : undefined}
+            className="w-[calc(100vw-48px)] max-w-[1368px] max-h-[calc(100dvh-48px)] md:w-[calc(100vw-96px)] md:max-h-[calc(100dvh-96px)]"
           >
-            {/* L size content */}
-            <div className="flex-1 overflow-auto min-h-[500px]">
+            <div
+              data-slot="widget-zoom-body"
+              className="min-h-0 flex-1 overflow-auto"
+            >
               {children}
             </div>
           </DialogContent>

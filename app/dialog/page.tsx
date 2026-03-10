@@ -18,7 +18,7 @@ export const meta = {
   name: "dialog",
   type: "registry:ui",
   title: "Dialog",
-  description: "Modal dialog with sizes xs/sm/md/lg, built-in header/footer, and action buttons. Based on old Modal component.",
+  description: "Modal dialog with sizes xs/sm/md/lg/fluid, built-in header/footer, and action buttons. Based on old Modal component.",
   ...registryMetadata["dialog"],
   files: [
     {
@@ -35,7 +35,7 @@ export const meta = {
 
 export default function DialogPage() {
   return (
-    <ComponentPageLayout meta={meta} title="Dialog" description="Based on old Modal with sizes xs/sm/md/lg, built-in header with title/close, body, and footer with action buttons.">
+    <ComponentPageLayout meta={meta} title="Dialog" description="Based on old Modal with sizes xs/sm/md/lg/fluid, built-in header with title/close, body, and footer with action buttons.">
       <div className="space-y-12">
         {/* Size XS (Default) */}
         <section>
@@ -55,6 +55,39 @@ export default function DialogPage() {
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="name-xs" className="text-right">Name</Label>
                   <Input id="name-xs" defaultValue="John Doe" className="col-span-3" />
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+        </section>
+
+        {/* Size Fluid */}
+        <section>
+          <h3 className="text-lg font-semibold mb-4">Size Fluid</h3>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline">Open Fluid Dialog</Button>
+            </DialogTrigger>
+            <DialogContent
+              size="fluid"
+              className="w-[calc(100vw-48px)] max-w-[1200px] max-h-[calc(100dvh-48px)] md:w-[calc(100vw-96px)] md:max-h-[calc(100dvh-96px)]"
+              titleText="Fluid Dialog"
+              descriptionText="Use fluid when the caller should own responsive width and viewport gutters."
+              hideFooter
+            >
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <div className="space-y-4">
+                  <div>
+                    <Label htmlFor="fluid-company">Company</Label>
+                    <Input id="fluid-company" defaultValue="Acme Corp" className="mt-1" />
+                  </div>
+                  <div>
+                    <Label htmlFor="fluid-department">Department</Label>
+                    <Input id="fluid-department" defaultValue="Engineering" className="mt-1" />
+                  </div>
+                </div>
+                <div className="rounded-[var(--radius-xs)] border border-dashed border-[var(--color-stroke-default)] p-6 text-sm text-[var(--color-text-secondary)]">
+                  Responsive content can fill the available dialog shell without relying on fixed `lg` sizing.
                 </div>
               </div>
             </DialogContent>

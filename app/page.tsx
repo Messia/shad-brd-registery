@@ -11,7 +11,7 @@ const REGISTRY_URL = "https://shad-brd-registery.vercel.app"
 // All available components in the registry
 const COMPONENTS = [
   "accordion", "alert", "alert-dialog", "aspect-ratio", "avatar",
-  "badge", "breadcrumb", "button", "calendar", "card", "carousel",
+  "badge", "breadcrumb", "button", "button-group", "calendar", "card", "carousel",
   "chart", "chip", "checkbox", "collapsible", "command", "context-menu",
   "currency-selector", "data-point-card", "dialog", "drawer", "dropdown-menu", "footer",
   "header", "hover-card", "icon-button", "input", "input-otp", "label",
@@ -19,7 +19,7 @@ const COMPONENTS = [
   "pagination", "popover", "progress", "radio-group", "resizable",
   "scroll-area", "select", "separator", "sheet", "shell", "side-toolbar", "skeleton",
   "slider", "sonner", "stepper", "switch", "table", "tabs", "textarea", "theme",
-  "toast", "toggle", "toggle-group", "top-navigation", "tooltip", "user-menu", "widget"
+  "toast", "toggle", "top-navigation", "tooltip", "user-menu", "widget"
 ]
 
 // Prefix for component names to prevent v0 from using built-in shadcn components

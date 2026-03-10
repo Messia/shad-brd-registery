@@ -10,6 +10,7 @@ import * as avatarModule from "./app/avatar/page.tsx"
 import * as badgeModule from "./app/badge/page.tsx"
 import * as breadcrumbModule from "./app/breadcrumb/page.tsx"
 import * as buttonModule from "./app/button/page.tsx"
+import * as buttonGroupModule from "./app/button-group/page.tsx"
 import * as calendarModule from "./app/calendar/page.tsx"
 import * as cardModule from "./app/card/page.tsx"
 import * as carouselModule from "./app/carousel/page.tsx"
@@ -58,7 +59,6 @@ import * as textareaModule from "./app/textarea/page.tsx"
 import * as themeModule from "./app/theme/page.tsx"
 import * as toastModule from "./app/toast/page.tsx"
 import * as toggleModule from "./app/toggle/page.tsx"
-import * as toggleGroupModule from "./app/toggle-group/page.tsx"
 import * as tooltipModule from "./app/tooltip/page.tsx"
 import * as topNavigationModule from "./app/top-navigation/page.tsx"
 import * as userMenuModule from "./app/user-menu/page.tsx"
@@ -84,6 +84,7 @@ const COMPONENT_NAME_MAP: Record<string, string> = {
   "badge": "badge",
   "breadcrumb": "breadcrumb",
   "button": "button",
+  "button-group": "button-group",
   "calendar": "calendar",
   "card": "card",
   "carousel": "carousel",
@@ -134,7 +135,7 @@ const COMPONENT_NAME_MAP: Record<string, string> = {
   "toast": "toast",
   "toaster": "toast",  // toaster imports from toast
   "toggle": "toggle",
-  "toggle-group": "toggle-group",
+  "toggle-group": "button-group",
   "tooltip": "tooltip",
   "top-navigation": "top-navigation",
   "user-menu": "user-menu",
@@ -180,6 +181,7 @@ const modules = [
   { name: "badge", module: badgeModule },
   { name: "breadcrumb", module: breadcrumbModule },
   { name: "button", module: buttonModule },
+  { name: "button-group", module: buttonGroupModule },
   { name: "calendar", module: calendarModule },
   { name: "card", module: cardModule },
   { name: "carousel", module: carouselModule },
@@ -228,7 +230,6 @@ const modules = [
   { name: "theme", module: themeModule },
   { name: "toast", module: toastModule },
   { name: "toggle", module: toggleModule },
-  { name: "toggle-group", module: toggleGroupModule },
   { name: "tooltip", module: tooltipModule },
   { name: "top-navigation", module: topNavigationModule },
   { name: "user-menu", module: userMenuModule },
